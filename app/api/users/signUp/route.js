@@ -1,4 +1,5 @@
 //url: http://localhost:3000/api/signUp
+//TODO fixed the objet assign to body, now only username, email and password
 
 import prisma from "@/lib/components/prismadb";
 import { NextResponse } from "next/server"
