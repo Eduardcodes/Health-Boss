@@ -1,7 +1,13 @@
 import AddUser from './components/AddUser'
 
 async function getUser() {
-  const res = await fetch("http://localhost:3000/api/users", { cache: 'no-store'});
+  const res = await fetch("http://localhost:3002/api/users", { cache: 'no-store'});
+
+  if(!res.ok) {
+    throw new Error("Failed to fetch data")
+  }
+
+  return res.json();
 
 }
 
