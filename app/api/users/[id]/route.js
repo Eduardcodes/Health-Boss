@@ -59,6 +59,26 @@ export const PATCH = async (request, {params}) => {
 
     } catch (error) {
         console.log(error)
-        return NextResponse.json({message: "POST Error", error}, {status:500})
+        return NextResponse.json({message: "PATCH Error", error}, {status:500})
+    }
+}
+
+export const DELETE = async (request, { params }) => {
+    try {
+
+        const { id } = params;
+       
+       await prisma.user.findUnique({
+            where: {
+                id
+            }
+        })
+
+
+        return NextResponse.json("User has been deleted");
+
+    } catch (error) {
+        console.log(error)
+        return NextResponse.json({message: "DELETE Error", error}, {status:500})
     }
 }
