@@ -6,13 +6,13 @@ import { NextResponse } from "next/server"
 export const POST = async (request) => {
     try {
         const body = await request.json();
-        const {userName, email} = body;
-        
-        console.log("hi")
+        const {userName, email, password} = body;
+    
         const newUser = await prisma.user.create({
             data: {
                 userName,
-                email
+                email, 
+                password
             }
         })
 
@@ -21,6 +21,5 @@ export const POST = async (request) => {
     } catch (error) {
         console.log(error)
         return NextResponse.json({message: "POST Error", error}, {status:500})
-        
     }
 }
