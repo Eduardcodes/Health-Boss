@@ -17,6 +17,8 @@ const AddUser = () => {
       .post("api/users/signup", inputs)
       .then((res) => {
         console.log(res);
+        const token = res.data;
+        localStorage.setItem('auth', JSON.stringify(token))
       })
       .catch((err) => {
         console.log(err);

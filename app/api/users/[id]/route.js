@@ -59,6 +59,7 @@ export const PATCH = async (request, {params}) => {
 
         return NextResponse.json(updateUser);
 
+
     } catch (error) {
         console.log(error)
         return NextResponse.json({message: "PATCH Error", error}, {status:500})

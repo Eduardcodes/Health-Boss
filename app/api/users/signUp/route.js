@@ -5,6 +5,9 @@ import prisma from "@/lib/components/prismadb";
 import { NextResponse } from "next/server";
 
 import { hash } from 'bcrypt';
+import { sign } from 'jsonwebtoken'
+
+const secretKey = process.env.JWT_SECRET;
 
 export const POST = async (request) => {
   try {
@@ -23,7 +26,12 @@ export const POST = async (request) => {
       },
     });
 
-    return NextResponse.json(newUser);
+    const token = sign({id: newUser.id}, secretKey, { expiresIn: '1h'})
+    // const data = NextResponse.json({newUser, token})
+    // console.log(data,"data")
+
+    //TODO should not send back password in response, use select
+    return NextResponse.json(token);
   } catch (error) {
     console.log(error);
     return NextResponse.json({ message: "POST Error", error }, { status: 500 });
