@@ -75,7 +75,7 @@ const User = ({ user }) => {
             <input
               type="text"
               placeholder="Username"
-              name="username"
+              name="userName"
               className="w-full p-2"
               value={userToEdit.userName || ""}
               onChange={handleChange}
