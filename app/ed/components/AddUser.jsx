@@ -14,7 +14,7 @@ const AddUser = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("api/post", inputs)
+      .post("api/users/signup", inputs)
       .then((res) => {
         console.log(res);
       })
