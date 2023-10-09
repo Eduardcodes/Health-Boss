@@ -1,29 +1,3 @@
-export type Nutrients = {
-    calories: number
-    protein: number
-    fat: number
-    carbs: number
-    fibre: number
-}
-
-export type FoodData = {
-    foodId: string
-    label: string
-    nutrients: Nutrients
-    image: string
-}
-
-export type CleanActivityData = {
-    activity: string
-    caloriesPerHour: number
-}
-
-export type DirtyActivityData = {
-    name: string
-    calories_per_hour: number
-    duration_minutes: number
-    total_calories: number
-}
 
 export type User = {
   id: string 
@@ -39,6 +13,7 @@ export type User = {
   updatedAt: Date
 }
 
+//Meal related types
 export type Meal = {
     id: string
     ingredients : Ingredient[]
@@ -47,6 +22,30 @@ export type Meal = {
     type? : string
     totalCal: number
 }
+
+export type Ingredient = {
+    name: string
+    nutrients: Nutrients
+    amount : number
+}
+
+export type Nutrients = {
+    calories: number
+    protein: number
+    fat: number
+    carbs: number
+    fibre: number
+}
+
+export type FoodData = {
+    foodId: string
+    label: string
+    nutrients: Nutrients
+    image: string
+}
+
+
+//Exercise related types
 
 export type Exercise = {
   id: string 
@@ -58,8 +57,17 @@ export type Exercise = {
   user: User
 }
 
-export type Ingredient = {
-    name: string
-    nutrients: Nutrients
-
+export type CleanActivityData = {
+    activity: string
+    caloriesPerHour: number
 }
+
+export type DirtyActivityData = {
+    name: string
+    calories_per_hour: number
+    duration_minutes: number
+    total_calories: number
+}
+
+
+

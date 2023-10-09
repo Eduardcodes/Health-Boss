@@ -20,11 +20,13 @@ export const GET = async (userId: string) => {
 export const POST = async (request: Request) => {
   try {
     const body = await request.json()
-    const {ingredients, userId} = body
+    const {ingredients, userId, type, totalCals} = body
     const newMeal: Meal = await prisma.meal.create({
       data:{
         ingredients,
-        userId
+        userId,
+        type,
+        totalCals
       }
     })
     return NextResponse.json(newMeal, {status:200})

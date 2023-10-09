@@ -28,9 +28,8 @@ export default function MealCard ({mealData, setDisplayedMeals}:{mealData: Meal,
       console.log('ITEM FAILED TO DELETE')
     }
     //TODO for above, create real alert
-
   }
-
+  
   return (
     <div onClick={()=> setDetails(!details)}>
       <div>
@@ -46,12 +45,12 @@ export default function MealCard ({mealData, setDisplayedMeals}:{mealData: Meal,
         {mealData.ingredients.map((ingredient) => {
           return (
           <>
-          <li>{ingredient.name}</li>
-          <li>{ingredient.nutrients.calories}</li>
-          <li>{ingredient.nutrients.protein}</li>
-          <li>{ingredient.nutrients.carbs}</li>
-          <li>{ingredient.nutrients.fibre}</li>
-          <li>{ingredient.nutrients.fat}</li>
+          <li>{ingredient.name} {ingredient.amount}</li>
+          <li>Calories: {ingredient.nutrients.calories*(ingredient.amount/100)}</li>
+          <li>Protein: {ingredient.nutrients.protein*(ingredient.amount/100)}</li>
+          <li>Carbohydrates:{ingredient.nutrients.carbs*(ingredient.amount/100)}</li>
+          <li>Fibre:{ingredient.nutrients.fibre*(ingredient.amount/100)}</li>
+          <li>Fat:{ingredient.nutrients.fat*(ingredient.amount/100)}</li>
           </>
           )
         })}
