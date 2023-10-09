@@ -8,12 +8,12 @@ export default function AddMealEntry({ingredient}:{ingredient: FoodData}) {
   
   return (
     <div>
-      <form>
+      
         {ingredient.label}:
         <input name={ingredient.label} type='number' 
         onChange={() => (e: React.ChangeEvent<HTMLInputElement>) => setAmount(Number(e.target.value))}>
         </input>g
-      </form>
+      
       <div>
           <p>Calories: {ingredient.nutrients.calories*(amount/100)}</p>
           <p>Protein: {ingredient.nutrients.protein*(amount/100)}</p>

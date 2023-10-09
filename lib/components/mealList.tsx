@@ -1,11 +1,10 @@
 'use client'
 import MealCard from "./mealCard"
 import { Meal } from "../types"
-import { useEffect,useState } from "react"
+import { useEffect } from "react"
 
-export default function mealList() {
+export default function MealList({displayedMeals, setDisplayedMeals}:{displayedMeals:Meal[], setDisplayedMeals: Function}) {
 
-  const [displayedMeals, setDisplayedMeals] = useState<Meal[]>([])
   
   useEffect(()=> {
 

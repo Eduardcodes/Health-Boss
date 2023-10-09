@@ -4,9 +4,8 @@ import {FormEvent, useState} from 'react'
 import { FoodData, Ingredient } from '../types'
 import AddMealEntry from './addMealEntry'
 
-export default function AddMeal() {
+export default function AddMeal({selectedFoods}:{selectedFoods:FoodData[]}) {
   
-  const [selectedIngredients, setSelectedFoods] = useState<FoodData[]>([])
   const [type, setType] = useState('Breakfast')
   
   async function submitHandler (e: FormEvent) {
@@ -19,10 +18,10 @@ export default function AddMeal() {
     let totalCalsThisMeal = 0
     let ingredientsList: Ingredient[] = []
     for(const ingName in dataNamesAndAmounts) {
-      for(let i=0; i<selectedIngredients.length; i++) {
-        if(ingName === selectedIngredients[i].label) {
+      for(let i=0; i<selectedFoods.length; i++) {
+        if(ingName === selectedFoods[i].label) {
 
-          let nutrients = selectedIngredients[i].nutrients
+          let nutrients = selectedFoods[i].nutrients
           let amount: number = dataNamesAndAmounts[ingName]
           totalCalsThisMeal += nutrients.calories*(amount/100)
           ingredientsList.push({
@@ -65,7 +64,7 @@ export default function AddMeal() {
           <option value='Snack'>Snack</option>
         </select>
       <form onSubmit={submitHandler}>
-        {selectedIngredients.map((ingredient: FoodData) => (<AddMealEntry ingredient={ingredient}/>))}
+        {selectedFoods.map((ingredient: FoodData) => (<AddMealEntry ingredient={ingredient}/>))}
         <button type='submit'>Confirm</button>
       </form>
     </div>
