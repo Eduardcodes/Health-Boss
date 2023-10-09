@@ -1,4 +1,4 @@
-import type { Config } from 'tailwindcss'
+import type { Config } from 'tailwindcss';
 
 const config: Config = {
   content: [
@@ -14,7 +14,24 @@ const config: Config = {
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
     },
+
+    colors: {
+      lightGreen: '#2eff74',
+      mainGreen: '#2DE86B',
+      darkGreen: '#15AD44',
+      darkBlack: '#292828',
+      mainBlack: '#353535',
+      mainWhite: '#FFFFFF',
+    },
+
+    fontFamily: {
+      inter: ['Inter', 'sans-serif'],
+    },
+
+    corePlugins: {
+      preflight: false,
+    },
   },
   plugins: [],
-}
-export default config
+};
+export default config;
