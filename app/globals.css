@@ -55,7 +55,7 @@ body {
 }
 
 .cardBackground {
-  @apply bg-darkBlack  rounded-lg m-4 shadow-md p-4;
+  @apply bg-darkBlack  rounded-lg mx-4  my-2 shadow-md p-4;
 }
 
 .cardProfile {

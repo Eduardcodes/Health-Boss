@@ -1,8 +1,12 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 
+interface QuoteData {
+  content: string;
+}
+
 function MotivationQuote() {
-  const [quote, setQuote] = useState('');
+  const [quote, setQuote] = useState<QuoteData>({ content: '' });
   const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {

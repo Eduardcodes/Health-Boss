@@ -42,7 +42,7 @@ export default function HomePage() {
 
   return (
     <div className={`sectionMainPages  `}>
-      <section className="h-20 flex justify-between items-center m-5">
+      <section className="h-20 flex justify-between items-center mx-5 mt-10">
         <div>{back}</div>
         <h4 className="font-bold">Home</h4>
         <Image
@@ -54,7 +54,7 @@ export default function HomePage() {
         />
       </section>
 
-      <section className="m-5 flex flex-col justify-center ">
+      <section className="mx-6 my-3 flex flex-col justify-center ">
         <div className="p-2 flex font-bold justify-between">
           <h5 className="text-3xl">Hi Panda</h5>
           <div className="flex gap-2 items-center">
