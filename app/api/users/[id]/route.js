@@ -67,8 +67,10 @@ export const DELETE = async (request, { params }) => {
     try {
 
         const { id } = params;
+
+        console.log(params.id)
        
-       await prisma.user.findUnique({
+       await prisma.user.delete({
             where: {
                 id
             }

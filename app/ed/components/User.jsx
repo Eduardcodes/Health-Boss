@@ -42,17 +42,18 @@ const User = ({ user }) => {
       .then((res) => {
         console.log(res);
       })
-      .catch((error) => {
+      .catch((err) => {
         console.log(err);
       })
       .finally(() => {
-        setOpenModalEdit(false);
+        setOpenModalDelete(false);
         router.refresh();
       });
   };
 
   return (
     <li className="p-3 my-5 bg-slate-200" key={user.id}>
+      <h1>id: {user.id}</h1>
       <h1>User Name: {user.userName}</h1>
       <p>Email: {user.email}</p>
       <p>Password: {user.password}</p>
@@ -65,7 +66,7 @@ const User = ({ user }) => {
           Edit
         </button>
 
-        <Modal modalOpen={openModalEdit} setModalOpen={setOpenModalEdit }>
+        <Modal modalOpen={openModalEdit} setModalOpen={setOpenModalEdit}>
           <form className="w-full" onSubmit={handleEditSubmit}>
             <h1 className="text-2xl" pb-3>
               Edit User
@@ -102,6 +103,31 @@ const User = ({ user }) => {
               Submit
             </button>
           </form>
+        </Modal>
+
+        <button
+          onClick={() => setOpenModalDelete(true)}
+          className="text-red-700 mr-3"
+        >
+          Delete
+        </button>
+        <Modal modalOpen={openModalDelete} setModalOpen={setOpenModalDelete}>
+          <h1 className="text-2xl pb-3">Please confirm delete this user.</h1>
+
+          <div>
+            <button
+              onClick={() => handleDeletePost(user.id)}
+              className="text-blue-700 font-bold mr-5"
+            >
+              Yes
+            </button>
+            <button
+              onClick={() => setOpenModalDelete(false)}
+              className="text-blue-700 font-bold mr-5"
+            >
+              No
+            </button>
+          </div>
         </Modal>
       </div>
     </li>
