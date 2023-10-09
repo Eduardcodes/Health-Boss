@@ -51,7 +51,7 @@ body {
 }
 
 .titleCards {
-  @apply font-bold max-w-[9.688rem] border-b-4 border-mainGreen;
+  @apply font-bold min-w-[10rem] border-b-4 border-mainGreen;
 }
 
 .cardProfile {
