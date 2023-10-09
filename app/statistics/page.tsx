@@ -1,9 +1,5 @@
-import React from 'react'
+import React from 'react';
 
 export default function StatisticsPage() {
-  return (
-    <div>
-      statistics
-    </div>
-  )
+  return <div className={'sectionMainPages'}>statistics</div>;
 }

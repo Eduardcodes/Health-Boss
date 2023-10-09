@@ -3,60 +3,123 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChartPie } from '@fortawesome/free-solid-svg-icons';
 import { faAngleDoubleLeft } from '@fortawesome/free-solid-svg-icons';
+import { faShoePrints } from '@fortawesome/free-solid-svg-icons';
+import { faBed } from '@fortawesome/free-solid-svg-icons';
+import { faUtensils } from '@fortawesome/free-solid-svg-icons';
+import { faBell } from '@fortawesome/free-solid-svg-icons';
+import MotivationQuote from '@/lib/components/MotivationQuote';
 
-const back = <FontAwesomeIcon icon={faAngleDoubleLeft} size="2xl" />;
-const chart = <FontAwesomeIcon icon={faChartPie} size="2xl" />;
+const back = (
+  <FontAwesomeIcon
+    icon={faAngleDoubleLeft}
+    size="2xl"
+    style={{ color: '#2de86b' }}
+  />
+);
+const chart = (
+  <FontAwesomeIcon icon={faChartPie} size="5x" style={{ color: '#2de86b' }} />
+);
+const walk = (
+  <FontAwesomeIcon
+    icon={faShoePrints}
+    size="2xl"
+    style={{ color: '#2de86b' }}
+  />
+);
+const notication = (
+  <FontAwesomeIcon icon={faBell} size="sm" style={{ color: '#2de86b' }} />
+);
+const sleep = (
+  <FontAwesomeIcon icon={faBed} size="2xl" style={{ color: '#2de86b' }} />
+);
+
+const meal = (
+  <FontAwesomeIcon icon={faUtensils} size="2xl" style={{ color: '#2de86b' }} />
+);
 
 export default function HomePage() {
   // TODO: check if user is logged in already, if not redirect to /login
 
   return (
-    <div className={`sectionMainPages p5`}>
-      <section className="h-20 flex justify-between items-center">
+    <div className={`sectionMainPages  `}>
+      <section className="h-20 flex justify-between items-center m-5">
         <div>{back}</div>
-        <h4>Home</h4>
+        <h4 className="font-bold">Home</h4>
         <Image
-          src="/profile.svg"
+          src="/profile.jpg"
           alt="exercise icon"
           width={50}
           height={50}
-          className="item-center"
+          className="item-center text-mainWhite rounded-full border-2 border-mainGreen"
         />
       </section>
 
-      <section className="flex flex-col ">
-        <div className="flex justify-between ">
-          <h5>Hi Panda</h5>
-          <p>+1</p>
+      <section className="m-5 flex flex-col justify-center ">
+        <div className="p-2 flex font-bold justify-between">
+          <h5 className="text-3xl">Hi Panda</h5>
+          <div className="flex gap-2 items-center">
+            {' '}
+            {notication} <p>+1</p>
+          </div>
         </div>
 
-        <p className="">Motivation here</p>
+        <MotivationQuote />
       </section>
 
-      <section className="flex flex-col">
-        <h4>Your activities</h4>
-        <div className="flex justify-between">
-          <p>Walking</p>
-          <p>9857</p>
+      <section className={` flex flex-col`}>
+        <h4 className={'titlehome'}>Your activities</h4>
+        <div className={`cardBackground flex justify-between items-center`}>
+          <div className="flex flex-col gap-2">
+            {walk}
+            <p className="text-sm">Walking</p>
+          </div>
+
+          <p className="text-5xl font-bold">9857</p>
           <p>Steps</p>
+        </div>
+
+        <div className={`cardBackground flex justify-between items-center`}>
+          <div className="flex flex-col gap-2 items-center">
+            {sleep}
+            <p className="text-sm">Time in bed</p>
+          </div>
+
+          <p className="text-5xl font-bold">5h 19m</p>
+          <div></div>
+        </div>
+
+        <div className={`cardBackground flex justify-between items-center`}>
+          <div className="flex flex-col gap-2">
+            {meal}
+            <p className="text-sm">Daily Calories</p>
+          </div>
+
+          <p className="text-5xl font-bold">1200</p>
+          <p>cal</p>
         </div>
       </section>
 
       <section>
-        <h4>How close to your goal(Monthly)</h4>
-        <div className="flex justify-around">
-          <div>
+        <h4 className={'titlehome'}>How close to your goal (Monthly)</h4>
+        <div className={`cardBackground flex justify-around w-full"`}>
+          <div className="flex h-full self-center">
             <span>{chart}</span>
           </div>
-          <div>
-            <h6>Walk</h6>
-            <p> 9857/280.00</p>
+          <div className="">
+            <div className="mb-3">
+              <h6 className="font-semibold">Walk</h6>
+              <p className="text-base"> 9857/280.00 steeps</p>
+            </div>
 
-            <h6>Sleep</h6>
-            <p> 9857/196 hours</p>
+            <div className="mb-3">
+              <h6 className="font-semibold">Sleep</h6>
+              <p className="text-base"> 9857/196 hours</p>
+            </div>
 
-            <h6>Calories</h6>
-            <p> 9857/70.000 cal</p>
+            <div>
+              <h6 className="font-semibold">Calories</h6>
+              <p className="text-base"> 9857/70.000 cal</p>
+            </div>
           </div>
         </div>
       </section>

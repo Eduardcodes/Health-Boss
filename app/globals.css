@@ -47,13 +47,21 @@ body {
 }
 
 .sectionMainPages {
-  @apply h-screen bg-mainBlack text-mainWhite  text-2xl flex flex-col;
+  @apply h-screen bg-mainBlack text-mainWhite  text-2xl flex flex-col overflow-scroll;
 }
 
 .titleCards {
   @apply font-bold min-w-[10rem] border-b-4 border-mainGreen;
 }
 
+.cardBackground {
+  @apply bg-darkBlack  rounded-lg m-4 shadow-md p-4;
+}
+
 .cardProfile {
   @apply bg-darkBlack  rounded-lg m-4 shadow-md p-4;
+}
+
+.titlehome {
+  @apply text-lg font-semibold px-4;
 }
