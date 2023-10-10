@@ -14,7 +14,9 @@ export default function MealCard ({mealData, setDisplayedMeals}:{mealData: Meal,
       },
       body: JSON.stringify({id: id})
     })
-    const deletedItem = await res.json() as Meal
+    const data = await res.json()
+    const {deletedItem} = data
+    console.log('DELETED ITEM',deletedItem)
     if(deletedItem.id) {
       setDisplayedMeals((prev: Meal[]) => {
         for(let i=0; i<prev.length; i++){
@@ -35,7 +37,7 @@ export default function MealCard ({mealData, setDisplayedMeals}:{mealData: Meal,
       <div>
         <div>
           <h3>{mealData.type}</h3>
-          <p>Calories: {mealData.totalCal}</p>
+          <p>Calories: {mealData.totalCals}</p>
         </div>
         <button onClick={() => handleDelete(mealData.id)}>
           X

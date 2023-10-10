@@ -4,17 +4,22 @@ import {FormEvent, useState} from 'react'
 import { FoodData, Ingredient } from '../types'
 import AddMealEntry from './addMealEntry'
 
-export default function AddMeal({selectedFoods}:{selectedFoods:FoodData[]}) {
+export default function AddMeal({
+  selectedFoods, setAddMealBox, setModalOpen, setDisplayedMeals}:
+  {selectedFoods:FoodData[],setAddMealBox: Function, setModalOpen: Function, setDisplayedMeals:Function}) {
   
   const [type, setType] = useState('Breakfast')
   
   async function submitHandler (e: FormEvent) {
+    console.log('PLS?')
+    e.preventDefault()
     let dataNamesAndAmounts: any = {}
-    const formElement = e.currentTarget as HTMLFormElement
+    const formElement =  e.currentTarget as HTMLFormElement
     const formData = new FormData(formElement)
     for(const pair of formData.entries()){
       dataNamesAndAmounts[pair[0]] = pair[1]
     }
+    console.log('DATA NAME AND AMOUNT',dataNamesAndAmounts)
     let totalCalsThisMeal = 0
     let ingredientsList: Ingredient[] = []
     for(const ingName in dataNamesAndAmounts) {
@@ -37,20 +42,23 @@ export default function AddMeal({selectedFoods}:{selectedFoods:FoodData[]}) {
           })
         }
       }
-      const request = await fetch('/api/meals', {
+      console.log('INGREDIENTS LIST', ingredientsList)
+      console.log('TOTAL CALS', totalCalsThisMeal)
+      const response = await fetch('/api/meals', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
           ingredients: ingredientsList,
-          userId: 'placeholder', //TODO REDUX FOR USER ID
+          userId: '652560db8f962632ac04d15f', //TODO REDUX FOR USER ID
           type: type,
           totalCals: totalCalsThisMeal
         })
       })
-      const newMeal = await request.json()
-      //TODO lift state and set displayed meals 
+      const newMeal = await response.json()
+      setDisplayedMeals((prev: FoodData[] )=> [...prev, newMeal])
+      setAddMealBox(false)
     }
   }
   return (
@@ -63,8 +71,10 @@ export default function AddMeal({selectedFoods}:{selectedFoods:FoodData[]}) {
           <option value='Dinner'>Dinner</option>
           <option value='Snack'>Snack</option>
         </select>
+      
       <form onSubmit={submitHandler}>
         {selectedFoods.map((ingredient: FoodData) => (<AddMealEntry ingredient={ingredient}/>))}
+        <button type='button' onClick={()=>setModalOpen(true)}>ADD THING</button>
         <button type='submit'>Confirm</button>
       </form>
     </div>

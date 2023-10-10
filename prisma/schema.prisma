@@ -30,16 +30,16 @@ model Exercise {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   activity String
   duration String
-  caloriesBurned Number
+  caloriesBurned Int
   createdAt DateTime @default(now())
   userId String 
   user User  @relation(fields: [userId], references: [id])
 }
 
 model Meal {
-  id String @default(auto()) @map("_id") @db.ObjectId
+  id String @id @default(auto()) @map("_id") @db.ObjectId
   ingredients Json
-  totalCals Number
+  totalCals Int
   type String
   createdAt DateTime @default(now())
   userId    String  

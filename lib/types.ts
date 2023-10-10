@@ -20,7 +20,7 @@ export type Meal = {
     userId:  string  
     user  :  User 
     type? : string
-    totalCal: number
+    totalCals: number
 }
 
 export type Ingredient = {
