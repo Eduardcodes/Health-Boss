@@ -1,9 +1,5 @@
 import React from 'react';
 
-// interface Content {
-//   title: string;
-// }
-
 function Button({ title }: { title: React.ReactNode }) {
   return (
     <div>

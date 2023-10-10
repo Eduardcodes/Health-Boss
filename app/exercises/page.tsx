@@ -1,10 +1,5 @@
-import React from 'react'
+import React from 'react';
 
 export default function ExercisesPage() {
- 
-  return (
-    <div>
-      exercises
-    </div>
-  )
+  return <div>exercises</div>;
 }
