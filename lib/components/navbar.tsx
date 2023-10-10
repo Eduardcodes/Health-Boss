@@ -46,13 +46,15 @@ export default function Navbar() {
   }
   return (
     <div className="flex justify-around items-center h-full ">
-      <Link
-        className={`${page.profile}`}
-        onClick={() => handlePageChange('profile')}
-        href="/profile"
-      >
-        <span className="">{user}</span>
-      </Link>
+      <div className="hover:border-4 rounded-full focus:ring-lightGreen hover:bg-lightGreen">
+        <Link
+          className={`${page.profile} `}
+          onClick={() => handlePageChange('profile')}
+          href="/profile"
+        >
+          <span className="">{user}</span>
+        </Link>
+      </div>
 
       <Link
         className={page.statistics}

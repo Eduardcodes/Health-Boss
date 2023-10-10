@@ -40,11 +40,11 @@ html:focus-within {
 
 /* Set core body defaults */
 body {
-  /* height: 100vh;
-  width: 100vw; */
   line-height: 1.5;
   font-family: 'Inter', sans-serif;
 }
+
+/* -------------- Variables for reuseable styling  -------------- */
 
 .sectionMainPages {
   @apply h-screen bg-mainBlack text-mainWhite  text-2xl flex flex-col overflow-scroll;
@@ -60,6 +60,10 @@ body {
 
 .cardProfile {
   @apply bg-darkBlack  rounded-lg m-4 shadow-md p-4;
+}
+
+.cardBgPhoto {
+  @apply rounded-lg m-4 shadow-md p-4;
 }
 
 .titlehome {

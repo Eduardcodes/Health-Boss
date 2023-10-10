@@ -1,46 +1,14 @@
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDoubleLeft } from '@fortawesome/free-solid-svg-icons';
 import Button from '@/lib/components/Button';
 
+// TODO: need to change this for real data from DB!!
+import { users } from '@/utils/mockData';
+
 const back = <FontAwesomeIcon icon={faAngleDoubleLeft} size="2xl" />;
-
-type User = {
-  id: number;
-  userName: string;
-  email: string;
-  password: number;
-  fistName: string;
-  lastName: string;
-  birthday: string;
-  goals: {
-    walk: number;
-    sleep: number;
-    calories: number;
-  };
-};
-
-const users: User[] = [
-  {
-    id: 1,
-    userName: 'pandaBear',
-    email: 'panda@gmail.com',
-    password: 123,
-    fistName: 'Panda',
-    lastName: 'Bear',
-    birthday: '20/12/00',
-    goals: {
-      walk: 10.0,
-      sleep: 7,
-      calories: 2500,
-    },
-  },
-];
-
-type Title = {
-  title: string;
-};
 
 export default function ProfilePage() {
   return (
@@ -131,9 +99,12 @@ export default function ProfilePage() {
         </div>
 
         <div className="flex justify-center">
-          <p className="text-mainGreen font-bold cursor-pointer hover:border-2 rounded-lg p-2">
-            Check history
-          </p>
+          <Link href="/statistics">
+            <p className="text-mainGreen font-bold cursor-pointer hover:border-2 rounded-lg p-2">
+              {/* //TODO: After MVP do we need to have another page for this ?? */}
+              Check history
+            </p>
+          </Link>
         </div>
       </div>
     </div>

@@ -8,6 +8,7 @@ import { faBed } from '@fortawesome/free-solid-svg-icons';
 import { faUtensils } from '@fortawesome/free-solid-svg-icons';
 import { faBell } from '@fortawesome/free-solid-svg-icons';
 import MotivationQuote from '@/lib/components/MotivationQuote';
+import { users } from '@/utils/mockData';
 
 const back = (
   <FontAwesomeIcon
@@ -27,7 +28,7 @@ const walk = (
   />
 );
 const notication = (
-  <FontAwesomeIcon icon={faBell} size="sm" style={{ color: '#2de86b' }} />
+  <FontAwesomeIcon icon={faBell} size="sm" style={{ color: '#2de86b' }} shake />
 );
 const sleep = (
   <FontAwesomeIcon icon={faBed} size="2xl" style={{ color: '#2de86b' }} />
@@ -56,7 +57,7 @@ export default function HomePage() {
 
       <section className="mx-6 my-3 flex flex-col justify-center ">
         <div className="p-2 flex font-bold justify-between">
-          <h5 className="text-3xl">Hi Panda</h5>
+          <h5 className="text-3xl">Hi {users[0].fistName}</h5>
           <div className="flex gap-2 items-center">
             {' '}
             {notication} <p>+1</p>
