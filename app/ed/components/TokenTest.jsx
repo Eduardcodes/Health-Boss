@@ -2,6 +2,8 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
+import { useAuth } from '@/lib/store';
+
 const TokenTest = () => {
 
     const [token, setToken] = useState('');
@@ -21,6 +23,8 @@ const TokenTest = () => {
           headers: { Authorization: `Bearer ${token}` }
         };
 
+        
+
         axios.post('/api/users/atoken', config);
         console.log("token send" , config)
 
@@ -28,10 +32,16 @@ const TokenTest = () => {
 
       }
     }, [token]);
+    
+    //const auth = useAuth((state) => state.auth)
+   function AuthCounter() {
+    return <h1>{auth}</h1>
+   }
 
     return (
         <div>
           <h1>{token ?  'login': 'not login'}</h1>
+          {/* <h1>{token ? {auth} : 'not login'}</h1> */}
         </div>
     )
 }

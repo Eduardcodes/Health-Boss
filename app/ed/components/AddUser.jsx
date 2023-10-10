@@ -5,20 +5,29 @@ import axios from "axios";
 import Modal from "./Modal"
 import { useRouter } from "next/navigation";
 
+import { useAuthStore } from "@/lib/store";
+
 const AddUser = () => {
   const router = useRouter();
 
   const [modalOpen, setModalOpen] = useState(false);
   const [inputs, setInputs] = useState({});
 
+  const setAuth = useAuthStore((state) => state.setAuth)
+
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
       .post("api/users/signup", inputs)
       .then((res) => {
-        console.log(res);
+        //console.log(res);
         const token = res.data;
-        localStorage.setItem('auth', JSON.stringify(token))
+        console.log(token, "token")
+       // localStorage.setItem('auth', JSON.stringify(token))
+        setAuth(token);
+      const authState =useAuthStore.getState()
+        console.log(authState, "setAutha")
+
       })
       .catch((err) => {
         console.log(err);
@@ -42,7 +51,7 @@ const AddUser = () => {
          onClick = {() => setModalOpen(true)}
          className="bg-blue-700 text-white p-3 cursor-pointer"
       >
-     Add New User
+     Add New User {setAuth}
       </button>
 
       <Modal modalOpen={modalOpen} setModalOpen={setModalOpen}>
