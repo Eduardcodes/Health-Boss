@@ -34,7 +34,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "utils/test.ts"
-  ],
+, "app/login/createUser/page.tsx"  ],
   "exclude": [
     "node_modules"
   ]
