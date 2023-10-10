@@ -17,11 +17,30 @@ type NavbarTracker = {
   profile: string;
 };
 
-const user = <FontAwesomeIcon icon={faUser} size="2xl" />;
-const statistic = <FontAwesomeIcon icon={faChartSimple} size="2xl" />;
-const home = <FontAwesomeIcon icon={faHouse} size="2xl" />;
-const meal = <FontAwesomeIcon icon={faUtensils} size="2xl" />;
-const exercise = <FontAwesomeIcon icon={faDumbbell} size="2xl" bounce />;
+const user = (
+  <FontAwesomeIcon icon={faUser} size="2xl" style={{ color: '#2de86b' }} />
+);
+const statistic = (
+  <FontAwesomeIcon
+    icon={faChartSimple}
+    size="2xl"
+    style={{ color: '#2de86b' }}
+  />
+);
+const home = (
+  <FontAwesomeIcon icon={faHouse} size="2xl" style={{ color: '#2de86b' }} />
+);
+const meal = (
+  <FontAwesomeIcon icon={faUtensils} size="2xl" style={{ color: '#2de86b' }} />
+);
+const exercise = (
+  <FontAwesomeIcon
+    icon={faDumbbell}
+    size="2xl"
+    bounce
+    style={{ color: '#2de86b' }}
+  />
+);
 
 export default function Navbar() {
   const [page, setPage] = useState({
@@ -46,32 +65,36 @@ export default function Navbar() {
   }
   return (
     <div className="flex justify-around items-center h-full ">
-      <div className="hover:border-4 rounded-full focus:ring-lightGreen hover:bg-lightGreen">
-        <Link
-          className={`${page.profile} `}
-          onClick={() => handlePageChange('profile')}
-          href="/profile"
-        >
-          <span className="">{user}</span>
-        </Link>
-      </div>
+      <Link
+        className={`${
+          page.profile === 'highlighted' ? 'bg-mainNavGreen' : ''
+        } `}
+        onClick={() => handlePageChange('profile')}
+        href="/profile"
+      >
+        <span className="hover:scale-110">{user}</span>
+      </Link>
 
       <Link
-        className={page.statistics}
+        className={`${
+          page.statistics === 'highlighted' ? 'bg-mainNavGreen' : ''
+        }`}
         onClick={() => handlePageChange('statistics')}
         href="/statistics"
       >
         <span>{statistic}</span>
       </Link>
       <Link
-        className={page.home}
+        className={`${page.home === 'highlighted' ? 'bg-mainNavGreen' : ''}`}
         onClick={() => handlePageChange('home')}
         href="/"
       >
         <span>{home}</span>
       </Link>
       <Link
-        className={page.exercises}
+        className={`${
+          page.exercises === 'highlighted' ? 'bg-mainNavGreen' : ''
+        }`}
         onClick={() => handlePageChange('exercises')}
         href="/exercises"
       >
@@ -79,7 +102,7 @@ export default function Navbar() {
       </Link>
 
       <Link
-        className={page.meals}
+        className={`${page.meals === 'highlighted' ? 'bg-mainNavGreen' : ''}`}
         onClick={() => handlePageChange('meals')}
         href="/meals"
       >

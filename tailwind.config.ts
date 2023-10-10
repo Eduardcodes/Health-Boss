@@ -15,6 +15,10 @@ const config: Config = {
       },
     },
 
+    variants: {
+      backgroundColor: ['responsive', 'hover', 'focus', 'active'],
+    },
+
     colors: {
       lightGreen: '#2eff74',
       mainGreen: '#2DE86B',
