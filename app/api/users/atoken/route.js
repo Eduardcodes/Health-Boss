@@ -1,4 +1,4 @@
-
+//url: http://localhost:3000/api/atoken
 
 import { NextResponse } from "next/server"
 import axios from "axios";
@@ -38,15 +38,16 @@ import axios from "axios";
 //   }
 
 export const POST = async (request) => {
-    console.log(request, "request to the server")
+    //console.log(request, "request to the server")
     try {
         //const body = await request.json();
-        const { token } = request.body
-        console.log('Received token:');
-        return NextResponse.json({ message: 'Token received successfully' });
+        const { token } = request.headers
+        //console.log('Received token:');
+        return NextResponse.json({ message: 'Token received successfully', token });
     } catch (error) {
         console.error('Error handling token:', error);
       return NextResponse.json({ message: 'Error handling token' }, { status: 500 });
     }
     // return NextResponse.error('Invalid method', 405);
 }
+

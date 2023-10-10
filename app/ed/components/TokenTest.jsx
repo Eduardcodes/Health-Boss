@@ -17,8 +17,12 @@ const TokenTest = () => {
       if (token) {
         // Example: Call your Get function here with the token
         // Get(token);
-        axios.post('/api/users/atoken', { token });
-        console.log("token send")
+        const config = {
+          headers: { Authorization: `Bearer ${token}` }
+        };
+
+        axios.post('/api/users/atoken', config);
+        console.log("token send" , config)
 
 
 
@@ -27,8 +31,7 @@ const TokenTest = () => {
 
     return (
         <div>
-
-            <h1>2</h1>
+          <h1>{token ?  'login': 'not login'}</h1>
         </div>
     )
 }
