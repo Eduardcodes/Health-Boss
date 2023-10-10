@@ -112,7 +112,7 @@ export default function ProfilePage() {
 
         <div className="flex justify-center">
           <Link href="/statistics">
-            <p className="text-mainGreen font-bold cursor-pointer hover:border-2 rounded-lg p-2">
+            <p className="text-mainGreen font-semibold cursor-pointer hover:border-2 rounded-lg p-2">
               {/* //TODO: After MVP do we need to have another page for this ?? */}
               Check history
             </p>
