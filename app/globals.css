@@ -1,5 +1,90 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* -------------- Reset styles -------------- */
 
+/* Box sizing rules  */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role="list"],
+ol[role="list"] {
+  list-style: none;
+}
+
+/* Set core root defaults */
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+/* Set core body defaults */
+body {
+  line-height: 1.5;
+  font-family: "Inter", sans-serif;
+}
+
+.bg-mainNavGreen {
+  background-color: #353535;
+  border: 0.2rem solid #2de86b;
+  width: 4.5rem;
+  height: 4.5rem;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* -------------- Variables for reuseable styling  -------------- */
+
+.sectionMainPages {
+  @apply h-screen bg-mainBlack text-mainWhite  text-2xl flex flex-col overflow-scroll;
+}
+
+.titleCards {
+  @apply font-bold min-w-[10rem] border-b-4 border-mainGreen;
+}
+
+.cardBackground {
+  @apply bg-darkBlack  rounded-lg mx-4  my-2 shadow-md p-4;
+}
+
+.cardProfile {
+  @apply bg-darkBlack  rounded-lg m-4 shadow-md p-4;
+}
+
+.cardBgPhoto {
+  @apply rounded-lg mx-4 shadow-md p-4;
+}
+
+.titlehome {
+  @apply text-lg font-semibold px-4;
+}
+
+.inputLogin {
+  @apply text-base font-semibold bg-mainBlack rounded-xl p-3 border-2 border-lightGreen mb-2 w-full;
+}
+
+.buttonLogin {
+  @apply rounded-xl p-3 border-2 border-lightGreen mt-2 font-semibold text-base w-56 ;
+}

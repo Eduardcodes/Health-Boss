@@ -2,9 +2,13 @@
   "compilerOptions": {
     "target": "es5",
     "lib": [
+      
       "dom",
+     
       "dom.iterable",
+     
       "esnext"
+    
     ],
     "downlevelIteration": true,
     "allowJs": true,
@@ -30,13 +34,21 @@
     }
   },
   "include": [
+    
     "next-env.d.ts",
+   
     "**/*.ts",
+   
     "**/*.tsx",
+   
     ".next/types/**/*.ts",
+    "utils/test.ts"
+, "app/login/createUser/page.tsx"  ,
     "utils/test.ts"
   ],
   "exclude": [
+    
     "node_modules"
+  
   ]
 }
