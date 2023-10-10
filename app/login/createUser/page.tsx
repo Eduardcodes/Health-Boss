@@ -18,7 +18,7 @@ function CreateAccount() {
       <section className="mx-5">
         <form className="flex flex-col items-center w-full">
           <div className="w-full">
-            <label className="font-semibold text-base" for="fname">
+            <label className="font-semibold text-base" htmlFor="fname">
               First name
             </label>
             <input
@@ -30,7 +30,7 @@ function CreateAccount() {
             />
           </div>
           <div className="w-full">
-            <label className="font-semibold text-base" for="lname">
+            <label className="font-semibold text-base" htmlFor="lname">
               Last name
             </label>
             <input
@@ -42,7 +42,7 @@ function CreateAccount() {
             />
           </div>
           <div className="w-full">
-            <label className="font-semibold text-base" for="email">
+            <label className="font-semibold text-base" htmlFor="email">
               Email
             </label>
             <input
@@ -54,7 +54,7 @@ function CreateAccount() {
             />
           </div>
           <div className="w-full">
-            <label className="font-semibold text-base" for="password">
+            <label className="font-semibold text-base" htmlFor="password">
               Password
             </label>
             <input
@@ -66,7 +66,7 @@ function CreateAccount() {
             />
           </div>
           <div className="w-full">
-            <label className="font-semibold text-base" for="birthday">
+            <label className="font-semibold text-base" htmlFor="birthday">
               Birthday
             </label>
             <input
