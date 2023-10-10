@@ -1,7 +1,6 @@
 'use client';
 import Link from 'next/link';
 import { useState } from 'react';
-import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { faUtensils } from '@fortawesome/free-solid-svg-icons';
@@ -34,12 +33,7 @@ const meal = (
   <FontAwesomeIcon icon={faUtensils} size="2xl" style={{ color: '#2de86b' }} />
 );
 const exercise = (
-  <FontAwesomeIcon
-    icon={faDumbbell}
-    size="2xl"
-    bounce
-    style={{ color: '#2de86b' }}
-  />
+  <FontAwesomeIcon icon={faDumbbell} size="2xl" style={{ color: '#2de86b' }} />
 );
 
 export default function Navbar() {

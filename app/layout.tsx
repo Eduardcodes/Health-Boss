@@ -15,7 +15,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  //TODO global loggedIn state storing user data
+  //TODO: global loggedIn state storing user data
 
   return (
     <html lang="en">
