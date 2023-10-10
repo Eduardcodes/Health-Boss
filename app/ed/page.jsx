@@ -2,6 +2,7 @@ import AddUser from './components/AddUser'
 import UserList from './components/UserList'
 import tokenComp from './components/tokenComp'
 import TokenTest from './components/TokenTest'
+import Link from 'next/link'
 
 async function getUser() {
   //TODO make it dynamic not only 3002
@@ -32,6 +33,7 @@ const TestingUserPage = async () => {
       <h1 className='text-3xl font-bold'>Testing Page</h1>
       <TokenTest />
       <AddUser />
+      <Link href= "/" >home</Link>
       </div>
       <UserList users={users} />
     </div>
