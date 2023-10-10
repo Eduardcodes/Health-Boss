@@ -12,6 +12,8 @@ const share = (
 
 export default function StatisticsPage() {
   const banana = '/Health-Boss/public/bananas.jpg';
+  const urlBanana =
+    'https://images.unsplash.com/photo-1603833665858-e61d17a86224?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1854&q=80';
 
   return (
     <div className={'sectionMainPages'}>
@@ -19,12 +21,24 @@ export default function StatisticsPage() {
       <h3 className="text-lg mx-6 my-3 ">Hi panda, check and share it!</h3>
 
       <section
-        className={`cardBgPhoto flex flex-col items-center bg-gradient-radial `}
+        className={`cardBgPhoto flex flex-col items-center bg-cover relative`}
       >
-        <p className="bg-mainWhite rounded-full  text-mainBlack text-center font-bold border-3 border-mainGreen">
-          25%
-        </p>
-        <p>2 of 5 complete</p>
+        <div>
+          <Image
+            src="/bananas.jpg"
+            alt="exercise icon"
+            fill={true}
+            style={{ objectFit: 'cover' }}
+            className="absolute rounded-lg  opacity-50"
+          />
+        </div>
+        <div className="z-20 flex flex-col items-center  ">
+          <div className="bg-mainWhite border-2 border-mainGreen w-20 h-20 rounded-full flex justify-center items-center ">
+            {/* TODO: change this for real number from user data */}
+            <p className=" text-mainBlack text-center font-bold">25%</p>
+          </div>
+          <p className="">2 of 5 complete</p>
+        </div>
       </section>
 
       <section className="flex justify-between mx-6 my-3 ">

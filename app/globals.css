@@ -63,7 +63,7 @@ body {
 }
 
 .cardBgPhoto {
-  @apply rounded-lg m-4 shadow-md p-4;
+  @apply rounded-lg mx-4 shadow-md p-4;
 }
 
 .titlehome {
