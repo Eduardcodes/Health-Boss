@@ -5,49 +5,30 @@ import Image from "next/image";
 import Modal from "@/app/ed/components/Modal";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { FormEvent, useState } from "react";
+import { useState } from "react";
 import React from "react";
 import { User } from "@/lib/types";
 
 function CreateAccount({ user }: { user: User }) {
+
   const router = useRouter();
   const [modalOpen, setModalOpen] = useState(false);
   const [inputs, setInputs] = useState<User>({} as User);
 
-  const handleSubmit = (event: FormEvent) => {
-    event.preventDefault();
-    console.log(inputs);
-    axios
-      .post("/api/users/signUp", inputs)
-      .then((res) => {
-        console.log(res);
-        //TODO add back token and set global store later
-        //const token = res.data;
-        // console.log(token, "token")
-        //localStorage.setItem('auth', JSON.stringify(token))
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => {
-        setInputs({});
-
-        //setModalOpen(false);
-        router.refresh();
-      });
+  const handleSubmit = async (event: React.SyntheticEvent) => {
+    try {
+      event.preventDefault();
+      // console.log("INPUTS::", inputs)
+      const response = await axios.post('/api/users/signUp', inputs);
+      //console.log("IT WORKS::", response)
+      setInputs({} as User);
+      //TODO give token to user and encrypt the password, set status to global store
+      router.push('/')
+      return response;
+    } catch (err) {
+      console.error("Failed to submit form:: ", err);
+    }
   };
-
-  // const handleSubmit = async (event: React.SyntheticEvent) => {
-  //   try {
-  //     event.preventDefault();
-  //     // console.log("INPUTS::", inputs)
-  //     const response = await axios.post('/api/users/signUp');
-  //     //console.log("IT WORKS::", response)
-  //     return response;
-  //   } catch (err) {
-  //     console.error("Failed to submit form:: ", err);
-  //   }
-  // };
 
   //? any better way to write ts
   const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
