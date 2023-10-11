@@ -1,6 +1,40 @@
 import Image from 'next/image';
+import Modal from '@/app/ed/components/Modal';
+import axios from 'axios';
+import { useRouter } from "next/navigation";
+import { FormEvent, useState } from "react";
 
 function CreateAccount() {
+  const router = useRouter();
+  const [modalOpen, setModalOpen] = useState(false);
+  const [inputs, setInputs] = useState({});
+
+
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    axios
+      .post("api/users/signUp", inputs)
+      .then((res) => {
+        console.log(res);
+
+        //TODO add back token and set global store later
+        //const token = res.data;
+       // console.log(token, "token")
+       //localStorage.setItem('auth', JSON.stringify(token))
+      
+
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        setInputs({});
+        //setModalOpen(false);
+        router.refresh();
+      });
+  };
+
+
   return (
     <div
       className={`sectionMainPages  bg-gradient-to-b from-mainGreen to-mainBlack `}
