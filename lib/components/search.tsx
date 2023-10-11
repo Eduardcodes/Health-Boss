@@ -3,6 +3,15 @@ import { useState } from 'react';
 import { FoodData } from '../types';
 import { getAutoFillResults, getFoodData } from '@/utils/food-database';
 import Image from 'next/image';
+import noImage from '@/public/no_image_available.png';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
+import { faClose } from '@fortawesome/free-solid-svg-icons';
+
+const plus = (
+  <FontAwesomeIcon icon={faCirclePlus} size="lg" style={{ color: '#2de86b' }} />
+);
+const close = <FontAwesomeIcon icon={faClose} size="2xl" />;
 
 export default function SearchPopup({
   setSelectedFoods,
@@ -13,10 +22,10 @@ export default function SearchPopup({
 }) {
   const [foods, setFoods] = useState<string[]>([]);
   const [searchDisplay, setSearchDisplay] = useState<FoodData[]>([]);
+  const [imageError, setImageError] = useState(false);
 
   async function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     const foodsList = await getAutoFillResults(e.target.value);
-    console.log(foodsList);
     setFoods(foodsList);
   }
   async function handleSelect(food: string) {
@@ -29,11 +38,11 @@ export default function SearchPopup({
   }
 
   return (
-    <div className="flex flex-col w-screen px-5">
-      <div>
+    <div className="flex flex-col ">
+      <div className="">
         <form>
           <input
-            className="inputLogin"
+            className="inputLogin "
             type="text"
             name="search"
             placeholder="Search foods..."
@@ -41,6 +50,7 @@ export default function SearchPopup({
           ></input>
         </form>
       </div>
+
       {foods &&
         foods.map((food, index) => (
           <p
@@ -55,24 +65,23 @@ export default function SearchPopup({
         searchDisplay.map((food) => {
           return (
             <div
-              className={`bg-darkBlack rounded-lg my-3 max-w-sm shadow-md p-4 flex w-full `}
+              className="bg-mainDarkBlack rounded-lg my-3 max-w-xs p-5 flex flex-col  w-full shadow-lg"
               key={food.foodId}
             >
-              {/* <img src={`${food.image}`} alt={food.label} /> */}
-              <div className="max-w-2xl">
+              {/* TODO: Fix the image that is not displayed */}
+              <div className="flex justify-between items-center">
                 <Image
                   src={food.image}
                   width={70}
                   height={70}
                   alt={food.label}
-                  className="rounded-full self-center text-xs"
+                  onError={() => setImageError(true)}
+                  className="rounded-full  text-xs self-end"
                 />
-                <h2 className="font-bold text-lg border-b-2 border-mainGreen">
-                  {food.label}
-                </h2>
+                <h2 className="titleCards text-base ">{food.label}</h2>
               </div>
-              <div>
-                <div className="text-base">
+              <div className="flex items-center ">
+                <div className="text-base mt-3">
                   <h3 className="font-semibold">Nutrition Data (Per 100g):</h3>
                   <p>Calories: {food.nutrients.calories}</p>
                   <p>Protein: {food.nutrients.protein}</p>
@@ -82,10 +91,10 @@ export default function SearchPopup({
                 </div>
               </div>
               <button
-                className="bg-lightGreen text-mainBlack rounded-full w-4 h-4"
+                className="justify-center"
                 onClick={() => handleAdd(food)}
               >
-                +
+                {plus}
               </button>
             </div>
           );

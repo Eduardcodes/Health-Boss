@@ -42,17 +42,19 @@ export default function MealsPage() {
         ></SearchPopup>
       </Modal>
 
-      {displayedMeals && (
-        <MealList
-          displayedMeals={displayedMeals}
-          setDisplayedMeals={setDisplayedMeals}
-        />
-      )}
+      <div className={!addMealBox ? `block` : 'hidden'}>
+        {displayedMeals && (
+          <MealList
+            displayedMeals={displayedMeals}
+            setDisplayedMeals={setDisplayedMeals}
+          />
+        )}
+      </div>
 
       <section
         className={
           !addMealBox
-            ? `cardBgPhoto flex flex-col h-24 bg-cover relative mt-3`
+            ? `cardBgPhoto flex flex-col h-28 bg-cover relative mt-3 cursor-pointer`
             : 'hidden'
         }
       >
@@ -67,7 +69,7 @@ export default function MealsPage() {
           />
         </div>
         <div className="z-10 flex flex-col  ">
-          <p className="text-lg font-bold">Ask for ideas health</p>
+          <p className="text-lg font-bold">Ask for health ideas </p>
           <p className="text-lg font-bold">with our AI NutriTrainer</p>
         </div>
       </section>

@@ -44,10 +44,10 @@ export default function MealCard({
   }
 
   return (
-    <div className="cardBackground " onClick={() => setDetails(!details)}>
+    <div className="cardBackground" onClick={() => setDetails(!details)}>
       <div className="">
         <div className="flex justify-between items-center text-base font-semibold ">
-          <h3 className=" font-semibold rounded-lg p-2 px-5 border-2 border-mainGreen shadow-lg">
+          <h3 className="font-semibold rounded-lg p-2 px-5 border-2 border-mainGreen shadow-lg">
             {mealData.type}
           </h3>
           <p className="">11/10/2023</p>
@@ -55,7 +55,10 @@ export default function MealCard({
 
         <div className="flex justify-between my-5 font-bold items-center">
           <p>Calories: </p>
-          <p>{mealData.totalCals} cals</p>
+          <p>
+            {mealData.totalCals}{' '}
+            <span>{mealData.totalCals > 1 ? 'cals' : 'cal'}</span>
+          </p>
           <button
             className="p-3  rounded-lg mt-2 text-base   font-bold"
             onClick={() => handleDelete(mealData.id)}

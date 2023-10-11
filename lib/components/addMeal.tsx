@@ -80,25 +80,30 @@ export default function AddMeal({
         >
           What did you eat today? 🔍
         </button>
-        <button
-          className={`buttonLogin bg-lightGreen text-mainBlack font-bold`}
-          type="submit"
-        >
-          Confirm
-        </button>
-      </form>
 
-      <select
-        className="mt-5 text-mainWhite text-base cursor-pointer border-2 border-mainGreen bg-mainBlack rounded-lg p-2"
-        name="Meal-type"
-        defaultValue={type}
-        onChange={(e) => setType(e.target.value)}
-      >
-        <option value="Breakfast">Breakfast</option>
-        <option value="Lunch">Lunch</option>
-        <option value="Dinner">Dinner</option>
-        <option value="Snack">Snack</option>
-      </select>
+        <div className="flex justify-around mt-5  ">
+          <select
+            className=" text-mainWhite text-base cursor-pointer border-2 border-mainGreen bg-mainBlack rounded-lg p-2"
+            name="Meal-type"
+            defaultValue={type}
+            onChange={(e) => setType(e.target.value)}
+          >
+            <option value="Breakfast">Breakfast</option>
+            <option value="Lunch">Lunch</option>
+            <option value="Dinner">Dinner</option>
+            <option value="Snack">Snack</option>
+          </select>
+
+          <button
+            name="confirm"
+            className={`text-base cursor-pointer border-2 border-mainGreen rounded-lg "
+          name="Meal-type w-[650px] bg-lightGreen text-mainBlack font-bold`}
+            type="submit"
+          >
+            Confirm
+          </button>
+        </div>
+      </form>
     </div>
   );
 }

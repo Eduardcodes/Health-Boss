@@ -55,6 +55,10 @@ body {
   justify-content: center;
 }
 
+.bg-mainDarkBlack {
+  background-color: #292828;
+}
+
 /* -------------- Variables for reuseable styling  -------------- */
 
 .sectionMainPages {
@@ -62,7 +66,7 @@ body {
 }
 
 .titleCards {
-  @apply font-bold min-w-[10rem] border-b-4 border-mainGreen;
+  @apply font-bold min-w-[10rem] border-b-4 border-mainGreen truncate;
 }
 
 .cardBackground {
