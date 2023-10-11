@@ -94,10 +94,10 @@ function CreateAccount({user}: {user:User}) {
             <input
               className="inputLogin"
               type="text"
-              id="userName"
-              name="userName"
+              id="firstName"
+              name="firstName"
               placeholder="Your first name here"
-              value = {inputs.userName || ""}
+              value = {inputs.firstName || ""}
               onChange={handleChange}
             />
           </div>
