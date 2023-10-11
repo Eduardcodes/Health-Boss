@@ -11,12 +11,12 @@ const back = (
   />
 );
 
-function HeaderPage() {
+function HeaderPage({ title }: { title: React.ReactNode }) {
   return (
     <>
-      <section className="h-20 flex justify-between items-center mx-5 mt-10">
+      <section className="h-20 flex justify-between items-center  mx-5 mt-10">
         <div>{back}</div>
-        <h4 className="font-bold">Statistic</h4>
+        <h4 className="font-bold">{title}</h4>
         <Image
           src="/profile.jpg"
           alt="exercise icon"

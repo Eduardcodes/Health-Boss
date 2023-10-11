@@ -1,6 +1,12 @@
 'use client';
 import { Meal } from '../types';
 import { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faClose } from '@fortawesome/free-solid-svg-icons';
+
+const close = (
+  <FontAwesomeIcon icon={faClose} size="2xl" style={{ color: '#2de86b' }} />
+);
 
 export default function MealCard({
   mealData,
@@ -38,14 +44,27 @@ export default function MealCard({
   }
 
   return (
-    <div onClick={() => setDetails(!details)}>
-      <div>
-        <div>
-          <h3>{mealData.type}</h3>
-          <p>Calories: {mealData.totalCals}</p>
+    <div className="cardBackground " onClick={() => setDetails(!details)}>
+      <div className="">
+        <div className="flex justify-between items-center text-base font-semibold ">
+          <h3 className=" font-semibold rounded-lg p-2 px-5 border-2 border-mainGreen shadow-lg">
+            {mealData.type}
+          </h3>
+          <p className="">11/10/2023</p>
         </div>
-        <button onClick={() => handleDelete(mealData.id)}>X</button>
+
+        <div className="flex justify-between my-5 font-bold items-center">
+          <p>Calories: </p>
+          <p>{mealData.totalCals} cals</p>
+          <button
+            className="p-3  rounded-lg mt-2 text-base   font-bold"
+            onClick={() => handleDelete(mealData.id)}
+          >
+            {close}
+          </button>
+        </div>
       </div>
+
       {details && (
         <ul>
           {mealData.ingredients.map((ingredient) => {

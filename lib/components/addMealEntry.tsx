@@ -6,15 +6,18 @@ export default function AddMealEntry({ ingredient }: { ingredient: FoodData }) {
   const [amount, setAmount] = useState(100);
 
   return (
-    <div>
-      {ingredient.label}:
+    <div className="text-base cardBackground flex flex-col">
+      <div className="text-lg font-bold text-mainGreen">
+        {ingredient.label}:
+      </div>
+      <label className="mt-4 font-semibold">Insert how many grams</label>
       <input
+        className="inputLogin  "
         name={ingredient.label}
         type="number"
         onChange={(e) => setAmount(Number(e.target.value))}
       ></input>{' '}
-      grams
-      <div>
+      <div className="grid grid-cols-2">
         <p>
           Calories:{' '}
           {(ingredient.nutrients.calories * (amount / 100)).toFixed(2)}

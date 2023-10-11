@@ -68,8 +68,28 @@ export default function AddMeal({
     }
   }
   return (
-    <div>
+    <div className="mx-4">
+      <form className="mt-5" onSubmit={submitHandler}>
+        {selectedFoods.map((ingredient: FoodData) => (
+          <AddMealEntry key={ingredient.foodId} ingredient={ingredient} />
+        ))}
+        <button
+          className="inputLogin"
+          type="button"
+          onClick={() => setModalOpen(true)}
+        >
+          What did you eat today? 🔍
+        </button>
+        <button
+          className={`buttonLogin bg-lightGreen text-mainBlack font-bold`}
+          type="submit"
+        >
+          Confirm
+        </button>
+      </form>
+
       <select
+        className="mt-5 text-mainWhite text-base cursor-pointer border-2 border-mainGreen bg-mainBlack rounded-lg p-2"
         name="Meal-type"
         defaultValue={type}
         onChange={(e) => setType(e.target.value)}
@@ -79,16 +99,6 @@ export default function AddMeal({
         <option value="Dinner">Dinner</option>
         <option value="Snack">Snack</option>
       </select>
-
-      <form onSubmit={submitHandler}>
-        {selectedFoods.map((ingredient: FoodData) => (
-          <AddMealEntry key={ingredient.foodId} ingredient={ingredient} />
-        ))}
-        <button type="button" onClick={() => setModalOpen(true)}>
-          ADD THING
-        </button>
-        <button type="submit">Confirm</button>
-      </form>
     </div>
   );
 }
