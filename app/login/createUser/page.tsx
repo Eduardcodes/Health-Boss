@@ -1,5 +1,4 @@
 "use client";
-// use useState so need to be client component
 
 import Image from "next/image";
 import Modal from "@/app/ed/components/Modal";

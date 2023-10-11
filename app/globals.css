@@ -82,7 +82,7 @@ body {
 }
 
 .inputLogin {
-  @apply text-base font-semibold bg-mainBlack rounded-xl p-3 border-2 border-lightGreen mb-2 w-full shadow-lg;
+  @apply text-base font-semibold bg-mainBlack rounded-xl p-3 border-2 border-lightGreen mb-2 w-full;
 }
 
 .buttonLogin {
