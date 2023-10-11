@@ -12,6 +12,8 @@ export type User = {
   updatedAt: Date;
 };
 
+
+
 //Meal related types
 export type Meal = {
   id: string;

@@ -1,17 +1,35 @@
+"use client"
+// use useState so need to be client component
+
 import Image from 'next/image';
 import Modal from '@/app/ed/components/Modal';
 import axios from 'axios';
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 
-function CreateAccount() {
+import { User } from '@/lib/types'; 
+
+function CreateAccount({user}: {user:User}) {
   const router = useRouter();
   const [modalOpen, setModalOpen] = useState(false);
-  const [inputs, setInputs] = useState({});
+  const [inputs, setInputs] = useState<User>({
+    id: '',
+    userName: '',
+    email: '',
+    password: '',
+    firstName: '',
+    lastName: '',
+    birthday: new Date(),
+    exerciseHistory: [],
+    mealHistory: [],
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  });
 
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
+    console.log(inputs)
     axios
       .post("api/users/signUp", inputs)
       .then((res) => {
@@ -28,12 +46,24 @@ function CreateAccount() {
         console.log(err);
       })
       .finally(() => {
-        setInputs({});
+        setInputs({   
+        id: '',
+        userName: '',
+        email: '',
+        password: '',
+        firstName: '',
+        lastName: '',
+        birthday: new Date(),
+        exerciseHistory: [],
+        mealHistory: [],
+        createdAt: new Date(),
+        updatedAt: new Date(),});
         //setModalOpen(false);
         router.refresh();
       });
   };
 
+  //? any better way to write ts 
   const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
     const name: string = event.currentTarget.name;
     const value: string = event.currentTarget.value;
@@ -56,7 +86,7 @@ function CreateAccount() {
       </section>
 
       <section className="mx-5">
-        <form className="flex flex-col items-center w-full">
+        <form className="flex flex-col items-center w-full" onSubmit={handleSubmit}>
           <div className="w-full">
             <label className="font-semibold text-base" htmlFor="fname">
               First name
@@ -64,9 +94,11 @@ function CreateAccount() {
             <input
               className="inputLogin"
               type="text"
-              id="fname"
-              name="fname"
+              id="userName"
+              name="userName"
               placeholder="Your first name here"
+              value = {inputs.userName || ""}
+              onChange={handleChange}
             />
           </div>
           <div className="w-full">
@@ -76,9 +108,11 @@ function CreateAccount() {
             <input
               className="inputLogin"
               type="text"
-              id="lname"
-              name="lname"
+              id="lastName"
+              name="lastName"
               placeholder="Your last name here"
+              value = {inputs.lastName || ""}
+              onChange={handleChange}
             />
           </div>
           <div className="w-full">
@@ -91,6 +125,9 @@ function CreateAccount() {
               id="email"
               name="email"
               placeholder="email@email.com"
+              value = {inputs.email || ""}
+              onChange={handleChange}
+
             />
           </div>
           <div className="w-full">
@@ -103,6 +140,8 @@ function CreateAccount() {
               id="password"
               name="password"
               placeholder="New password"
+              value = {inputs.password || ""}
+              onChange={handleChange}
             />
           </div>
           <div className="w-full">
