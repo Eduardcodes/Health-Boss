@@ -7,7 +7,7 @@ export default function HomePage() {
   
   // TODO: check if user is logged in already, if not redirect to /login
   const authState =useAuthStore.getState()
-  console.log(authState)
+  console.log(authState.auth, "HOME state")
   return (
     <div>
       home 

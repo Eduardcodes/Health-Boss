@@ -4,25 +4,33 @@ import tokenComp from './components/tokenComp'
 import TokenTest from './components/TokenTest'
 import Link from 'next/link'
 
-async function getUser() {
+import { useAuthStore } from "@/lib/store";
+
+async function getUser(token) {
   //TODO make it dynamic not only 3002
 
+
   // put token in the header
-  const res = await fetch("http://localhost:3000/api/users", { cache: 'no-store'});
-  
-  if(!res.ok) {
-    throw new Error("Failed to fetch data")
-  }
-  
-  return res.json();
-  
+  const res = await fetch("http://localhost:3000/api/users", 
+  { method: 'GET', cache: 'no-store', headers: {Authorization: `Bearer ${token}` }
+});
+
+if(!res.ok) {
+  throw new Error("Failed to fetch data")
+}
+
+return res.json();
+
 }
 
 
 const TestingUserPage = async () => {
-
   
-  const users = await getUser();
+  const authState =useAuthStore.getState()
+  const token = authState.auth
+  console.log(token, "token in ed page")
+  
+  const users = await getUser(token);
 
   // const tokenFromLocalStorage = localStorage.getItem('auth');
   // console.log(tokenFromLocalStorage)

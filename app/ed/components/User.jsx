@@ -6,6 +6,8 @@ import Modal from "./Modal";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 
+import { useAuthStore } from "@/lib/store";
+
 const User = ({ user }) => {
   const router = useRouter();
 
@@ -14,10 +16,10 @@ const User = ({ user }) => {
 
   const [openModalDelete, setOpenModalDelete] = useState(false);
 
-  const handleEditSubmit = (e) => {
+  const handleEditSubmit = (e, token) => {
     e.preventDefault();
     axios
-      .patch(`/api/users/${user.id}`, userToEdit)
+      .patch(`/api/users/${user.id}`, userToEdit, {headers:{Authorization: `Bearer ${token}`}})
       .then((res) => {
         console.log(res);
       })
@@ -51,6 +53,9 @@ const User = ({ user }) => {
       });
   };
 
+  const authState =useAuthStore.getState()
+  const token = authState.auth
+
   return (
     <li className="p-3 my-5 bg-slate-200" key={user.id}>
       <h1>id: {user.id}</h1>
@@ -67,7 +72,7 @@ const User = ({ user }) => {
         </button>
 
         <Modal modalOpen={openModalEdit} setModalOpen={setOpenModalEdit}>
-          <form className="w-full" onSubmit={handleEditSubmit}>
+          <form className="w-full" onSubmit={(e) => handleEditSubmit(e, token)}>
             <h1 className="text-2xl" pb-3>
               Edit User
             </h1>

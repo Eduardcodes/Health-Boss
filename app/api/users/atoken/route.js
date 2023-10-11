@@ -2,7 +2,7 @@
 
 import { NextResponse } from "next/server"
 import axios from "axios";
-
+import { useAuthStore } from "@/lib/store";
 
 // export const Get = async () => {
 //     try {
@@ -38,10 +38,20 @@ import axios from "axios";
 //   }
 
 export const POST = async (request) => {
+
+    const authState =useAuthStore.getState()
+    const token = authState.auth
+
+
     //console.log(request, "request to the server")
     try {
+
+        const config = {
+            headers: { Authorization: `Bearer ${token}` }
+          }
+          
         //const body = await request.json();
-        const { token } = request.headers
+       // const { token } = request.headers
         //console.log('Received token:');
         return NextResponse.json({ message: 'Token received successfully', token });
     } catch (error) {

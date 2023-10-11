@@ -18,15 +18,15 @@ const AddUser = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("api/users/signup", inputs)
+      .post("api/users/signUp", inputs)
       .then((res) => {
         //console.log(res);
         const token = res.data;
         console.log(token, "token")
-       // localStorage.setItem('auth', JSON.stringify(token))
-        setAuth(token);
-      const authState =useAuthStore.getState()
-        console.log(authState, "setAutha")
+       localStorage.setItem('auth', JSON.stringify(token))
+      setAuth(token);
+      //const authState =useAuthStore.getState()
+      //console.log({authState}, "setAutha")
 
       })
       .catch((err) => {
@@ -51,7 +51,7 @@ const AddUser = () => {
          onClick = {() => setModalOpen(true)}
          className="bg-blue-700 text-white p-3 cursor-pointer"
       >
-     Add New User {setAuth}
+     Add New User
       </button>
 
       <Modal modalOpen={modalOpen} setModalOpen={setModalOpen}>
@@ -65,7 +65,7 @@ const AddUser = () => {
             className="w-full p-2"
             value = {inputs.userName || ""}
             onChange={handleChange}
-        />
+        ></input>
 
         <input 
             type="text"
@@ -74,7 +74,7 @@ const AddUser = () => {
             className="w-full p-2"
             value = {inputs.email || ""}
             onChange={handleChange}
-        />
+        ></input>
 
         <input 
             type="text"
@@ -83,7 +83,7 @@ const AddUser = () => {
             className="w-full p-2"
             value = {inputs.password || ""}
             onChange={handleChange}
-        />
+        ></input>
         
         <button type="submit" className="bg-blue-700 text-white px-5 py-2">
             Submit

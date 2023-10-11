@@ -1,4 +1,4 @@
-//url: http://localhost:3000/api/signUp
+//url: http://localhost:3000/api/users/signUp
 //TODO fixed the objet assign to body, now only username, email and password
 
 import prisma from "@/lib/components/prismadb";
@@ -10,7 +10,9 @@ import { sign } from 'jsonwebtoken'
 const secretKey = process.env.JWT_SECRET;
 
 export const POST = async (request) => {
+  console.log("post")
   try {
+
     //TODO change to ts  const hashedPassword:string
     
     const body = await request.json();
@@ -31,6 +33,9 @@ export const POST = async (request) => {
     // console.log(data,"data")
 
     //TODO should not send back password in response, use select
+
+    
+    //return NextResponse.json(newUser);
     return NextResponse.json(token);
   } catch (error) {
     console.log(error);

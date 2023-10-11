@@ -1,4 +1,4 @@
-
+//front end milddle
 
 import { NextRequest, NextResponse } from 'next/server'
 import axios from "axios";
@@ -9,6 +9,10 @@ import axios from "axios";
 // This function can be marked `async` if using `await` inside
 
 export async function middleware(request) {
+
+  console.log(request)
+
+
   
   // // const axiosInstance = axios.create({
   //   //   // Specify the HTTP adapter for Node.js
@@ -46,7 +50,8 @@ export async function middleware(request) {
  
 // See "Matching Paths" below to learn more
 export const config = {
-  // matcher: '/api/user',
+  //matcher: '/api/:users*', 
+  matcher: '/api/users', 
 }
 
 
