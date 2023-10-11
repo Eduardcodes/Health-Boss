@@ -1,75 +1,61 @@
-"use client"
+"use client";
 // use useState so need to be client component
 
-import Image from 'next/image';
-import Modal from '@/app/ed/components/Modal';
-import axios from 'axios';
+import Image from "next/image";
+import Modal from "@/app/ed/components/Modal";
+import axios from "axios";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
+import React from "react";
+import { User } from "@/lib/types";
 
-import { User } from '@/lib/types'; 
-
-function CreateAccount({user}: {user:User}) {
+function CreateAccount({ user }: { user: User }) {
   const router = useRouter();
   const [modalOpen, setModalOpen] = useState(false);
-  const [inputs, setInputs] = useState<User>({
-    id: '',
-    userName: '',
-    email: '',
-    password: '',
-    firstName: '',
-    lastName: '',
-    birthday: new Date(),
-    exerciseHistory: [],
-    mealHistory: [],
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  });
-
+  const [inputs, setInputs] = useState<User>({} as User);
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
     console.log(inputs)
     axios
-      .post("api/users/signUp", inputs)
+      .post('/api/users/signUp', inputs)
       .then((res) => {
         console.log(res);
-
         //TODO add back token and set global store later
         //const token = res.data;
        // console.log(token, "token")
        //localStorage.setItem('auth', JSON.stringify(token))
-      
 
       })
       .catch((err) => {
         console.log(err);
       })
       .finally(() => {
-        setInputs({   
-        id: '',
-        userName: '',
-        email: '',
-        password: '',
-        firstName: '',
-        lastName: '',
-        birthday: new Date(),
-        exerciseHistory: [],
-        mealHistory: [],
-        createdAt: new Date(),
-        updatedAt: new Date(),});
+        setInputs({});
+
         //setModalOpen(false);
         router.refresh();
       });
   };
 
-  //? any better way to write ts 
+  // const handleSubmit = async (event: React.SyntheticEvent) => {
+  //   try {
+  //     event.preventDefault();
+  //     // console.log("INPUTS::", inputs)
+  //     const response = await axios.post('/api/users/signUp');
+  //     //console.log("IT WORKS::", response)
+  //     return response;
+  //   } catch (err) {
+  //     console.error("Failed to submit form:: ", err);
+  //   }
+  // };
+
+  //? any better way to write ts
   const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
     const name: string = event.currentTarget.name;
     const value: string = event.currentTarget.value;
-    setInputs((prevState) => ({...prevState, [name]: value}))
-  }
-
+    setInputs((prevState) => ({ ...prevState, [name]: value }));
+  };
 
   return (
     <div
@@ -86,7 +72,10 @@ function CreateAccount({user}: {user:User}) {
       </section>
 
       <section className="mx-5">
-        <form className="flex flex-col items-center w-full" onSubmit={handleSubmit}>
+        <form
+          className="flex flex-col items-center w-full"
+          onSubmit={handleSubmit}
+        >
           <div className="w-full">
             <label className="font-semibold text-base" htmlFor="fname">
               First name
@@ -97,7 +86,7 @@ function CreateAccount({user}: {user:User}) {
               id="firstName"
               name="firstName"
               placeholder="Your first name here"
-              value = {inputs.firstName || ""}
+              value={inputs.firstName || ""}
               onChange={handleChange}
             />
           </div>
@@ -111,7 +100,7 @@ function CreateAccount({user}: {user:User}) {
               id="lastName"
               name="lastName"
               placeholder="Your last name here"
-              value = {inputs.lastName || ""}
+              value={inputs.lastName || ""}
               onChange={handleChange}
             />
           </div>
@@ -125,9 +114,8 @@ function CreateAccount({user}: {user:User}) {
               id="email"
               name="email"
               placeholder="email@email.com"
-              value = {inputs.email || ""}
+              value={inputs.email || ""}
               onChange={handleChange}
-
             />
           </div>
           <div className="w-full">
@@ -140,7 +128,7 @@ function CreateAccount({user}: {user:User}) {
               id="password"
               name="password"
               placeholder="New password"
-              value = {inputs.password || ""}
+              value={inputs.password || ""}
               onChange={handleChange}
             />
           </div>
