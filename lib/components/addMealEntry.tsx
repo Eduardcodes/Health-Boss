@@ -9,7 +9,7 @@ export default function AddMealEntry({ingredient}:{ingredient: FoodData}) {
   
   return (
     <div>
-      
+    
         {ingredient.label}:
         <input name={ingredient.label} type='number' 
         onChange={(e) => setAmount(Number(e.target.value))}>

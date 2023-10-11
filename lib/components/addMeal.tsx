@@ -63,7 +63,7 @@ export default function AddMeal({
   }
   return (
     <div>
-       <select name='Meal-type' 
+       <select name='Meal-type'
        defaultValue={type}
        onChange={(e)=> setType(e.target.value)}>
           <option value='Breakfast'>Breakfast</option>
