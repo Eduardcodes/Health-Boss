@@ -10,8 +10,8 @@ function CreateAccount() {
   const [inputs, setInputs] = useState({});
 
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = (event: FormEvent) => {
+    event.preventDefault();
     axios
       .post("api/users/signUp", inputs)
       .then((res) => {
@@ -33,6 +33,12 @@ function CreateAccount() {
         router.refresh();
       });
   };
+
+  const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
+    const name: string = event.currentTarget.name;
+    const value: string = event.currentTarget.value;
+    setInputs((prevState) => ({...prevState, [name]: value}))
+  }
 
 
   return (
