@@ -10,6 +10,8 @@ import { faBell } from '@fortawesome/free-solid-svg-icons';
 import MotivationQuote from '@/lib/components/MotivationQuote';
 import { users } from '@/utils/mockData';
 
+import Link from 'next/link';
+
 const back = (
   <FontAwesomeIcon
     icon={faAngleDoubleLeft}
@@ -65,6 +67,7 @@ export default function HomePage() {
         </div>
 
         <MotivationQuote />
+        <Link href='/login/loginUser'>login</Link>
       </section>
 
       <section className={` flex flex-col`}>

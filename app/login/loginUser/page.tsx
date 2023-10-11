@@ -9,8 +9,11 @@ import React from "react";
 import { User } from "@/lib/types";
 import Link  from 'next/link'
 
+import { useAuthStore } from "@/lib/store"
 
 function LoginPage() {
+
+  console.log(useAuthStore.getState(), "global state in login page")
 
   const router = useRouter();
   const [modalOpen, setModalOpen] = useState(false);

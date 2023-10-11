@@ -7,6 +7,8 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import React from "react";
 import { User } from "@/lib/types";
+//! global store
+import { useAuthStore } from "@/lib/store"
 
 function CreateAccount({ user }: { user: User }) {
 
@@ -14,14 +16,20 @@ function CreateAccount({ user }: { user: User }) {
   const [modalOpen, setModalOpen] = useState(false);
   const [inputs, setInputs] = useState<User>({} as User);
 
+  //! global store instance 
+  const setAuth = useAuthStore((state) => state.setAuth)
+
   const handleSubmit = async (event: React.SyntheticEvent) => {
     try {
       event.preventDefault();
       // console.log("INPUTS::", inputs)
       const response = await axios.post('/api/users/signUp', inputs);
-      //console.log("IT WORKS::", response)
+      console.log("IT WORKS::", response.data)
       setInputs({} as User);
       //TODO give token to user and encrypt the password, set status to global store
+      //! global store set status
+      setAuth(response.data)
+
       router.push('/')
       return response;
     } catch (err) {
