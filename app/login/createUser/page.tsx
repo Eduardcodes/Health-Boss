@@ -16,16 +16,15 @@ function CreateAccount({ user }: { user: User }) {
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
-    console.log(inputs)
+    console.log(inputs);
     axios
-      .post('/api/users/signUp', inputs)
+      .post("/api/users/signUp", inputs)
       .then((res) => {
         console.log(res);
         //TODO add back token and set global store later
         //const token = res.data;
-       // console.log(token, "token")
-       //localStorage.setItem('auth', JSON.stringify(token))
-
+        // console.log(token, "token")
+        //localStorage.setItem('auth', JSON.stringify(token))
       })
       .catch((err) => {
         console.log(err);
@@ -77,7 +76,21 @@ function CreateAccount({ user }: { user: User }) {
           onSubmit={handleSubmit}
         >
           <div className="w-full">
-            <label className="font-semibold text-base" htmlFor="fname">
+            <label className="font-semibold text-base" htmlFor="userName">
+              User Name
+            </label>
+            <input
+              className="inputLogin"
+              type="text"
+              id="userName"
+              name="userName"
+              placeholder="Your user name here"
+              value={inputs.userName || ""}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="w-full">
+            <label className="font-semibold text-base" htmlFor="firstName">
               First name
             </label>
             <input
@@ -91,7 +104,7 @@ function CreateAccount({ user }: { user: User }) {
             />
           </div>
           <div className="w-full">
-            <label className="font-semibold text-base" htmlFor="lname">
+            <label className="font-semibold text-base" htmlFor="lastName">
               Last name
             </label>
             <input
@@ -132,17 +145,7 @@ function CreateAccount({ user }: { user: User }) {
               onChange={handleChange}
             />
           </div>
-          <div className="w-full">
-            <label className="font-semibold text-base" htmlFor="birthday">
-              Birthday
-            </label>
-            <input
-              className="inputLogin"
-              type="date"
-              id="birthday"
-              name="birthday"
-            />
-          </div>
+
           <button
             className={`buttonLogin bg-lightGreen text-mainBlack hover:scale-110`}
             type="submit"
