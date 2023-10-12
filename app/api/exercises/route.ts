@@ -27,12 +27,12 @@ export const DELETE = async (request: Request) => {
   try {
     const body = await request.json()
     const {id} = body
-    await prisma.session.delete({
+    const deletedItem = await prisma.session.delete({
       where: {
         id: id
       }
     })
-    return NextResponse.json({status:200})
+    return NextResponse.json({deletedItem, status:200})
   } catch(error) {
     console.log(error)
     return NextResponse.json({message: 'Delete request failed',error},{status:500})

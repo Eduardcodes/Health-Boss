@@ -1,7 +1,7 @@
 'use client'
 import { CleanActivityData, Session } from "@/lib/types"
 import { useState, useEffect } from "react"
-import { FormEvent } from "react"
+import { FormEvent, FormEventHandler } from "react"
 import { getAutoFillSuggestions, getActivityDetails, getActivitiesList } from "@/utils/exercise-database"
 
 export default function SearchExercise(
@@ -33,8 +33,9 @@ export default function SearchExercise(
     console.log('SELECT', activityData)
     setSearchDisplay(activityData)
   }
-  async function handleSubmit(e: FormEvent<HTMLInputElement>) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
+    setOptions([])
     const activityData = await getActivityDetails(e.currentTarget.value, 160)  //TODO REDUX FOR USER WEIGHT
     setSearchDisplay(activityData)
   }
@@ -46,12 +47,13 @@ export default function SearchExercise(
   return (
     <div>
       <div>
-        <form >
+        <form onSubmit={(e)=>handleSubmit(e)}>
           <input type="text" name="search" placeholder="Search foods..." 
           onChange={(e)=> handleChange(e)}></input>
+          <button type="submit">Search</button>
         </form>
       </div>
-      {options && options.map(option => <p onClick={()=> handleSelect(option)}>{option}</p>)}
+      {/* {options && options.map(option => <p onClick={()=> handleSelect(option)}>{option}</p>)} */}
       {searchDisplay && searchDisplay.map(activity => {
         return (
           <div>

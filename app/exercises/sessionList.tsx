@@ -18,9 +18,10 @@ export default function SessionList(
   async function getAllSessions() {
     const res: Response = await fetch('/api/exercises/652560db8f962632ac04d15f')
     const data = await res.json()
-    const allSessions = data.allSessions as Session[]
-    if(Array.isArray(allSessions)){
-      setDisplayedSessions(allSessions)
+    const allSession = data.allSession as Session[]
+    console.log('ALL SESSIONS LIST', allSession)
+    if(Array.isArray(allSession)){
+      setDisplayedSessions(allSession)
     } 
     else return null
   }

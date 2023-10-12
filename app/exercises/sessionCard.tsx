@@ -50,7 +50,7 @@ export default function SessionCard(
         {session.activities.map((activity) => {
           return (
           <>
-          <li>{activity.activity} {activity.duration}</li>
+          <li>{activity.activity} {activity.duration} minutes</li>
           <li>Calories Burned: {activity.calsBurned}</li>
           </>
           )

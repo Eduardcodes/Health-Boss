@@ -25,11 +25,11 @@ export const getActivityDetails = async (activity: string, weight?: number) => {
                 "X-Api-Key": "M3E6uLa4vo3d5xnU6I5/YQ==P8C5PsirDGOxDnro"
             }
         })
-        console.log(res)
-        console.log(await res.json())
-        const array = await res.json()
-        console.log('ARRAY RAR', array)
-        console.log('ARRAY IN IF', arrayOfActivities)
+        // console.log(res)
+        // console.log(await res.json())
+        arrayOfActivities = await res.json()
+        // console.log('ARRAY RAR', array)
+        // console.log('ARRAY IN IF', arrayOfActivities)
         //sorry Seb i realised that the API im using is garbage so this is bad right now
     } else {
         const res: Response = await fetch(`https://api.api-ninjas.com/v1/caloriesburned?activity=${activity}`, {
