@@ -56,7 +56,6 @@ export default function MealCard({
 
         <div className="text-lg flex justify-between mt-5 font-bold items-center">
           <p>Total Calories: </p>
-
           <p>
             {mealData.totalCals}{' '}
             <span>{mealData.totalCals > 1 ? 'cals' : 'cal'}</span>

@@ -3,7 +3,7 @@ import React from 'react';
 import SessionList from './sessionList';
 import ExerciseSession from './exerciseSession';
 import SearchExercise from './searchExercise';
-import Modal from '@/app/ed/components/Modal';
+import ModalExercise from '@/app/ed/components/ModalExercise';
 import { useState } from 'react';
 import { CleanActivityData, Session } from '@/lib/types';
 import Image from 'next/image';
@@ -68,12 +68,12 @@ export default function ExercisesPage() {
           setAddSessionBox={setAddSessionBox}
         />
       )}
-      <Modal modalOpen={modalOpen} setModalOpen={setModalOpen}>
+      <ModalExercise modalOpen={modalOpen} setModalOpen={setModalOpen}>
         <SearchExercise
           setModalOpen={setModalOpen}
           setSelectedActivities={setSelectedActivities}
         />
-      </Modal>
+      </ModalExercise>
 
       {displayedSessions && (
         <SessionList
