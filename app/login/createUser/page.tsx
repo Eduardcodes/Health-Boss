@@ -1,6 +1,43 @@
-import Image from 'next/image';
+"use client";
 
-function CreateAccount() {
+import Image from "next/image";
+import Modal from "@/app/ed/components/Modal";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import React from "react";
+import { User } from "@/lib/types";
+import { setJWT } from "@/lib/jwt";
+
+function CreateAccount({ user }: { user: User }) {
+
+  const router = useRouter();
+  const [modalOpen, setModalOpen] = useState(false);
+  const [inputs, setInputs] = useState<User>({} as User);
+
+  const handleSubmit = async (event: React.SyntheticEvent) => {
+    try {
+      event.preventDefault();
+      // console.log("INPUTS::", inputs)
+      const response = await axios.post('/api/users/signUp', inputs);
+      //console.log("IT WORKS::", response)
+      setJWT(response.data.token)
+      setInputs({} as User);
+      //TODO give token to user and encrypt the password, set status to global store
+      router.push('/')
+      return response;
+    } catch (err) {
+      console.error("Failed to submit form:: ", err);
+    }
+  };
+
+  //? any better way to write ts
+  const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
+    const name: string = event.currentTarget.name;
+    const value: string = event.currentTarget.value;
+    setInputs((prevState) => ({ ...prevState, [name]: value }));
+  };
+
   return (
     <div
       className={`sectionMainPages  bg-gradient-to-b from-mainGreen to-mainBlack `}
@@ -16,29 +53,50 @@ function CreateAccount() {
       </section>
 
       <section className="mx-5">
-        <form className="flex flex-col items-center w-full">
+        <form
+          className="flex flex-col items-center w-full"
+          onSubmit={handleSubmit}
+        >
           <div className="w-full">
-            <label className="font-semibold text-base" htmlFor="fname">
+            <label className="font-semibold text-base" htmlFor="userName">
+              User Name
+            </label>
+            <input
+              className="inputLogin"
+              type="text"
+              id="userName"
+              name="userName"
+              placeholder="Your user name here"
+              value={inputs.userName || ""}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="w-full">
+            <label className="font-semibold text-base" htmlFor="firstName">
               First name
             </label>
             <input
               className="inputLogin"
               type="text"
-              id="fname"
-              name="fname"
+              id="firstName"
+              name="name"
               placeholder="Your first name here"
+              value={inputs.name || ""}
+              onChange={handleChange}
             />
           </div>
           <div className="w-full">
-            <label className="font-semibold text-base" htmlFor="lname">
+            <label className="font-semibold text-base" htmlFor="lastName">
               Last name
             </label>
             <input
               className="inputLogin"
               type="text"
-              id="lname"
-              name="lname"
+              id="lastName"
+              name="lastname"
               placeholder="Your last name here"
+              value={inputs.lastname || ""}
+              onChange={handleChange}
             />
           </div>
           <div className="w-full">
@@ -51,6 +109,8 @@ function CreateAccount() {
               id="email"
               name="email"
               placeholder="email@email.com"
+              value={inputs.email || ""}
+              onChange={handleChange}
             />
           </div>
           <div className="w-full">
@@ -63,19 +123,11 @@ function CreateAccount() {
               id="password"
               name="password"
               placeholder="New password"
+              value={inputs.password || ""}
+              onChange={handleChange}
             />
           </div>
-          <div className="w-full">
-            <label className="font-semibold text-base" htmlFor="birthday">
-              Birthday
-            </label>
-            <input
-              className="inputLogin"
-              type="date"
-              id="birthday"
-              name="birthday"
-            />
-          </div>
+
           <button
             className={`buttonLogin bg-lightGreen text-mainBlack hover:scale-110`}
             type="submit"
