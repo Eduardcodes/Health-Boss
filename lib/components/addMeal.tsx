@@ -30,7 +30,7 @@ export default function AddMeal({
     let totalCalsThisMeal = 0;
     let ingredientsList: Ingredient[] = [];
     delete dataNamesAndAmounts['Meal-type'];
-    console.log(dataNamesAndAmounts);
+
     for (const ingName in dataNamesAndAmounts) {
       for (let i = 0; i < selectedFoods.length; i++) {
         if (ingName === selectedFoods[i].label) {

@@ -13,7 +13,6 @@ function MotivationQuote() {
     fetch('https://api.quotable.io/random?maxLength=30')
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setQuote(data);
         setLoading(false);
       });
