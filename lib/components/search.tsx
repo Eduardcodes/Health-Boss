@@ -41,7 +41,7 @@ export default function SearchPopup({
       <div className="bg-mainGreen">
         <form>
           <input
-            className="inputLogin "
+            className="inputLogin"
             type="text"
             name="search"
             placeholder="Search foods..."

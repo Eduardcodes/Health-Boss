@@ -1,6 +1,12 @@
 'use client';
 import { useState } from 'react';
 import { CleanActivityData } from '@/lib/types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faClose } from '@fortawesome/free-solid-svg-icons';
+
+const close = (
+  <FontAwesomeIcon icon={faClose} size="2xl" style={{ color: '#2de86b' }} />
+);
 
 export default function SessionEntry({
   activity,
@@ -23,25 +29,27 @@ export default function SessionEntry({
   }
 
   return (
-    <div>
-      <div>
+    <div className="text-base cardBackground flex flex-col">
+      <div className="text-lg font-bold text-mainGreen">
         {activity.activity}:
-        <input
-          name={activity.activity}
-          type="number"
-          onChange={(e) => setDuration(Number(e.target.value))}
-        ></input>{' '}
-        minutes
-        <button type="button" onClick={() => handleClose(activity)}>
-          X
-        </button>
       </div>
+      <label className="mt-4 font-semibold">Insert how many Minutes</label>
+      <input
+        className="inputLogin"
+        name={activity.activity}
+        type="number"
+        onChange={(e) => setDuration(Number(e.target.value))}
+        placeholder="Minutes"
+      ></input>{' '}
       <div>
         <h3>
           Calories Burned:{' '}
           {(activity.caloriesPerHour * (duration / 60)).toFixed(2)}
         </h3>
       </div>
+      <button type="button" onClick={() => handleClose(activity)}>
+        {close}
+      </button>
     </div>
   );
 }

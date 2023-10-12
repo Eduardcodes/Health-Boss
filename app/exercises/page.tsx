@@ -35,7 +35,8 @@ export default function ExercisesPage() {
   return (
     <div className="sectionMainPages">
       <section className="h-20 flex justify-between items-center  mx-5 mt-10">
-        <button onClick={() => setAddSessionBox(!addSessionBox)}>{back}</button>
+        {/* <button onClick={() => setAddSessionBox(!addSessionBox)}>{back}</button> */}
+        <button onClick={() => handleCancel()}>{back}</button>
         <h4 className="font-bold">My Exercises</h4>
         <Link href="/profile">
           <Image
@@ -49,7 +50,8 @@ export default function ExercisesPage() {
       </section>
 
       {addSessionBox ? (
-        <button onClick={() => handleCancel()}>Cancel</button>
+        // <button onClick={() => handleCancel()}>Cancel</button>
+        <button className="hidden"></button>
       ) : (
         <button
           className="buttonAddActivityOrFood"
@@ -75,12 +77,14 @@ export default function ExercisesPage() {
         />
       </ModalExercise>
 
-      {displayedSessions && (
-        <SessionList
-          displayedSessions={displayedSessions}
-          setDisplayedSessions={setDisplayedSessions}
-        />
-      )}
+      <div className={!addSessionBox ? `block` : 'hidden'}>
+        {displayedSessions && (
+          <SessionList
+            displayedSessions={displayedSessions}
+            setDisplayedSessions={setDisplayedSessions}
+          />
+        )}
+      </div>
 
       <section
         className={

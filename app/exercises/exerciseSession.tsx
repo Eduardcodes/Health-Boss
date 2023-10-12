@@ -18,7 +18,7 @@ export default function ExerciseSession({
     React.SetStateAction<CleanActivityData[]>
   >;
 }) {
-  const [time, setTime] = useState('morning');
+  const [time, setTime] = useState('Morning');
 
   async function submitHandler(e: FormEvent) {
     e.preventDefault();
@@ -28,8 +28,11 @@ export default function ExerciseSession({
     for (const pair of formData.entries()) {
       activityNamesAndDurations[pair[0]] = pair[1];
     }
+
     let calsBurnedThisSesssion = 0;
     let activityList: NewSessionList[] = [];
+    delete activityNamesAndDurations['Exercise-type'];
+
     for (const activityName in activityNamesAndDurations) {
       for (let i = 0; i < selectedActivities.length; i++) {
         if (activityName === selectedActivities[i].activity) {
@@ -62,18 +65,7 @@ export default function ExerciseSession({
     setAddSessionBox(false);
   }
   return (
-    <div>
-      <select
-        name="Meal-type"
-        defaultValue={time}
-        onChange={(e) => setTime(e.target.value)}
-      >
-        <option value="Breakfast">Early Morning</option>
-        <option value="Lunch">Late Morning</option>
-        <option value="Dinner">Afternoon</option>
-        <option value="Snack">Evening</option>
-      </select>
-
+    <div className="mx-4">
       <form onSubmit={submitHandler}>
         {selectedActivities.map((activity: CleanActivityData, i: number) => (
           <SessionEntry
@@ -82,10 +74,35 @@ export default function ExerciseSession({
             activity={activity}
           />
         ))}
-        <button type="button" onClick={() => setModalOpen(true)}>
-          ADD THING
+        <button
+          className="inputLogin text-center mt-5"
+          type="button"
+          onClick={() => setModalOpen(true)}
+        >
+          Add New Exercise 💪
         </button>
-        <button type="submit">Confirm</button>
+
+        <div className="flex justify-around mt-5 gap-4">
+          <div className="flex-1">
+            <select
+              className="buttonSelect w-full"
+              name="Exercise-type"
+              defaultValue={time}
+              onChange={(e) => setTime(e.target.value)}
+            >
+              <option value="Early-morning">Early Morning</option>
+              <option value="Late-morning">Late Morning</option>
+              <option value="Afternoon">Afternoon</option>
+              <option value="Evening">Evening</option>
+            </select>
+          </div>
+
+          <div className="flex-1">
+            <button className={`buttonConfirm w-full`} type="submit">
+              Confirm
+            </button>
+          </div>
+        </div>
       </form>
     </div>
   );

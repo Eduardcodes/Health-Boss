@@ -12,7 +12,7 @@ export default function AddMealEntry({ ingredient }: { ingredient: FoodData }) {
       </div>
       <label className="mt-4 font-semibold">Insert how many grams</label>
       <input
-        className="inputLogin  "
+        className="inputLogin"
         name={ingredient.label}
         type="number"
         onChange={(e) => setAmount(Number(e.target.value))}

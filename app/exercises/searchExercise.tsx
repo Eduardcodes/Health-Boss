@@ -7,6 +7,12 @@ import {
   getActivityDetails,
   getActivitiesList,
 } from '@/utils/exercise-database';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
+
+const plus = (
+  <FontAwesomeIcon icon={faCirclePlus} size="lg" style={{ color: '#2de86b' }} />
+);
 
 export default function SearchExercise({
   setSelectedActivities,
@@ -56,29 +62,50 @@ export default function SearchExercise({
   }
 
   return (
-    <div>
+    <div className="flex flex-col">
       <div>
-        <form onSubmit={(e) => handleSubmit(e)}>
+        <form
+          className="flex flex-col justify-center items-center"
+          onSubmit={(e) => handleSubmit(e)}
+        >
           <input
             type="text"
             name="search"
-            className="h-10"
-            placeholder="Search foods..."
+            className="inputLogin"
+            placeholder="Search exercises..."
             onChange={(e) => handleChange(e)}
           ></input>
-          <button type="submit">Search</button>
+          <button
+            className="bg-lightGreen text-mainBlack font-semibold rounded-md text-base p-2 px-7"
+            type="submit"
+          >
+            Search
+          </button>
         </form>
       </div>
+
+      {/* TODO: FIX THE SEARCH OPTION */}
       {/* {options && options.map(option => <p onClick={()=> handleSelect(option)}>{option}</p>)} */}
+
       {searchDisplay &&
         searchDisplay.map((activity, index) => {
           return (
-            <div key={index}>
-              <div>
-                <h2>{activity.activity}</h2>
-                <h3>{activity.caloriesPerHour}</h3>
+            <div className="cardsSearch" key={index}>
+              <div className="flex flex-1 justify-between  gap-2">
+                <h2 className="font-bold text-base ">{activity.activity}</h2>
+                <div className="flex flex-auto  flex-col w-2/4">
+                  <h3 className="text-base font-semibold">
+                    {activity.caloriesPerHour}
+                  </h3>
+                  <p className="text-base">KCAL P/hour</p>
+                </div>
               </div>
-              <button onClick={() => handleAdd(activity)}>+</button>
+              <button
+                className="justify-center mt-5"
+                onClick={() => handleAdd(activity)}
+              >
+                {plus}
+              </button>
             </div>
           );
         })}
