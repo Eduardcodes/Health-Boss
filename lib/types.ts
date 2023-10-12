@@ -1,4 +1,3 @@
-
 export type User = {
   id: string 
   userName: string
@@ -15,35 +14,34 @@ export type User = {
 
 //Meal related types
 export type Meal = {
-    id: string
-    ingredients : Ingredient[]
-    userId:  string  
-    user  :  User 
-    type? : string
-    totalCals: number
-}
+  id: string;
+  ingredients: Ingredient[];
+  userId: string;
+  user: User;
+  type?: string;
+  totalCals: number;
+};
 
 export type Ingredient = {
-    name: string
-    nutrients: Nutrients
-    amount : number
-}
+  name: string;
+  nutrients: Nutrients;
+  amount: number;
+};
 
 export type Nutrients = {
-    calories: number
-    protein: number
-    fat: number
-    carbs: number
-    fibre: number
-}
+  calories: number;
+  protein: number;
+  fat: number;
+  carbs: number;
+  fibre: number;
+};
 
 export type FoodData = {
-    foodId: string
-    label: string
-    nutrients: Nutrients
-    image: string
-}
-
+  foodId: string;
+  label: string;
+  nutrients: Nutrients;
+  image: string;
+};
 
 //Exercise related types
 
@@ -64,16 +62,13 @@ export type NewSessionList = {
 }
 
 export type CleanActivityData = {
-    activity: string
-    caloriesPerHour: number
-}
+  activity: string;
+  caloriesPerHour: number;
+};
 
 export type DirtyActivityData = {
-    name: string
-    calories_per_hour: number
-    duration_minutes: number
-    total_calories: number
-}
-
-
-
+  name: string;
+  calories_per_hour: number;
+  duration_minutes: number;
+  total_calories: number;
+};

@@ -53,8 +53,8 @@ export default function Navbar() {
       statistics: '',
       profile: '',
     };
-    newState[nextPage] = 'highlighted';
 
+    (newState as any)[nextPage] = 'highlighted';
     setPage(newState);
   }
   return (

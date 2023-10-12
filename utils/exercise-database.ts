@@ -1,5 +1,4 @@
-import { CleanActivityData, DirtyActivityData } from '../lib/types'
-
+import { CleanActivityData, DirtyActivityData } from '../lib/types';
 
 export const getActivitiesList = async () => {
     const res: Response = await fetch('https://api.api-ninjas.com/v1/caloriesburnedactivities', {
@@ -52,8 +51,15 @@ export const getActivityDetails = async (activity: string, weight?: number) => {
     return cleanData
 }
 
-export const getAutoFillSuggestions = (currentInputValue: string, activitiesList: string[]) => {
-    const firstToUpperCase = currentInputValue.charAt(0).toUpperCase() + currentInputValue.slice(1);
-    const filteredArr = activitiesList.filter(activity => activity.includes(firstToUpperCase) && activity[0] === firstToUpperCase[0])
-    return filteredArr
-}
+export const getAutoFillSuggestions = (
+  currentInputValue: string,
+  activitiesList: string[]
+) => {
+  const firstToUpperCase =
+    currentInputValue.charAt(0).toUpperCase() + currentInputValue.slice(1);
+  const filteredArr = activitiesList.filter(
+    (activity) =>
+      activity.includes(firstToUpperCase) && activity[0] === firstToUpperCase[0]
+  );
+  return filteredArr;
+};
