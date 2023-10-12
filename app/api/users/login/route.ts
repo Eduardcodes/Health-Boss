@@ -1,57 +1,50 @@
-//url: http://localhost:3000/api/users/signUp
-//TODO fixed the objet assign to body, now only username, email and password
+//url: http://localhost:3000/api/users/login
 
-import prisma from "@/lib/components/prismadb";
+import { hashPassword } from '../../../../lib/components/auth';
 import { NextRequest, NextResponse } from "next/server";
-import { SignupSchema } from "@/lib/components/validation";
-import { hash } from 'bcrypt';
-//import jwt from 'jsonwebtoken';
-import jwt from 'jsonwebtoken';
 
-const secretKey = process.env.JWT_SECRET_KEY;
+import { z } from "zod";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import prisma from "../../../../lib/components/prismadb"; 
+import { loginSchema } from "@/lib/components/validation";
 
-export const POST = async (request: NextRequest, res: NextResponse) => {
+interface SignInRequestBody {
+  email: string;
+  password: string;
+}
+
+export const POST = async (req: NextRequest, res: NextResponse) => {
   try {
-    const body = await request.json();
-    const {password, userName, email} = SignupSchema.parse(body);
-   // Check if email or username already exists
-   const existingEmail = await prisma.user.findUnique({
-    where: { email },
-  });
-  const existingUsername = await prisma.user.findUnique({
-    where: { userName },
-  });
-
-  if (existingEmail) {
-    return NextResponse.json({ message: 'User with this email already exists.' }, {status: 400});
-  }
-
-  if (existingUsername) {
-    return NextResponse.json({ message: 'User with this username already exists.' }, {status: 400});
-  }
-
-    //TODO change to ts  const hashedPassword:string
-    const hashedPassword = await hash(password, 10)
-
-    const newUser = await prisma.user.create({
-      data: {
-        userName,
-        email,
-        password: hashedPassword,
-      },
+    const body: SignInRequestBody = await req.json();
+    // Validate the request body
+    const { email, password } = loginSchema.parse(body);
+    console.log(email, password)
+    // Find the user by username using Prisma
+    const user = await prisma.user.findUnique({
+      where: { email },
     });
 
+    // Check if the user exists
+    if (!user) {
+      return NextResponse.json({ message: "Authentication failed." }, { status: 401 })
+    }
 
-    const token = jwt.sign({ userId: newUser.id }, String(secretKey), {
+    // Verify the password using bcrypt
+    const isPasswordValid = await bcrypt.compare(password, user.password || "");
+    if (!isPasswordValid) {
+      return NextResponse.json({ message: "Authentication failed." }, { status: 401 });
+    }
+
+    // Generate a JWT token
+    const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET_KEY || "Secret", {
       expiresIn: "1h",
-    });    
-    // const data = NextResponse.json({newUser, token})
-    // console.log(data,"data")
+    });
 
-    //TODO should not send back password in response, use select
-    return NextResponse.json({token});
+    // Return the token in the response
+    return NextResponse.json({ message: "Authentication successful", token });
   } catch (error) {
-    console.log(error);
-    return NextResponse.json({ message: "POST Error", error }, { status: 500 });
+    console.error("Login error:", error);
+    return NextResponse.json({ message: "An error occurred during login." }, {status: 500});
   }
-};
+}

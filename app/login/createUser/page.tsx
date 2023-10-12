@@ -18,7 +18,7 @@ function CreateAccount({ user }: { user: User }) {
   const handleSubmit = async (event: React.SyntheticEvent) => {
     try {
       event.preventDefault();
-      // console.log("INPUTS::", inputs)
+      console.log("INPUTS::", inputs)
       const response = await axios.post('/api/users/signUp', inputs);
       //console.log("IT WORKS::", response)
       setJWT(response.data.token)
