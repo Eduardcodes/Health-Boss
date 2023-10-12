@@ -79,9 +79,9 @@ function CreateAccount({ user }: { user: User }) {
               className="inputLogin"
               type="text"
               id="firstName"
-              name="name"
+              name="firstName"
               placeholder="Your first name here"
-              value={inputs.name || ""}
+              value={inputs.firstName || ""}
               onChange={handleChange}
             />
           </div>
@@ -93,9 +93,9 @@ function CreateAccount({ user }: { user: User }) {
               className="inputLogin"
               type="text"
               id="lastName"
-              name="lastname"
+              name="lastName"
               placeholder="Your last name here"
-              value={inputs.lastname || ""}
+              value={inputs.lastName || ""}
               onChange={handleChange}
             />
           </div>
