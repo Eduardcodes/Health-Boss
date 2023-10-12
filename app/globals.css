@@ -100,3 +100,7 @@ body {
 .buttonLogin {
   @apply rounded-xl p-3 border-2 border-lightGreen mt-2 font-semibold text-base w-2/3 shadow-lg;
 }
+
+.buttonAddActivityOrFood {
+  @apply rounded-xl p-3 border-2 border-lightGreen mt-5  font-bold text-base w-[350px]  shadow-lg bg-lightGreen text-mainBlack self-center mb-5;
+}

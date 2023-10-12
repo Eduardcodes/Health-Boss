@@ -7,6 +7,17 @@ import Modal from '@/app/ed/components/Modal';
 import { useState } from 'react';
 import { CleanActivityData, Session } from '@/lib/types';
 import Image from 'next/image';
+import Link from 'next/link';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAngleDoubleLeft } from '@fortawesome/free-solid-svg-icons';
+
+const back = (
+  <FontAwesomeIcon
+    icon={faAngleDoubleLeft}
+    size="2xl"
+    style={{ color: '#2de86b' }}
+  />
+);
 
 export default function ExercisesPage() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -23,11 +34,28 @@ export default function ExercisesPage() {
 
   return (
     <div className="sectionMainPages">
+      <section className="h-20 flex justify-between items-center  mx-5 mt-10">
+        <button onClick={() => setAddSessionBox(!addSessionBox)}>{back}</button>
+        <h4 className="font-bold">My Exercises</h4>
+        <Link href="/profile">
+          <Image
+            src="/profile.jpg"
+            alt="exercise icon"
+            width={50}
+            height={50}
+            className="item-center text-mainWhite rounded-full border-2 border-mainGreen"
+          />
+        </Link>
+      </section>
+
       {addSessionBox ? (
         <button onClick={() => handleCancel()}>Cancel</button>
       ) : (
-        <button onClick={() => setAddSessionBox(true)}>
-          Log New Exercise Session
+        <button
+          className="buttonAddActivityOrFood"
+          onClick={() => setAddSessionBox(true)}
+        >
+          Add New Exercise
         </button>
       )}
 
