@@ -2,14 +2,12 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleDoubleLeft } from '@fortawesome/free-solid-svg-icons';
 import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
 import Button from '@/lib/components/Button';
 
 // TODO: need to change this for real data from DB!!
 import { users } from '@/utils/mockData';
 
-const back = <FontAwesomeIcon icon={faAngleDoubleLeft} size="2xl" />;
 const plus = (
   <FontAwesomeIcon icon={faCirclePlus} size="lg" style={{ color: '#2de86b' }} />
 );
@@ -34,10 +32,8 @@ export default function ProfilePage() {
     <div className={`sectionMainPages `}>
       <section className="relative flex flex-col items-center ">
         <div className="flex-col h-[200px] w-full flex justify-between items-center bg-lightGreen rounded-b-[9rem] shadow-md relative">
-          <div className=" flex my-4 h-16 justify-between items-center w-full font-bold ">
-            <span className="text-mainBlack mx-4">{back}</span>
+          <div className=" flex my-4 h-16 justify-center items-center w-full font-bold ">
             <h4 className="text-mainBlack">Profile</h4>
-            <p className="text-lightGreen">Ignore</p>
           </div>
         </div>
 
