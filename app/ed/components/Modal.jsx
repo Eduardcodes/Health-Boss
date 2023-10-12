@@ -9,10 +9,17 @@ const Modal = ({ children, modalOpen, setModalOpen }) => {
   return (
     <>
       {modalOpen && (
-        <div className="bg-mainBlack fixed inset-0 overflow-scroll">
+        <div className="bg-mainBlack fixed inset-0 overflow-scroll max-[300px]">
           <div className="flex justify-center items-center h-auto">
             <div className="flex flex-col  p-5">
-              <button onClick={() => setModalOpen(false)}>{close}</button>
+              <div className="flex items-center justify-around rounded-lg bg-lightGreen  mb-4 ">
+                <button className="" onClick={() => setModalOpen(false)}>
+                  {close}
+                </button>
+                <h1 className="text-mainBlack font-bold  p-3">
+                  Search for the food
+                </h1>
+              </div>
               {children}
             </div>
           </div>

@@ -89,6 +89,14 @@ body {
   @apply text-base font-semibold bg-mainBlack rounded-xl p-3 border-2 border-lightGreen mb-2 w-full shadow-lg;
 }
 
+.buttonConfirm {
+  @apply text-base font-bold bg-lightGreen text-mainBlack rounded-xl p-4 px-8 shadow-lg;
+}
+
+.buttonSelect {
+  @apply text-base text-mainWhite  border-2 border-mainGreen bg-mainBlack rounded-lg p-4  cursor-pointer shadow-lg;
+}
+
 .buttonLogin {
   @apply rounded-xl p-3 border-2 border-lightGreen mt-2 font-semibold text-base w-2/3 shadow-lg;
 }

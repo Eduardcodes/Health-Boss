@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { FoodData } from '../types';
 import { getAutoFillResults, getFoodData } from '@/utils/food-database';
 import Image from 'next/image';
-import noImage from '@/public/no_image_available.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
 import { faClose } from '@fortawesome/free-solid-svg-icons';
@@ -39,7 +38,7 @@ export default function SearchPopup({
 
   return (
     <div className="flex flex-col ">
-      <div className="">
+      <div className="bg-mainGreen">
         <form>
           <input
             className="inputLogin "
@@ -68,16 +67,27 @@ export default function SearchPopup({
               className="bg-mainDarkBlack rounded-lg my-3 max-w-xs p-5 flex flex-col  w-full shadow-lg"
               key={food.foodId}
             >
-              {/* TODO: Fix the image that is not displayed */}
               <div className="flex justify-between items-center">
-                <Image
-                  src={food.image}
-                  width={70}
-                  height={70}
-                  alt={food.label}
-                  onError={() => setImageError(true)}
-                  className="rounded-full  text-xs self-end"
-                />
+                {food.image ? (
+                  <Image
+                    src={food.image}
+                    width={70}
+                    height={70}
+                    alt={food.label}
+                    onError={() => setImageError(true)}
+                    className="rounded-full  text-xs self-end"
+                  />
+                ) : (
+                  <Image
+                    src="/notfound.jpg"
+                    width={70}
+                    height={70}
+                    alt={food.label}
+                    onError={() => setImageError(true)}
+                    className="rounded-full  text-xs self-end"
+                  />
+                )}
+
                 <h2 className="titleCards text-base ">{food.label}</h2>
               </div>
               <div className="flex items-center ">

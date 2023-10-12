@@ -9,6 +9,18 @@ import SearchPopup from '@/lib/components/search';
 import { FoodData, Meal } from '@/lib/types';
 import HeaderPage from '@/lib/components/HeaderPage';
 import Image from 'next/image';
+import { getFoodData } from '@/utils/food-database';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAngleDoubleLeft } from '@fortawesome/free-solid-svg-icons';
+import Link from 'next/link';
+
+const back = (
+  <FontAwesomeIcon
+    icon={faAngleDoubleLeft}
+    size="2xl"
+    style={{ color: '#2de86b' }}
+  />
+);
 
 export default function MealsPage() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -18,16 +30,36 @@ export default function MealsPage() {
 
   return (
     <div className="sectionMainPages ">
-      <HeaderPage title={'My meals'} />
-      <button
-        className={`rounded-xl p-3 border-2 border-lightGreen mt-5  font-bold text-base w-[350px]  shadow-lg bg-lightGreen text-mainBlack self-center mb-5`}
-        onClick={() => setAddMealBox(!addMealBox)}
-      >
-        {!addMealBox ? 'Add new meal' : 'Cancel'}
-      </button>
+      {/* <HeaderPage title={'My meals'} /> */}
+
+      <section className="h-20 flex justify-between items-center  mx-5 mt-10">
+        <button onClick={() => setAddMealBox(!addMealBox)}>{back}</button>
+        <h4 className="font-bold">My Meals</h4>
+        <Link href="/profile">
+          <Image
+            src="/profile.jpg"
+            alt="exercise icon"
+            width={50}
+            height={50}
+            className="item-center text-mainWhite rounded-full border-2 border-mainGreen"
+          />
+        </Link>
+      </section>
+
+      {!addMealBox ? (
+        <button
+          className={`rounded-xl p-3 border-2 border-lightGreen mt-5  font-bold text-base w-[350px]  shadow-lg bg-lightGreen text-mainBlack self-center mb-5`}
+          onClick={() => setAddMealBox(!addMealBox)}
+        >
+          {'Add new meal'}
+        </button>
+      ) : (
+        <button className="hidden"></button>
+      )}
 
       {addMealBox && (
         <AddMeal
+          setSelectedFoods={setSelectedFoods}
           setDisplayedMeals={setDisplayedMeals}
           setModalOpen={setModalOpen}
           selectedFoods={selectedFoods}
