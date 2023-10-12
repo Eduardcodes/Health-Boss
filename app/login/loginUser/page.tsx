@@ -40,7 +40,7 @@ function LoginPage() {
 
     return (
       <div
-        className={`sectionMainPages  bg-gradient-to-b from-mainGreen to-mainBlack `}
+        className={`sectionMainPages bg-gradient-to-b from-mainGreen from-10% to-mainBlack to-70% `}
       >
         <section className="mt-5 flex flex-col justify-center items-center ">
           <Image
@@ -50,10 +50,10 @@ function LoginPage() {
             alt="Health Boss Logo"
           />
           <h1 className="text-center font-semibold">Welcome back</h1>
+          <h5 className="text-base font-semibold text-center">Login to your account</h5>
         </section>
   
-        <section className="mx-5">
-          <h5>Login to your account</h5>
+        <section className="mx-5 flex flex-col  mt-14">
           <form
             className="flex flex-col items-center w-full"
             onSubmit={handleSubmit}
@@ -86,8 +86,10 @@ function LoginPage() {
                 onChange={handleChange}
                 />
             </div>
-  
-            <Link href="/">Forgot password</Link>
+            
+            <div className="flex justify-start mb-20">
+            <Link href="/" className="text-base font-semibold ">Forgot password</Link>
+            </div>
             <button
               className={`buttonLogin bg-lightGreen text-mainBlack hover:scale-110`}
               type="submit"
@@ -96,7 +98,9 @@ function LoginPage() {
              Log In
             </button>
           </form>
-          <span>Don't have an account? </span><Link href="/login/createUser">Sign up</Link>
+          <div className="text-center">
+          <span className="text-base ">Don't have an account? </span><Link href="/login/createUser" className="text-base font-semibold">Sign up</Link>
+          </div>
         </section>
       </div>
     );
