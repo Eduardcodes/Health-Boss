@@ -16,8 +16,8 @@ export default function ExerciseSession(
 
   const [time, setTime] = useState('morning')
 
-  async function submitHandler(e: FormEvent){
-    e.preventDefault()
+  const processFormData = (e: FormEvent) => {
+    
     let activityNamesAndDurations: any = {}
     const formElement = e.currentTarget as HTMLFormElement
     const formData = new FormData(formElement)
@@ -39,36 +39,54 @@ export default function ExerciseSession(
         }
       }
     }
+    return {
+      calsBurnedThisSesssion,
+      activityList,
+    }
+  }
+  async function postNewSession(list: NewSessionList[], calories: number) {
     const response = await fetch('/api/exercises', {
       method: 'POST',
       headers: {
         "Content-Type":"application/json"
       },
       body: JSON.stringify({
-        activities: activityList,
-        caloriesBurned: calsBurnedThisSesssion,
+        activities: list,
+        caloriesBurned: calories,
         time: time,
         userId: '652560db8f962632ac04d15f' //TODO REDUX FOR USER ID
       })
     })
-    const newSession = await response.json() as Session
+    return await response.json()
+  }
+
+  async function submitHandler(e: FormEvent){
+    e.preventDefault()
+    const {calsBurnedThisSesssion, activityList} = processFormData(e)
+    console.log('CHECK', calsBurnedThisSesssion, activityList)
+    const {newSession}:{newSession: Session}= await postNewSession(activityList, calsBurnedThisSesssion)
+    console.log(newSession)
+    setSelectedActivities([])
     setDisplayedSessions((prev) => [...prev, newSession])
     setAddSessionBox(false)
   }
   return (
 
   <div>
-       <select name='Meal-type' 
-       defaultValue={time}
-       onChange={(e)=> setTime(e.target.value)}>
-          <option value='Breakfast'>Early Morning</option>
-          <option value='Lunch'>Late Morning</option>
-          <option value='Dinner'>Afternoon</option>
-          <option value='Snack'>Evening</option>
-        </select>
+      <select name='Meal-type' 
+        defaultValue={time}
+        onChange={(e)=> setTime(e.target.value)}
+      >
+        <option value='Breakfast'>Early Morning</option>
+        <option value='Lunch'>Late Morning</option>
+        <option value='Dinner'>Afternoon</option>
+        <option value='Snack'>Evening</option>
+      </select>
       
       <form onSubmit={submitHandler}>
-        {selectedActivities.map((activity: CleanActivityData) => (<SessionEntry setSelectedActivities={setSelectedActivities} activity={activity}/>))}
+        {selectedActivities.map((activity: CleanActivityData) =>
+          (<SessionEntry setSelectedActivities={setSelectedActivities} activity={activity}/>))
+        }
         <button type='button' onClick={()=>setModalOpen(true)}>ADD THING</button>
         <button type='submit'>Confirm</button>
       </form>
