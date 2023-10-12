@@ -92,7 +92,7 @@ export default function MealsPage() {
       >
         <div>
           <Image
-            src="/healthfood.jpg"
+            src="/images/healthfood.jpg"
             alt="exercise icon"
             fill={true}
             style={{ objectFit: 'cover' }}
