@@ -46,7 +46,7 @@ function CreateAccount({ user }: { user: User }) {
 
   return (
     <div
-      className={`sectionMainPages  bg-gradient-to-b from-mainGreen to-mainBlack `}
+      className={`sectionMainPages  bg-gradient-to-b from-mainGreen via-mainBlack to-darkBlack`}
     >
       <section className="mt-5 flex flex-col justify-center items-center ">
         <Image
