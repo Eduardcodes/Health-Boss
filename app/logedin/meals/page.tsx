@@ -38,7 +38,7 @@ export default function MealsPage() {
         <Link href="/logedin/profile">
           <Image
             src="/profile.jpg"
-            alt="exercise icon"
+            alt="Pandar bear profile"
             width={50}
             height={50}
             className="item-center text-mainWhite rounded-full border-2 border-mainGreen"
@@ -93,7 +93,7 @@ export default function MealsPage() {
         <div>
           <Image
             src="/images/healthfood.jpg"
-            alt="exercise icon"
+            alt="Some plates of healthy food in it"
             fill={true}
             style={{ objectFit: 'cover' }}
             className="absolute rounded-lg  opacity-40"

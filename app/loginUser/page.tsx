@@ -46,6 +46,7 @@ function LoginPage() {
           width={256}
           height={183}
           alt="Health Boss Logo"
+          priority={true}
         />
         <h1 className="text-center font-semibold">Welcome back</h1>
         <h5 className="text-base font-semibold text-center">

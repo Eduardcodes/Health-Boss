@@ -1,5 +1,5 @@
-import Image from "next/image";
-import Link from "next/link";
+import Image from 'next/image';
+import Link from 'next/link';
 
 function WelcomePage() {
   return (
@@ -8,8 +8,8 @@ function WelcomePage() {
         <Image
           src="/images/welcome3.jpg"
           fill={true}
-          alt="exercise icon"
-          style={{ objectFit: "cover" }}
+          alt="Many fruits showing in the background"
+          style={{ objectFit: 'cover' }}
           className="absolute rounded-lg opacity-25 "
           priority={true}
         />
@@ -29,18 +29,20 @@ function WelcomePage() {
       <section className=" z-20 mx-5 flex flex-col justify-center items-center gap-4 mt-4">
         <Link
           href="/createUser"
-          className={`buttonLogin bg-mainBlack hover:scale-110 text-center`}>
+          className={`buttonLogin bg-mainBlack hover:scale-110 text-center`}
+        >
           Create an account
         </Link>
         <Link
           href="/loginUser"
-          className={`buttonLogin bg-mainBlack text-mainGreen hover:scale-110 text-center`}>
+          className={`buttonLogin bg-mainBlack text-mainGreen hover:scale-110 text-center`}
+        >
           I have an account
         </Link>
       </section>
 
       <h2 className=" z-20  mt-5 text-center font-semibold">
-        Be the{" "}
+        Be the{' '}
         <span className="font-semibold border-b-2 border-mainGreen">BOSS</span>
       </h2>
       <h2 className="z-20 text-center font-semibold">of your health!</h2>

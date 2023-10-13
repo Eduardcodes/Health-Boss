@@ -43,7 +43,8 @@ export default function ProfilePage() {
             alt="exercise icon"
             width={170}
             height={170}
-            className="item-center rounded-full border-4 border-mainGreen shadow-md relative   "
+            className="item-center rounded-full border-4 border-mainGreen shadow-md relative"
+            priority={true}
           />
           <span className="ml-[8.5rem] mt-32 absolute shadow-lg">{plus}</span>
         </div>

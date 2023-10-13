@@ -33,7 +33,7 @@ export default function SearchExercise({
 
   async function getAllActivities() {
     const list = (await getActivitiesList()) as string[];
-    console.log(list);
+
     setAllActivities(list);
   }
 
@@ -42,7 +42,7 @@ export default function SearchExercise({
       e.target.value,
       allActivities
     );
-    console.log(activitiesList);
+
     setOptions(activitiesList);
   }
   async function handleSelect(activity: string) {

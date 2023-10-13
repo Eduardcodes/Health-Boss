@@ -45,6 +45,7 @@ export default function ExercisesPage() {
             width={50}
             height={50}
             className="item-center text-mainWhite rounded-full border-2 border-mainGreen"
+            priority={true}
           />
         </Link>
       </section>
@@ -96,7 +97,7 @@ export default function ExercisesPage() {
         <div>
           <Image
             src="/images/exercise.jpg"
-            alt="exercise icon"
+            alt="People doing exercises together"
             fill={true}
             style={{ objectFit: 'cover' }}
             className="absolute rounded-lg  opacity-40"

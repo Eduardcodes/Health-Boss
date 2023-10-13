@@ -30,6 +30,7 @@ function HeaderPage({ title }: { title: React.ReactNode }) {
             width={50}
             height={50}
             className="item-center text-mainWhite rounded-full border-2 border-mainGreen"
+            priority={true}
           />
         </Link>
       </section>

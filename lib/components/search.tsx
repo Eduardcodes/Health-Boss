@@ -76,6 +76,7 @@ export default function SearchPopup({
                     alt={food.label}
                     onError={() => setImageError(true)}
                     className="rounded-full  text-xs self-end"
+                    priority={true}
                   />
                 ) : (
                   <Image
@@ -85,6 +86,7 @@ export default function SearchPopup({
                     alt={food.label}
                     onError={() => setImageError(true)}
                     className="rounded-full  text-xs self-end"
+                    priority={true}
                   />
                 )}
 

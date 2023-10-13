@@ -1,16 +1,15 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import Modal from "@/app/ed/components/Modal";
-import axios from "axios";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import React from "react";
-import { User } from "@/lib/types";
-import { setJWT } from "@/lib/jwt";
+import Image from 'next/image';
+import Modal from '@/app/ed/components/Modal';
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import React from 'react';
+import { User } from '@/lib/types';
+import { setJWT } from '@/lib/jwt';
 
 function CreateAccount({ user }: { user: User }) {
-
   const router = useRouter();
   const [modalOpen, setModalOpen] = useState(false);
   const [inputs, setInputs] = useState<User>({} as User);
@@ -18,16 +17,16 @@ function CreateAccount({ user }: { user: User }) {
   const handleSubmit = async (event: React.SyntheticEvent) => {
     try {
       event.preventDefault();
-      console.log("INPUTS::", inputs)
+      console.log('INPUTS::', inputs);
       const response = await axios.post('/api/users/signUp', inputs);
       //console.log("IT WORKS::", response)
-      setJWT(response.data.token)
+      setJWT(response.data.token);
       setInputs({} as User);
       //TODO give token to user and encrypt the password, set status to global store
-      router.push('/')
+      router.push('/');
       return response;
     } catch (err) {
-      console.error("Failed to submit form:: ", err);
+      console.error('Failed to submit form:: ', err);
     }
   };
 
@@ -48,6 +47,7 @@ function CreateAccount({ user }: { user: User }) {
           width={256}
           height={183}
           alt="Health Boss Logo"
+          priority={true}
         />
         <h1 className="text-center font-semibold">Create an account</h1>
       </section>
@@ -67,7 +67,7 @@ function CreateAccount({ user }: { user: User }) {
               id="userName"
               name="userName"
               placeholder="Your user name here"
-              value={inputs.userName || ""}
+              value={inputs.userName || ''}
               onChange={handleChange}
             />
           </div>
@@ -81,7 +81,7 @@ function CreateAccount({ user }: { user: User }) {
               id="firstName"
               name="firstName"
               placeholder="Your first name here"
-              value={inputs.firstName || ""}
+              value={inputs.firstName || ''}
               onChange={handleChange}
             />
           </div>
@@ -95,7 +95,7 @@ function CreateAccount({ user }: { user: User }) {
               id="lastName"
               name="lastName"
               placeholder="Your last name here"
-              value={inputs.lastName || ""}
+              value={inputs.lastName || ''}
               onChange={handleChange}
             />
           </div>
@@ -109,7 +109,7 @@ function CreateAccount({ user }: { user: User }) {
               id="email"
               name="email"
               placeholder="email@email.com"
-              value={inputs.email || ""}
+              value={inputs.email || ''}
               onChange={handleChange}
             />
           </div>
@@ -123,7 +123,7 @@ function CreateAccount({ user }: { user: User }) {
               id="password"
               name="password"
               placeholder="New password"
-              value={inputs.password || ""}
+              value={inputs.password || ''}
               onChange={handleChange}
             />
           </div>

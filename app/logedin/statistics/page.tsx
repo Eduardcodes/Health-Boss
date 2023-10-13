@@ -21,7 +21,7 @@ export default function StatisticsPage() {
       >
         <div>
           <Image
-            src="/bananas.jpg"
+            src="/images/bananas.jpg"
             alt="exercise icon"
             fill={true}
             style={{ objectFit: 'cover' }}

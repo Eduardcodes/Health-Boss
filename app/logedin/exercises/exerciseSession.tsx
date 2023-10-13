@@ -60,7 +60,7 @@ export default function ExerciseSession({
       }),
     });
     const { newSession } = await response.json();
-    console.log(newSession);
+
     setDisplayedSessions((prev) => [...prev, newSession]);
     setAddSessionBox(false);
   }
