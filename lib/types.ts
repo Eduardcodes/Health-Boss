@@ -43,6 +43,11 @@ export type FoodData = {
   image: string;
 };
 
+export type AverageCalories = {
+  calorieCount: number
+  overHowManyMeals?: number
+}
+
 //Exercise related types
 
 export type Session = {
@@ -72,3 +77,4 @@ export type DirtyActivityData = {
   duration_minutes: number;
   total_calories: number;
 };
+

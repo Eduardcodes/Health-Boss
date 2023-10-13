@@ -1,3 +1,4 @@
+'use client'
 import React from 'react';
 import Image from 'next/image';
 import HeaderPage from '@/lib/components/HeaderPage';
@@ -5,12 +6,26 @@ import Button from '@/lib/components/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShare } from '@fortawesome/free-solid-svg-icons';
 import { users } from '@/utils/mockData';
+import { useUserStore } from '@/lib/store/store';
+import prisma from '@/lib/components/prismadb';
+import {useEffect} from 'react'
 
 const share = (
   <FontAwesomeIcon icon={faShare} size="2xl" style={{ color: '#2de86b' }} />
 );
 
 export default function StatisticsPage() {
+
+  useEffect(()=>{
+    getUser()
+  }, [])
+  async function getUser() {
+    const res = await fetch('/api/test')
+    const data = await res.json()
+    console.log('USER DATA ', data)
+  }
+  // const userData = useUserStore.getState().data
+
   return (
     <div className={'sectionMainPages'}>
       <HeaderPage title={'Statistic '} />
