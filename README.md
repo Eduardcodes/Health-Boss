@@ -6,7 +6,7 @@
 
 🚧⚠️ Under construction, Coming soon!! ⚠️🚧
 
-Check our [Figma 🎨](https://www.figma.com/file/LpdEaufepRQpsLyV9Ha7MR/Health-Boss-High-fidelity?type=design&node-id=0%3A1&mode=design&t=2AKjUUb3iMmYT0fQ-1)
+![](./public/comingsoon.jpg)
 
 ## Frontend tech
 
