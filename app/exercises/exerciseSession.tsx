@@ -14,19 +14,17 @@ export default function ExerciseSession({
   setAddSessionBox: React.Dispatch<React.SetStateAction<boolean>>;
   setDisplayedSessions: React.Dispatch<React.SetStateAction<Session[]>>;
   selectedActivities: CleanActivityData[];
-  setSelectedActivities: React.Dispatch<
-    React.SetStateAction<CleanActivityData[]>
-  >;
+  setSelectedActivities: React.Dispatch<React.SetStateAction<CleanActivityData[]>>;
 }) {
   const [time, setTime] = useState('Morning');
 
-  async function submitHandler(e: FormEvent) {
-    e.preventDefault();
-    let activityNamesAndDurations: any = {};
-    const formElement = e.currentTarget as HTMLFormElement;
-    const formData = new FormData(formElement);
-    for (const pair of formData.entries()) {
-      activityNamesAndDurations[pair[0]] = pair[1];
+  const processFormData = (e: FormEvent) => {
+    
+    let activityNamesAndDurations: any = {}
+    const formElement = e.currentTarget as HTMLFormElement
+    const formData = new FormData(formElement)
+    for(const pair of formData.entries()) {
+      activityNamesAndDurations[pair[0]] = pair[1]
     }
 
     let calsBurnedThisSesssion = 0;
@@ -47,24 +45,39 @@ export default function ExerciseSession({
         }
       }
     }
+    return {
+      calsBurnedThisSesssion,
+      activityList,
+    }
+  }
+  async function postNewSession(list: NewSessionList[], calories: number) {
     const response = await fetch('/api/exercises', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        activities: activityList,
-        caloriesBurned: calsBurnedThisSesssion,
+        activities: list,
+        caloriesBurned: calories,
         time: time,
-        userId: '652560db8f962632ac04d15f', //TODO REDUX FOR USER ID
-      }),
-    });
-    const { newSession } = await response.json();
-    console.log(newSession);
-    setDisplayedSessions((prev) => [...prev, newSession]);
-    setAddSessionBox(false);
+        userId: '652560db8f962632ac04d15f' //TODO REDUX FOR USER ID
+      })
+    })
+    return await response.json()
+  }
+
+  async function submitHandler(e: FormEvent){
+    e.preventDefault()
+    const {calsBurnedThisSesssion, activityList} = processFormData(e)
+    console.log('CHECK', calsBurnedThisSesssion, activityList)
+    const {newSession}:{newSession: Session}= await postNewSession(activityList, calsBurnedThisSesssion)
+    console.log(newSession)
+    setSelectedActivities([])
+    setDisplayedSessions((prev) => [...prev, newSession])
+    setAddSessionBox(false)
   }
   return (
+
     <div className="mx-4">
       <form onSubmit={submitHandler}>
         {selectedActivities.map((activity: CleanActivityData, i: number) => (

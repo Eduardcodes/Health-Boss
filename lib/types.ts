@@ -1,16 +1,16 @@
 export type User = {
-  id: string 
-  userName: string
-  email: string
-  password: string
-  firstName: string
-  lastName: string 
-  birthday: Date 
-  exerciseHistory: Session[]
-  mealHistory: Meal[]
-  createdAt: Date
-  updatedAt: Date
-}
+  id: string;
+  userName: string;
+  email: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+  birthday: Date;
+  exerciseHistory: Session[];
+  mealHistory: Meal[];
+  createdAt: Date;
+  updatedAt: Date;
+};
 
 //Meal related types
 export type Meal = {
@@ -43,6 +43,11 @@ export type FoodData = {
   image: string;
 };
 
+export type AverageCalories = {
+  calorieCount: number
+  overHowManyMeals?: number
+}
+
 //Exercise related types
 
 export type Session = {
@@ -72,3 +77,4 @@ export type DirtyActivityData = {
   duration_minutes: number;
   total_calories: number;
 };
+

@@ -3,6 +3,8 @@
 import prisma from "@/lib/components/prismadb";
 import { NextResponse } from "next/server"
 
+
+
 export const GET = async (request, { params }) => {
     try {
 
@@ -56,6 +58,7 @@ export const PATCH = async (request, {params}) => {
         }
 
         return NextResponse.json(updateUser);
+
 
     } catch (error) {
         console.log(error)

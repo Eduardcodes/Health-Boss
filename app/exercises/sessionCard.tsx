@@ -16,37 +16,37 @@ export default function SessionCard({
   session: Session;
   setDisplayedSessions: React.Dispatch<React.SetStateAction<Session[]>>;
 }) {
+  
   const [details, setDetails] = useState(false);
 
-  async function handleDelete(id: string) {
-    const res: Response = await fetch('/api/exercises', {
-      method: 'DELETE',
-      headers: {
-        'Contet-Type': 'application/json',
-      },
-      body: JSON.stringify({ id: id }),
-    });
-    const data = await res.json();
-    const { deletedItem } = data;
-    console.log('DELETED ITEM', deletedItem);
-    if (deletedItem.id) {
+    async function handleDelete(id: string){
+      
       setDisplayedSessions((prev: Session[]) => {
-        for (let i = 0; i < prev.length; i++) {
-          if (prev[i].id === deletedItem.id) {
-            prev.splice(i, 1);
+        for(let i=0; i<prev.length; i++){
+          if(prev[i].id === id) {
+            prev.splice(i,1)
           }
         }
-        return [...prev];
-      });
-    } else {
-      console.log('ITEM FAILED TO DELETE');
+        return [...prev]
+      })
+      const res: Response = await fetch('/api/exercises', {
+        method: 'DELETE',
+        headers: {
+          'Contet-Type':'application/json'
+        },
+        body: JSON.stringify({id: id})
+      })
+      const data = await res.json()
+      const {deletedItem} = data
+      console.log('DELETED ITEM',deletedItem)
+      //TODO for above, create real alert
     }
     //TODO: for above, create real alert
-  }
 
   const data = moment(session.createdAt).format('l');
 
   return (
+
     <div className="cardBackground">
       <div>
         <div className="flex justify-between items-center text-base font-semibold ">
