@@ -38,7 +38,7 @@ export default function ExercisesPage() {
         {/* <button onClick={() => setAddSessionBox(!addSessionBox)}>{back}</button> */}
         <button onClick={() => handleCancel()}>{back}</button>
         <h4 className="font-bold">My Exercises</h4>
-        <Link href="/profile">
+        <Link href="/logedin/profile">
           <Image
             src="/profile.jpg"
             alt="exercise icon"

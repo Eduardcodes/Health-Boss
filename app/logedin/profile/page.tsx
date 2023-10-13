@@ -107,7 +107,7 @@ export default function ProfilePage() {
         </section>
 
         <div className="flex justify-center">
-          <Link href="/statistics">
+          <Link href="/logedin/statistics">
             <p className="text-mainGreen font-semibold cursor-pointer hover:border-2 rounded-lg p-2">
               {/* //TODO: After MVP do we need to have another page for this ?? */}
               Check history
