@@ -1,13 +1,23 @@
-'use client'
-import { Session } from "@/lib/types";
-import { useState } from "react";
+'use client';
+import { Session } from '@/lib/types';
+import { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faClose } from '@fortawesome/free-solid-svg-icons';
+import moment from 'moment';
 
-export default function SessionCard(
-  {session, setDisplayedSessions}:
-  {session: Session, setDisplayedSessions: React.Dispatch<React.SetStateAction<Session[]>>}) 
-  {
+const close = (
+  <FontAwesomeIcon icon={faClose} size="2xl" style={{ color: '#2de86b' }} />
+);
 
-    const [details, setDetails] = useState(false)
+export default function SessionCard({
+  session,
+  setDisplayedSessions,
+}: {
+  session: Session;
+  setDisplayedSessions: React.Dispatch<React.SetStateAction<Session[]>>;
+}) {
+  
+  const [details, setDetails] = useState(false);
 
     async function handleDelete(id: string){
       
@@ -31,30 +41,65 @@ export default function SessionCard(
       console.log('DELETED ITEM',deletedItem)
       //TODO for above, create real alert
     }
-    
-    return (
-      <div >
+    //TODO: for above, create real alert
+
+  const data = moment(session.createdAt).format('l');
+
+  return (
+
+    <div className="cardBackground">
       <div>
-        <div>
-          <h3>{session.time}</h3>
-          <p>Total Calories Burned: {session.caloriesBurned}</p>
+        <div className="flex justify-between items-center text-base font-semibold ">
+          <h3 className="font-semibold rounded-lg p-2 px-5 border-2 border-mainGreen shadow-lg">
+            {session.time}
+          </h3>
+          <h3 className="font-semibold">{data}</h3>
+          <button
+            className="p-3 rounded-lg mt-2 text-base font-bold"
+            onClick={() => handleDelete(session.id)}
+          >
+            {close}
+          </button>
         </div>
-        <button onClick={() => handleDelete(session.id)}>
-          X
-        </button>
+
+        <div className="text-lg flex justify-between mt-5 font-bold items-center">
+          <p>Total Calories Burned: </p>
+          <p>
+            {session.caloriesBurned}{' '}
+            <span>{session.caloriesBurned > 1 ? 'cals' : 'cal'}</span>
+          </p>
+        </div>
+
+        {session.activities.map((ex) => (
+          <p className="text-base mb-3" key={ex.activity}>
+            {ex.activity}
+          </p>
+        ))}
       </div>
-    {details && <ul>
-        {session.activities.map((activity) => {
-          return (
-          <>
-          <li>{activity.activity} {activity.duration} minutes</li>
-          <li>Calories Burned: {activity.calsBurned}</li>
-          </>
-          )
-        })}
-      </ul>
-    }
-    <button onClick={()=> setDetails(!details)}>{details ? 'Fewer Details' : 'Show More Details'}</button>
+      {details && (
+        <ul className="text-base flex flex-col">
+          {session.activities.map((activity) => {
+            return (
+              <>
+                <div className="font-semibold  text-mainGreen flex justify-between">
+                  <p> {activity.activity} </p>
+                  <p> {activity.duration} </p>
+                </div>
+                <div className="font-semibold flex justify-between">
+                  <p> Calories Burned:</p>
+                  <p>{activity.calsBurned}</p>
+                </div>
+              </>
+            );
+          })}
+        </ul>
+      )}
+      <button
+        className="font-semibold text-lg text-mainGreen"
+        onClick={() => setDetails(!details)}
+      >
+        {details ? 'Less Details' : 'Show More Details'}
+      </button>
     </div>
-    )
+  );
 }

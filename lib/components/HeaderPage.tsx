@@ -1,7 +1,9 @@
+'use client';
 import React from 'react';
 import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDoubleLeft } from '@fortawesome/free-solid-svg-icons';
+import Link from 'next/link';
 
 const back = (
   <FontAwesomeIcon
@@ -11,19 +13,25 @@ const back = (
   />
 );
 
-function HeaderPage() {
+function HeaderPage({ title }: { title: React.ReactNode }) {
+  const handleBackClick = () => {
+    window.history.back();
+  };
+
   return (
     <>
-      <section className="h-20 flex justify-between items-center mx-5 mt-10">
-        <div>{back}</div>
-        <h4 className="font-bold">Statistic</h4>
-        <Image
-          src="/profile.jpg"
-          alt="exercise icon"
-          width={50}
-          height={50}
-          className="item-center text-mainWhite rounded-full border-2 border-mainGreen"
-        />
+      <section className="h-20 flex justify-between items-center  mx-5 mt-10">
+        <button onClick={handleBackClick}>{back}</button>
+        <h4 className="font-bold">{title}</h4>
+        <Link href="/profile">
+          <Image
+            src="/profile.jpg"
+            alt="exercise icon"
+            width={50}
+            height={50}
+            className="item-center text-mainWhite rounded-full border-2 border-mainGreen"
+          />
+        </Link>
       </section>
     </>
   );

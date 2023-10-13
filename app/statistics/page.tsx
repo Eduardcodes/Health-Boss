@@ -28,7 +28,7 @@ export default function StatisticsPage() {
 
   return (
     <div className={'sectionMainPages'}>
-      <HeaderPage />
+      <HeaderPage title={'Statistic '} />
       <h3 className="text-lg mx-6 my-3 ">Hi panda, check and share it!</h3>
 
       <section
@@ -41,6 +41,7 @@ export default function StatisticsPage() {
             fill={true}
             style={{ objectFit: 'cover' }}
             className="absolute rounded-lg  opacity-50"
+            priority={true}
           />
         </div>
         <div className="z-20 flex flex-col items-center  ">

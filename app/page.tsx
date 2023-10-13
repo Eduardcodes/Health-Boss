@@ -1,22 +1,14 @@
-import Image from 'next/image';
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChartPie } from '@fortawesome/free-solid-svg-icons';
-import { faAngleDoubleLeft } from '@fortawesome/free-solid-svg-icons';
 import { faShoePrints } from '@fortawesome/free-solid-svg-icons';
 import { faBed } from '@fortawesome/free-solid-svg-icons';
 import { faUtensils } from '@fortawesome/free-solid-svg-icons';
 import { faBell } from '@fortawesome/free-solid-svg-icons';
 import MotivationQuote from '@/lib/components/MotivationQuote';
 import { users } from '@/utils/mockData';
+import HeaderPage from '@/lib/components/HeaderPage';
 
-const back = (
-  <FontAwesomeIcon
-    icon={faAngleDoubleLeft}
-    size="2xl"
-    style={{ color: '#2de86b' }}
-  />
-);
 const chart = (
   <FontAwesomeIcon icon={faChartPie} size="5x" style={{ color: '#2de86b' }} />
 );
@@ -43,17 +35,7 @@ export default function HomePage() {
 
   return (
     <div className={`sectionMainPages  `}>
-      <section className="h-20 flex justify-between items-center mx-5 mt-10">
-        <div>{back}</div>
-        <h4 className="font-bold">Home</h4>
-        <Image
-          src="/profile.jpg"
-          alt="exercise icon"
-          width={50}
-          height={50}
-          className="item-center text-mainWhite rounded-full border-2 border-mainGreen"
-        />
-      </section>
+      <HeaderPage title={'Home'} />
 
       <section className="mx-6 my-3 flex flex-col justify-center ">
         <div className="p-2 flex font-bold justify-between">

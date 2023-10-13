@@ -11,6 +11,7 @@ function WelcomePage() {
           fill={true}
           style={{ objectFit: 'cover' }}
           className="absolute rounded-lg opacity-25 "
+          priority={true}
         />
       </div>
       <section className=" z-20 mt-5 flex flex-col justify-center items-center ">

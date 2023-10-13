@@ -18,7 +18,7 @@ export default function MealList({
     const res: Response = await fetch('/api/meals/652560db8f962632ac04d15f');
     const data = await res.json();
     const allMeals = data.allMeals;
-    console.log(allMeals);
+
     if (Array.isArray(allMeals)) return allMeals;
     else return null;
   }
