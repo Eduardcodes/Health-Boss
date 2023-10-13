@@ -1,16 +1,16 @@
 export type User = {
-  id: string 
-  userName: string
-  email: string
-  password: string
-  firstName: string
-  lastName: string 
-  birthday: Date 
-  exerciseHistory: Session[]
-  mealHistory: Meal[]
-  createdAt: Date
-  updatedAt: Date
-}
+  id: string;
+  userName: string;
+  email: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+  birthday: Date;
+  exerciseHistory: Session[];
+  mealHistory: Meal[];
+  createdAt: Date;
+  updatedAt: Date;
+};
 
 //Meal related types
 export type Meal = {
