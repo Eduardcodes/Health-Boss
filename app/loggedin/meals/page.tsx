@@ -1,15 +1,11 @@
 'use client';
 import { useState } from 'react';
-import Modal from '../../ed/components/Modal';
+import Modal from '../../modal/Modal';
 import MealList from '@/lib/components/mealList';
-import MealCard from '@/lib/components/mealCard';
 import AddMeal from '@/lib/components/addMeal';
-import AddMealEntry from '@/lib/components/addMealEntry';
 import SearchPopup from '@/lib/components/search';
 import { FoodData, Meal } from '@/lib/types';
-import HeaderPage from '@/lib/components/HeaderPage';
 import Image from 'next/image';
-import { getFoodData } from '@/utils/food-database';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDoubleLeft } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
@@ -30,12 +26,10 @@ export default function MealsPage() {
 
   return (
     <div className="sectionMainPages ">
-      {/* <HeaderPage title={'My meals'} /> */}
-
       <section className="h-20 flex justify-between items-center  mx-5 mt-10">
         <button onClick={() => setAddMealBox(!addMealBox)}>{back}</button>
         <h4 className="font-bold">My Meals</h4>
-        <Link href="/logedin/profile">
+        <Link href="/loggedin/profile">
           <Image
             src="/profile.jpg"
             alt="Pandar bear profile"

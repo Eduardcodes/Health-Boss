@@ -1,7 +1,5 @@
 'use client';
-
 import Image from 'next/image';
-import Modal from '@/app/ed/components/Modal';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -9,7 +7,7 @@ import React from 'react';
 import { User } from '@/lib/types';
 import { setJWT } from '@/lib/jwt';
 
-function CreateAccount({ user }: { user: User }) {
+function CreateAccount() {
   const router = useRouter();
   const [modalOpen, setModalOpen] = useState(false);
   const [inputs, setInputs] = useState<User>({} as User);

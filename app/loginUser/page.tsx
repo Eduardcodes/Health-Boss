@@ -1,7 +1,5 @@
 'use client';
-
 import Image from 'next/image';
-import Modal from '@/app/ed/components/Modal';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -23,7 +21,7 @@ function LoginPage() {
       setJWT(response.data.token);
       setInputs({} as User);
       //TODO give token to user and encrypt the password, set status to global store
-      router.push('/logedin/');
+      router.push('/loggedin/');
     } catch (err) {
       console.error('Failed to submit form:: ', err);
     }

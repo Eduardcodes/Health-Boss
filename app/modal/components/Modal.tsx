@@ -5,7 +5,13 @@ const close = (
   <FontAwesomeIcon icon={faClose} size="2xl" style={{ color: '#292828' }} />
 );
 
-const ModalExercise = ({ children, modalOpen, setModalOpen }) => {
+interface ModalProps {
+  children: React.ReactNode;
+  modalOpen: boolean;
+  setModalOpen: (isOpen: boolean) => void;
+}
+
+const Modal = ({ children, modalOpen, setModalOpen }: ModalProps) => {
   return (
     <>
       {modalOpen && (
@@ -17,7 +23,7 @@ const ModalExercise = ({ children, modalOpen, setModalOpen }) => {
                   {close}
                 </button>
                 <h1 className="text-mainBlack font-bold  p-3">
-                  Search for the exercise
+                  Search for the food
                 </h1>
               </div>
               {children}
@@ -29,4 +35,4 @@ const ModalExercise = ({ children, modalOpen, setModalOpen }) => {
   );
 };
 
-export default ModalExercise;
+export default Modal;

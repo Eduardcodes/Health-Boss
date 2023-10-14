@@ -74,6 +74,7 @@ export default function ExerciseSession({
             activity={activity}
           />
         ))}
+
         <button
           className="inputLogin text-center mt-5"
           type="button"
