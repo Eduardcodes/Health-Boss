@@ -64,7 +64,7 @@ export default function Navbar() {
           page.profile === 'highlighted' ? 'bg-mainNavGreen' : ''
         } `}
         onClick={() => handlePageChange('profile')}
-        href="/logedin/profile"
+        href="/loggedin/profile"
       >
         <span className="hover:scale-110">{user}</span>
       </Link>
@@ -74,14 +74,14 @@ export default function Navbar() {
           page.statistics === 'highlighted' ? 'bg-mainNavGreen' : ''
         }`}
         onClick={() => handlePageChange('statistics')}
-        href="/logedin/statistics"
+        href="/loggedin/statistics"
       >
         <span>{statistic}</span>
       </Link>
       <Link
         className={`${page.home === 'highlighted' ? 'bg-mainNavGreen' : ''}`}
         onClick={() => handlePageChange('home')}
-        href="/logedin/"
+        href="/loggedin/"
       >
         <span>{home}</span>
       </Link>
@@ -90,7 +90,7 @@ export default function Navbar() {
           page.exercises === 'highlighted' ? 'bg-mainNavGreen' : ''
         }`}
         onClick={() => handlePageChange('exercises')}
-        href="/logedin/exercises"
+        href="/loggedin/exercises"
       >
         <span>{exercise}</span>
       </Link>
@@ -98,7 +98,7 @@ export default function Navbar() {
       <Link
         className={`${page.meals === 'highlighted' ? 'bg-mainNavGreen' : ''}`}
         onClick={() => handlePageChange('meals')}
-        href="/logedin/meals"
+        href="/loggedin/meals"
       >
         <span>{meal}</span>
       </Link>

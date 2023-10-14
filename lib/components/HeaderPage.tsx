@@ -23,7 +23,7 @@ function HeaderPage({ title }: { title: React.ReactNode }) {
       <section className="h-20 flex justify-between items-center  mx-5 mt-10">
         <button onClick={handleBackClick}>{back}</button>
         <h4 className="font-bold">{title}</h4>
-        <Link href="/logedin/profile">
+        <Link href="/loggedin/profile">
           <Image
             src="/profile.jpg"
             alt="exercise icon"

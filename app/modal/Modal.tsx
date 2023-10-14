@@ -5,7 +5,13 @@ const close = (
   <FontAwesomeIcon icon={faClose} size="2xl" style={{ color: '#292828' }} />
 );
 
-const Modal = ({ children, modalOpen, setModalOpen }) => {
+interface ModalProps {
+  children: React.ReactNode;
+  modalOpen: boolean;
+  setModalOpen: (isOpen: boolean) => void;
+}
+
+const Modal = ({ children, modalOpen, setModalOpen }: ModalProps) => {
   return (
     <>
       {modalOpen && (

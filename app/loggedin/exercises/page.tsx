@@ -3,13 +3,18 @@ import React from 'react';
 import SessionList from './sessionList';
 import ExerciseSession from './exerciseSession';
 import SearchExercise from './searchExercise';
-import ModalExercise from '@/app/ed/components/ModalExercise';
+import ModalExercise from '@/app/modal/ModalExercise';
 import { useState } from 'react';
 import { CleanActivityData, Session } from '@/lib/types';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDoubleLeft } from '@fortawesome/free-solid-svg-icons';
+import { faClose } from '@fortawesome/free-solid-svg-icons';
+
+const close = (
+  <FontAwesomeIcon icon={faClose} size="2xl" style={{ color: '#292828' }} />
+);
 
 const back = (
   <FontAwesomeIcon
@@ -35,10 +40,10 @@ export default function ExercisesPage() {
   return (
     <div className="sectionMainPages">
       <section className="h-20 flex justify-between items-center  mx-5 mt-10">
-        {/* <button onClick={() => setAddSessionBox(!addSessionBox)}>{back}</button> */}
         <button onClick={() => handleCancel()}>{back}</button>
+
         <h4 className="font-bold">My Exercises</h4>
-        <Link href="/logedin/profile">
+        <Link href="/loggedin/profile">
           <Image
             src="/profile.jpg"
             alt="exercise icon"

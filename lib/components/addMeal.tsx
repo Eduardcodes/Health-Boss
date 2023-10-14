@@ -84,7 +84,7 @@ export default function AddMeal({
           Add new meal 🍌
         </div>
 
-        <div className="flex justify-around mt-5 ">
+        <div className="flex justify-around mt-5 gap-2">
           <div className="flex-1">
             <select
               className="buttonSelect w-full"
