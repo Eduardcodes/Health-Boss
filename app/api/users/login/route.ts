@@ -46,7 +46,7 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
     });
     
     // Return the token in the response
-    return NextResponse.json({ message: "Authentication successful", token, user});
+    return NextResponse.json({ message: "Authentication successful", user });
   } catch (error) {
     console.error("Login error:", error);
     return NextResponse.json({ message: "An error occurred during login." }, {status: 500});

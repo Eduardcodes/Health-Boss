@@ -8,6 +8,7 @@ import { faBell } from '@fortawesome/free-solid-svg-icons';
 import MotivationQuote from '@/lib/components/MotivationQuote';
 import { users } from '@/utils/mockData';
 import HeaderPage from '@/lib/components/HeaderPage';
+// import { useSession } from 'next-auth/react';
 
 const chart = (
   <FontAwesomeIcon icon={faChartPie} size="5x" style={{ color: '#2de86b' }} />
@@ -32,6 +33,8 @@ const meal = (
 
 export default function HomePage() {
   // TODO: check if user is logged in already, if not redirect to /login
+  // const session = useSession();
+  // console.log(session)
 
   return (
     <div className={`sectionMainPages  `}>
