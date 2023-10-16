@@ -36,6 +36,6 @@ const config: Config = {
       preflight: false,
     },
   },
-  plugins: [],
+  plugins: [require('daisyui')],
 };
 export default config;

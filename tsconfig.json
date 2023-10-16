@@ -33,7 +33,8 @@
     ".next/types/**/*.ts",
     "utils/test.ts",
     "app/createUser/page.tsx",
-    "utils/test.ts"
+    "utils/test.ts",
+    "app/share/pagetsx"
   ],
   "exclude": ["node_modules"]
 }

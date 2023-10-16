@@ -1,28 +1,53 @@
-'use client'
-import React from 'react';
+'use client';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import HeaderPage from '@/lib/components/HeaderPage';
 import Button from '@/lib/components/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faFacebook,
+  faWhatsapp,
+  faXTwitter,
+} from '@fortawesome/free-brands-svg-icons';
 import { faShare } from '@fortawesome/free-solid-svg-icons';
 import { users } from '@/utils/mockData';
 import { useUserStore } from '@/lib/store/store';
 import prisma from '@/lib/components/prismadb';
-import {useEffect} from 'react'
+import { useEffect } from 'react';
+import ModalShare from '@/app/modal/modalShare';
+import {
+  FacebookShareButton,
+  TwitterShareButton,
+  WhatsappShareButton,
+} from 'react-share';
+import Link from 'next/link';
 
 const share = (
   <FontAwesomeIcon icon={faShare} size="2xl" style={{ color: '#2de86b' }} />
 );
 
-export default function StatisticsPage() {
+const twitter = (
+  <FontAwesomeIcon icon={faXTwitter} size="xl" style={{ color: '#2de86b' }} />
+);
+const facebook = (
+  <FontAwesomeIcon icon={faFacebook} size="xl" style={{ color: '#2de86b' }} />
+);
+const whatsapp = (
+  <FontAwesomeIcon icon={faWhatsapp} size="xl" style={{ color: '#2de86b' }} />
+);
 
-  useEffect(()=>{
-    getUser()
-  }, [])
+export default function StatisticsPage() {
+  const [open, setOpen] = useState(false);
+
+  const handleToggle = () => setOpen((prev) => !prev);
+
+  useEffect(() => {
+    getUser();
+  }, []);
   async function getUser() {
-    const res = await fetch('/api/test')
-    const data = await res.json()
-    console.log('USER DATA ', data)
+    const res = await fetch('/api/test');
+    const data = await res.json();
+    console.log('USER DATA ', data);
   }
   // const userData = useUserStore.getState().data
 
@@ -55,7 +80,42 @@ export default function StatisticsPage() {
 
       <section className="flex justify-between mx-6 my-3 ">
         <Button title={'October'} />
-        <button>{share}</button>
+
+        <Link href="/share">Share</Link>
+
+        <button onClick={handleToggle}>{share}</button>
+        <ModalShare open={open}>
+          <h3 className="font-bold text-lg text-mainWhite">Share it one:</h3>
+
+          <div className="flex m-2 gap-7 ">
+            <TwitterShareButton
+              title="Checkout this awesome exercise I did!"
+              url="https://health-boss.vercel.app/share"
+            >
+              {twitter}
+            </TwitterShareButton>
+
+            <FacebookShareButton
+              quote="Checkout this awesome exercise I did!"
+              url="https://health-boss.vercel.app/share"
+            >
+              {facebook}
+            </FacebookShareButton>
+
+            <WhatsappShareButton
+              title="Checkout this awesome exercise I did!"
+              url="https://health-boss.vercel.app/share"
+            >
+              {whatsapp}
+            </WhatsappShareButton>
+          </div>
+
+          <div className="modal-action  text-mainWhite">
+            <button className="buttonConfirm" onClick={handleToggle}>
+              Close
+            </button>
+          </div>
+        </ModalShare>
       </section>
 
       <section>

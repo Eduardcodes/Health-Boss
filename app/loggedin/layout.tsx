@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Navbar from '../../lib/components/navbar';
+import Head from 'next/head';
 
 export const metadata: Metadata = {
   title: 'Health Boss 😎',
