@@ -9,6 +9,10 @@ import { users } from '@/utils/mockData';
 import { useUserStore } from '@/lib/store/store';
 import prisma from '@/lib/components/prismadb';
 import {useEffect} from 'react'
+import FavouriteActivitiesList from './favouriteActivities';
+import AverageBurnedCalories from './averageBurnedCalories';
+import AverageCaloriesConsumed from './averageCaloriesConsumed';
+import FavouriteFoods from './favouriteFoods';
 
 const share = (
   <FontAwesomeIcon icon={faShare} size="2xl" style={{ color: '#2de86b' }} />
@@ -16,14 +20,14 @@ const share = (
 
 export default function StatisticsPage() {
 
-  useEffect(()=>{
-    getUser()
-  }, [])
-  async function getUser() {
-    const res = await fetch('/api/test')
-    const data = await res.json()
-    console.log('USER DATA ', data)
-  }
+  // useEffect(()=>{
+  //   getUser()
+  // }, [])
+  // async function getUser() {
+  //   const res = await fetch('/api/test')
+  //   const data = await res.json()
+  //   console.log('USER DATA ', data)
+  // }
   // const userData = useUserStore.getState().data
 
   return (
@@ -58,7 +62,7 @@ export default function StatisticsPage() {
         <button>{share}</button>
       </section>
 
-      <section>
+      {/* <section>
         {users.map((user) => (
           <div className="flex flex-col gap-2" key={user.id}>
             <h6 className="mx-6 text-lg ">Your activities this month:</h6>
@@ -69,7 +73,11 @@ export default function StatisticsPage() {
             ))}
           </div>
         ))}
-      </section>
+      </section> */}
+      <AverageBurnedCalories></AverageBurnedCalories>
+      <AverageCaloriesConsumed></AverageCaloriesConsumed>
+      <FavouriteActivitiesList></FavouriteActivitiesList>
+      <FavouriteFoods></FavouriteFoods>
     </div>
   );
 }

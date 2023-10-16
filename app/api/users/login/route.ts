@@ -23,6 +23,10 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
     // Find the user by username using Prisma
     const user = await prisma.user.findUnique({
       where: { email },
+      include: {
+        exerciseHistory: true,
+        mealHistory:true
+      }
     });
 
     // Check if the user exists
@@ -40,9 +44,9 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
     const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET_KEY || "Secret", {
       expiresIn: "1h",
     });
-
+    
     // Return the token in the response
-    return NextResponse.json({ message: "Authentication successful", token });
+    return NextResponse.json({ message: "Authentication successful", token, user});
   } catch (error) {
     console.error("Login error:", error);
     return NextResponse.json({ message: "An error occurred during login." }, {status: 500});

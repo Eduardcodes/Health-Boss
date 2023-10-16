@@ -10,13 +10,15 @@ export default function AverageBurnedCalories() {
   const [average, setAverage] = useState(0);
 
   useEffect(() => {
-    if (userData) {
+    console.log(userData)
+    if (userData?.exerciseHistory) {
       const exerciseHistory = userData.exerciseHistory;
       const { calorieCount } = averageCaloriesBurnedPrevSessions(
         exerciseHistory,
         period
       );
       setAverage(calorieCount);
+      console.log('BURNED CALORIES', calorieCount)
     }
   }, [userData, period]);
 

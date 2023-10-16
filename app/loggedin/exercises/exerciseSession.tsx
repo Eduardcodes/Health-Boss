@@ -2,6 +2,7 @@
 import { useState, FormEvent } from 'react';
 import { CleanActivityData, NewSessionList, Session } from '@/lib/types';
 import SessionEntry from './sessionEntry';
+import { useUserStore } from '@/lib/store/store';
 
 export default function ExerciseSession({
   setModalOpen,
@@ -18,6 +19,7 @@ export default function ExerciseSession({
     React.SetStateAction<CleanActivityData[]>
   >;
 }) {
+  const userData = useUserStore(state => state.data)
   const [time, setTime] = useState('Morning');
 
   async function submitHandler(e: FormEvent) {
@@ -56,7 +58,7 @@ export default function ExerciseSession({
         activities: activityList,
         caloriesBurned: calsBurnedThisSesssion,
         time: time,
-        userId: '652560db8f962632ac04d15f', //TODO REDUX FOR USER ID
+        userId: userData?.id, //TODO REDUX FOR USER ID
       }),
     });
     const { newSession } = await response.json();
