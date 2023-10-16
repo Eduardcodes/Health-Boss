@@ -27,14 +27,13 @@ model User {
 }
 
 model Session {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-  activities Json
-  time String
-  caloriesBurned Int
-  createdAt DateTime @default(now())
-  userId String 
-  user User  @relation(fields: [userId], references: [id])
+  id           String   @id @map("_id") @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
+
 
 model Meal {
   id String @id @default(auto()) @map("_id") @db.ObjectId

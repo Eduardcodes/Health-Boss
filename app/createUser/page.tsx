@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import React from 'react';
 import { User } from '@/lib/types';
-import { setJWT } from '@/lib/jwt';
+import { signIn } from 'next-auth/react';
 
 function CreateAccount() {
   const router = useRouter();
@@ -16,13 +16,9 @@ function CreateAccount() {
     try {
       event.preventDefault();
       console.log('INPUTS::', inputs);
-      const response = await axios.post('/api/users/signUp', inputs);
-      //console.log("IT WORKS::", response)
-      setJWT(response.data.token);
-      setInputs({} as User);
-      //TODO give token to user and encrypt the password, set status to global store
-      router.push('/');
-      return response;
+      await axios.post('/api/users/signUp', inputs);
+      await signIn("credentials", {redirect: false, ...inputs}) 
+      router.push('/loggedin');
     } catch (err) {
       console.error('Failed to submit form:: ', err);
     }

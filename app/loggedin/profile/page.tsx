@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -7,6 +8,7 @@ import Button from '@/lib/components/Button';
 
 // TODO: need to change this for real data from DB!!
 import { users } from '@/utils/mockData';
+import { signOut } from 'next-auth/react';
 
 const plus = (
   <FontAwesomeIcon icon={faCirclePlus} size="lg" style={{ color: '#2de86b' }} />
@@ -114,6 +116,11 @@ export default function ProfilePage() {
               Check history
             </p>
           </Link>
+            <p onClick={() => {
+              signOut({ callbackUrl: 'http://localhost:3000/' });
+            }} className="text-mainGreen font-semibold cursor-pointer hover:border-2 rounded-lg p-2">
+              Sign Out
+            </p>
         </div>
       </div>
     </div>
