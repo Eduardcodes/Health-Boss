@@ -1,15 +1,10 @@
-//TODO check API
+//TODO fix api checking, now only checking the api by sending request to it
 
 describe("motivation api is working", () => {
-  it("check 'User Name field", () => {
-    cy.visit("http://localhost:3002/createUser");
-
-    cy.get("#userName").type("testUser").should("have.value", "testUser");
-    cy.get("#firstName").type("testFirst").should("have.value", "testFirst");
-    cy.get("#lastName").type("testLast").should("have.value", "testLast");
-    cy.get("#email").type("testEmail").should("have.value", "testEmail");
-    cy.get("#password")
-      .type("testPassword")
-      .should("have.value", "testPassword");
+  it("send request to MotivationQuoteApi", () => {
+    cy.request("GET",'https://api.quotable.io/random?maxLength=30').then((response) =>{
+      expect(response.status).to.eq(200)
+      //expect(response.body.results.length).to.be.greaterThan(1)
+    })
   });
 });
