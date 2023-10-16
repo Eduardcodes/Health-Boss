@@ -12,13 +12,13 @@ describe("check input fields work", () => {
   });
 });
 
-describe("check 'Create account' button ", () => {
-  it("give error if input fields empty", () => {
-    cy.visit("http://localhost:3002/createUser");
-  });
-  it("give error if userName is too short fields empty", () => {
-    cy.visit("http://localhost:3002/createUser");
-  });
-});
+// describe("check 'Create account' button ", () => {
+//   it("give error if input fields empty", () => {
+//     cy.visit("http://localhost:3002/createUser");
+//   });
+//   it("give error if userName is too short fields empty", () => {
+//     cy.visit("http://localhost:3002/createUser");
+//   });
+// });
 
-//TODO fix 'Create account button' after error message is online
+//TODO fix 'Create account button' test after error message is online
