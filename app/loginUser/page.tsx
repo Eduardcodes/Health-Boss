@@ -1,13 +1,12 @@
-'use client';
-import Image from 'next/image';
-import axios from 'axios';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
-import React from 'react';
-import { User } from '@/lib/types';
-import Link from 'next/link';
-import { setJWT } from '@/lib/jwt';
-import { signIn } from 'next-auth/react';
+"use client";
+import Image from "next/image";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import React from "react";
+import { User } from "@prisma/client";
+import Link from "next/link";
+import { signIn } from "next-auth/react";
 
 function LoginPage() {
   const router = useRouter();
@@ -17,14 +16,14 @@ function LoginPage() {
   const handleSubmit = async (event: React.SyntheticEvent) => {
     try {
       event.preventDefault();
-      console.log(await signIn("credentials", {redirect: false, ...inputs}))
+      console.log(await signIn("credentials", { redirect: false, ...inputs }));
       // const response = await axios.post('/api/users/login', inputs);
       // setJWT(response.data.token);
       // setInputs({} as User);
       //TODO give token to user and encrypt the password, set status to global store
-      router.push('/loggedin');
+      router.push("/loggedin");
     } catch (err) {
-      console.error('Failed to submit form:: ', err);
+      console.error("Failed to submit form:: ", err);
     }
   };
 
@@ -37,8 +36,7 @@ function LoginPage() {
 
   return (
     <div
-      className={`sectionMainPages bg-gradient-to-b from-mainGreen from-10% to-mainBlack to-70% `}
-    >
+      className={`sectionMainPages bg-gradient-to-b from-mainGreen from-10% to-mainBlack to-70% `}>
       <section className="mt-5 flex flex-col justify-center items-center ">
         <Image
           src="/logo.png"
@@ -56,8 +54,7 @@ function LoginPage() {
       <section className="mx-5 flex flex-col  mt-14">
         <form
           className="flex flex-col items-center w-full"
-          onSubmit={handleSubmit}
-        >
+          onSubmit={handleSubmit}>
           <div className="w-full">
             <label className="font-semibold text-base" htmlFor="email">
               Email
@@ -68,7 +65,7 @@ function LoginPage() {
               id="email"
               name="email"
               placeholder="email@email.com"
-              value={inputs.email || ''}
+              value={inputs.email || ""}
               onChange={handleChange}
             />
           </div>
@@ -82,7 +79,7 @@ function LoginPage() {
               id="password"
               name="password"
               placeholder="New password"
-              value={inputs.password || ''}
+              value={inputs.password || ""}
               onChange={handleChange}
             />
           </div>
@@ -95,8 +92,7 @@ function LoginPage() {
           <button
             className={`buttonLogin bg-lightGreen text-mainBlack hover:scale-110`}
             type="submit"
-            value="Submit"
-          >
+            value="Submit">
             Log In
           </button>
         </form>

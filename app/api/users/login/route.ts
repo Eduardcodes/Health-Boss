@@ -1,3 +1,4 @@
+
 //url: http://localhost:3000/api/users/login
 
 import { hashPassword } from '../../../../lib/components/auth';
@@ -7,7 +8,7 @@ import { z } from "zod";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import prisma from "../../../../lib/components/prismadb"; 
-import { loginSchema } from "@/lib/components/validation";
+import { loginSchema } from './../../../../lib/components/validation';
 
 interface SignInRequestBody {
   email: string;
