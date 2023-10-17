@@ -1,12 +1,7 @@
 
 //url: http://localhost:3000/api/users/login
-
-import { hashPassword } from '../../../../lib/components/auth';
 import { NextRequest, NextResponse } from "next/server";
-
-import { z } from "zod";
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
 import prisma from "../../../../lib/components/prismadb"; 
 import { loginSchema } from './../../../../lib/components/validation';
 
@@ -20,7 +15,6 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
     const body: SignInRequestBody = await req.json();
     // Validate the request body
     const { email, password } = loginSchema.parse(body);
-    console.log(email, password)
     // Find the user by username using Prisma
     const user = await prisma.user.findUnique({
       where: { email },
@@ -40,12 +34,6 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
     if (!isPasswordValid) {
       return NextResponse.json({ message: "Authentication failed." }, { status: 401 });
     }
-
-    // Generate a JWT token
-    const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET_KEY || "Secret", {
-      expiresIn: "1h",
-    });
-    
     // Return the token in the response
     return NextResponse.json({ message: "Authentication successful", user });
   } catch (error) {

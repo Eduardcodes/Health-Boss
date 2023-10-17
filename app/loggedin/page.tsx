@@ -34,7 +34,6 @@ const meal = (
 export default function HomePage() {
   // TODO: check if user is logged in already, if not redirect to /login
   const session = useSession();
-  console.log(session);
   return (
     <div className={`sectionMainPages  `}>
       <HeaderPage title={"Home"} />
