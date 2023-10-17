@@ -2,7 +2,7 @@ import prisma from "@/lib/components/prismadb"
 import CredentialsProvider from "next-auth/providers/credentials"
 import { PrismaAdapter } from "@next-auth/prisma-adapter"
 
-export default {
+const authOption = {
   adapter: PrismaAdapter(prisma),
     providers: [
         CredentialsProvider({
@@ -23,22 +23,35 @@ export default {
             // e.g. return { id: 1, name: 'J Smith', email: 'jsmith@example.com' }
             // You can also use the `req` object to obtain additional parameters
             // (i.e., the request IP address)
-            const res = await fetch("http://localhost:3000/api/users/login", {
+            const res = await fetch(`${process.env.NEXTAUTH_URL}/api/users/login`, {
               method: 'POST',
               body: JSON.stringify(credentials),
               headers: { "Content-Type": "application/json" }
             })
-            const user = await res.json()
-            console.log(res.ok && user)
+            const userRes = await res.json()
             // If no error and we have user data, return it
-            if (res.ok && user) {
-              return user
+            if (res.ok && userRes) {
+              return userRes.user
             }
             // Return null if user data could not be retrieved
             return null
           }
         })
       ],
+      callbacks: {
+        // @ts-ignore
+        async jwt({token, user}){
+          return {...token, ...user}
+       },
+        // @ts-ignore
+        async session({ session, token, user }) {
+          const {firstName, lastName, email, birthday} = token
+          console.log(token)
+          return {...session, user: {
+            firstName, lastName, email, birthday
+          }};
+        },
+      },
       session: {
         strategy: 'jwt'
       },
@@ -47,3 +60,5 @@ export default {
         newUser: '/createUser' 
       },
 }
+
+export default authOption;

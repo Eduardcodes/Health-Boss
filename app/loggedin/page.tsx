@@ -1,50 +1,49 @@
-import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChartPie } from '@fortawesome/free-solid-svg-icons';
-import { faShoePrints } from '@fortawesome/free-solid-svg-icons';
-import { faBed } from '@fortawesome/free-solid-svg-icons';
-import { faUtensils } from '@fortawesome/free-solid-svg-icons';
-import { faBell } from '@fortawesome/free-solid-svg-icons';
-import MotivationQuote from '@/lib/components/MotivationQuote';
-import { users } from '@/utils/mockData';
-import HeaderPage from '@/lib/components/HeaderPage';
-// import { useSession } from 'next-auth/react';
+"use client";
+import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChartPie } from "@fortawesome/free-solid-svg-icons";
+import { faShoePrints } from "@fortawesome/free-solid-svg-icons";
+import { faBed } from "@fortawesome/free-solid-svg-icons";
+import { faUtensils } from "@fortawesome/free-solid-svg-icons";
+import { faBell } from "@fortawesome/free-solid-svg-icons";
+import HeaderPage from "../../lib/components/HeaderPage";
+import { useSession } from "next-auth/react";
+import MotivationQuote from "../../lib/components/MotivationQuote";
 
 const chart = (
-  <FontAwesomeIcon icon={faChartPie} size="5x" style={{ color: '#2de86b' }} />
+  <FontAwesomeIcon icon={faChartPie} size="5x" style={{ color: "#2de86b" }} />
 );
 const walk = (
   <FontAwesomeIcon
     icon={faShoePrints}
     size="2xl"
-    style={{ color: '#2de86b' }}
+    style={{ color: "#2de86b" }}
   />
 );
 const notication = (
-  <FontAwesomeIcon icon={faBell} size="sm" style={{ color: '#2de86b' }} shake />
+  <FontAwesomeIcon icon={faBell} size="sm" style={{ color: "#2de86b" }} shake />
 );
 const sleep = (
-  <FontAwesomeIcon icon={faBed} size="2xl" style={{ color: '#2de86b' }} />
+  <FontAwesomeIcon icon={faBed} size="2xl" style={{ color: "#2de86b" }} />
 );
 
 const meal = (
-  <FontAwesomeIcon icon={faUtensils} size="2xl" style={{ color: '#2de86b' }} />
+  <FontAwesomeIcon icon={faUtensils} size="2xl" style={{ color: "#2de86b" }} />
 );
 
 export default function HomePage() {
   // TODO: check if user is logged in already, if not redirect to /login
-  // const session = useSession();
-  // console.log(session)
-
+  const session = useSession();
+  console.log(session);
   return (
     <div className={`sectionMainPages  `}>
-      <HeaderPage title={'Home'} />
+      <HeaderPage title={"Home"} />
 
       <section className="mx-6 my-3 flex flex-col justify-center ">
         <div className="p-2 flex font-bold justify-between">
-          <h5 className="text-3xl">Hi {users[0].fistName}</h5>
+          <h5 className="text-3xl">Hi {session?.data?.user.firstName}</h5>
           <div className="flex gap-2 items-center">
-            {' '}
+            {" "}
             {notication} <p>+1</p>
           </div>
         </div>
@@ -53,7 +52,7 @@ export default function HomePage() {
       </section>
 
       <section className={` flex flex-col`}>
-        <h4 className={'titlehome'}>Your activities</h4>
+        <h4 className={"titlehome"}>Your activities</h4>
         <div className={`cardBackground flex justify-between items-center`}>
           <div className="flex flex-col gap-2">
             {walk}
@@ -86,7 +85,7 @@ export default function HomePage() {
       </section>
 
       <section>
-        <h4 className={'titlehome'}>How close to your goal (Monthly)</h4>
+        <h4 className={"titlehome"}>How close to your goal (Monthly)</h4>
         <div className={`cardBackground flex justify-around w-full"`}>
           <div className="flex h-full self-center">
             <span>{chart}</span>

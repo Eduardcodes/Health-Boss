@@ -6,16 +6,13 @@ import { useState } from "react";
 import React from "react";
 import { User } from "@/lib/types";
 import Link from "next/link";
-import { setJWT } from "@/lib/jwt";
 import { signIn } from "next-auth/react";
-import { useUserStore } from "@/lib/store/store";
 
 function LoginPage() {
   const router = useRouter();
   const [modalOpen, setModalOpen] = useState(false);
   const [inputs, setInputs] = useState<User>({} as User);
-  const setUser = useUserStore((state) => state.setUser);
-  const user = useUserStore((state) => state.data);
+
   const handleSubmit = async (event: React.SyntheticEvent) => {
     try {
       event.preventDefault();
