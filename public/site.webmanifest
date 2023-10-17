@@ -1,6 +1,6 @@
 {
   "name": "Health Boss 😎",
-  "short_name": "HeathBoss 😎",
+  "short_name": "Heath Boss 😎",
   "description": "Be the boss of your health!",
   "icons": [
     {
@@ -16,5 +16,5 @@
   ],
   "theme_color": "#353535",
   "background_color": "#353535",
-  "display": "standalone"
+  "display": "fullscreen"
 }

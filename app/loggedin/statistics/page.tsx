@@ -25,7 +25,6 @@ import Link from 'next/link';
 const share = (
   <FontAwesomeIcon icon={faShare} size="2xl" style={{ color: '#2de86b' }} />
 );
-
 const twitter = (
   <FontAwesomeIcon icon={faXTwitter} size="xl" style={{ color: '#2de86b' }} />
 );
@@ -81,7 +80,7 @@ export default function StatisticsPage() {
       <section className="flex justify-between mx-6 my-3 ">
         <Button title={'October'} />
 
-        <Link href="/share">Share</Link>
+        {/* <Link href="/share">Share</Link> */}
 
         <button onClick={handleToggle}>{share}</button>
         <ModalShare open={open}>
