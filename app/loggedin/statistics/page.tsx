@@ -14,6 +14,7 @@ import AverageBurnedCalories from './averageBurnedCalories';
 import AverageCaloriesConsumed from './averageCaloriesConsumed';
 import FavouriteFoods from './favouriteFoods';
 import MealsChart from './mealsChart';
+import SessionsChart from './sessionsChart';
 
 
 const share = (
@@ -81,7 +82,7 @@ export default function StatisticsPage() {
       <FavouriteActivitiesList></FavouriteActivitiesList>
       <FavouriteFoods></FavouriteFoods>
       <MealsChart></MealsChart>
-      
+      <SessionsChart></SessionsChart>
     </div>
   );
 }

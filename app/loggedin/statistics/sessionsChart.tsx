@@ -8,7 +8,7 @@ import { ChartData } from '@/lib/types';
 
 ChartJS.register(ArcElement, Tooltip, Legend, ...registerables);
 
-export default function MealsChart() {
+export default function SessionsChart() {
   
   const userData = useUserStore(state => state.data)
   const [chartData, setChartData] = useState<ChartData>()
