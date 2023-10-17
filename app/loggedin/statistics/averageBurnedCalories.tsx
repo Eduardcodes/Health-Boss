@@ -42,7 +42,7 @@ export default function AverageBurnedCalories() {
         <option>40</option>
       </select>{' '}
       <div className={`cardBackground my-0`}>
-        <p className="font-semibold">{average} Kcal</p>
+        <p className="font-semibold">{average.toFixed(2)} Kcal</p>
       </div>
     </div>
   );
