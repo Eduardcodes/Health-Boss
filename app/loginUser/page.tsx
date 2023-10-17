@@ -19,11 +19,7 @@ function LoginPage() {
   const handleSubmit = async (event: React.SyntheticEvent) => {
     try {
       event.preventDefault();
-      console.log(await signIn("credentials", { redirect: false, ...inputs }));
-      // const response = await axios.post('/api/users/login', inputs);
-      // setJWT(response.data.token);
-      // setInputs({} as User);
-      //TODO give token to user and encrypt the password, set status to global store
+      await signIn("credentials", { redirect: false, ...inputs });
       router.push("/loggedin");
     } catch (err) {
       console.error("Failed to submit form:: ", err);

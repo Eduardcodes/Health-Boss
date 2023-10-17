@@ -15,7 +15,6 @@ function CreateAccount() {
   const handleSubmit = async (event: React.SyntheticEvent) => {
     try {
       event.preventDefault();
-      console.log("INPUTS::", inputs);
       await axios.post("/api/users/signUp", inputs);
       await signIn("credentials", { redirect: false, ...inputs });
       router.push("/loggedin");
