@@ -20,6 +20,7 @@ export type Meal = {
   user: User;
   type?: string;
   totalCals: number;
+  createdAt: Date
 };
 
 export type Ingredient = {
@@ -46,6 +47,11 @@ export type FoodData = {
 export type AverageCalories = {
   calorieCount: number
   overHowManyMeals?: number
+}
+
+export type ChartData = {
+  xAxis: string[]
+  yAxis: number[]
 }
 
 //Exercise related types

@@ -1,5 +1,6 @@
 import { useUserStore } from "@/lib/store/store";
 import {  Meal } from "@/lib/types";
+import moment from "moment";
 
 export const averageCaloriesPreviousMeals = (userMealHistory: Meal[], noOfMeals: number) => {
   const reversed = userMealHistory.slice().reverse()
@@ -38,6 +39,36 @@ export const mostEatenFoods = (meals: Meal[], count:number) => {
     (a, b) => ingredientCounts[b] - ingredientCounts[a]
   );
     return sortedIngredients.slice(0,count)
+}
+
+export const getChartData = (method: string, mealHistory: Meal[]) => {
+  
+  let xAxis: string[] = []
+  let yProgenitor: {[key: string]: number} = {}
+  if(method === 'Total') {
+    mealHistory.forEach(meal => {
+      const date = moment(meal.createdAt).format('DD/MM')
+      if(!xAxis.includes(date)) {
+        xAxis.push(date)
+        yProgenitor[date] = meal.totalCals
+      } else {
+        yProgenitor[date] += meal.totalCals
+      }
+    })
+  } else {
+    mealHistory.forEach(meal => {
+      if(meal.type === method) {
+        const date = moment(meal.createdAt).format('DD/MM')
+        if(!xAxis.includes(date)) {
+          xAxis.push(date)
+          yProgenitor[date] = meal.totalCals
+        } else {
+          yProgenitor[date] += meal.totalCals
+        }
+      }
+    })
+  }
+  return {xAxis, yAxis: Object.values(yProgenitor)}
 }
 
 

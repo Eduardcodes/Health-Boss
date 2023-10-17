@@ -19,12 +19,12 @@ export default function FavouriteFoods() {
 
   return (
     <div className="flex flex-col gap-2">
-      <h6 className="mx-6 text-lg ">Your favourite foods!</h6>
+      <h2 className="mx-6 text-lg ">Your favourite foods!</h2>
       {favouriteFoods &&
         favouriteFoods.map((food, index) => {
           return (
             <div key={index} className={`cardBackground my-0`}>
-              <p className="font-semibold">{food} Kcal</p>
+              <p className="font-semibold">{food}</p>
             </div>
           );
         })}
