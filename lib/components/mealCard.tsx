@@ -3,6 +3,8 @@ import { Meal } from '../types';
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClose } from '@fortawesome/free-solid-svg-icons';
+import { useUserStore } from '../store/store';
+import moment from 'moment';
 
 const close = (
   <FontAwesomeIcon icon={faClose} size="2xl" style={{ color: '#2de86b' }} />
@@ -15,6 +17,7 @@ export default function MealCard({
   mealData: Meal;
   setDisplayedMeals: Function;
 }) {
+
   const [details, setDetails] = useState(false);
 
   async function handleDelete(id: string) {
@@ -23,7 +26,7 @@ export default function MealCard({
       headers: {
         'Contet-Type': 'application/json',
       },
-      body: JSON.stringify({ id: id }),
+      body: JSON.stringify({ id: id}),
     });
     const data = await res.json();
     const { deletedItem } = data;
@@ -51,7 +54,7 @@ export default function MealCard({
             {mealData.type}
           </h3>
           {/* TODO: Make real time */}
-          <p className="">11/10/2023</p>
+          <p className="">{moment(mealData.createdAt).format('DD/MM/YYYY')}</p>
         </div>
 
         <div className="text-lg flex justify-between mt-5 font-bold items-center">

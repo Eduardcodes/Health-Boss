@@ -6,6 +6,7 @@ import { useState } from 'react';
 import React from 'react';
 import { User } from '@/lib/types';
 import { setJWT } from '@/lib/jwt';
+import { useUserStore } from '@/lib/store/store';
 
 function CreateAccount() {
   const router = useRouter();

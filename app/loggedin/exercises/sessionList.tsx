@@ -2,6 +2,7 @@
 import { Session } from '@/lib/types';
 import { useEffect, useState } from 'react';
 import SessionCard from './sessionCard';
+import { useUserStore } from '@/lib/store/store';
 
 export default function SessionList({
   displayedSessions,
@@ -10,14 +11,14 @@ export default function SessionList({
   displayedSessions: Session[];
   setDisplayedSessions: React.Dispatch<React.SetStateAction<Session[]>>;
 }) {
+
+  const userData = useUserStore(state => state.data)
   useEffect(() => {
     getAllSessions();
   }, []);
 
   async function getAllSessions() {
-    const res: Response = await fetch(
-      '/api/exercises/652560db8f962632ac04d15f'
-    );
+    const res: Response = await fetch(`/api/exercises/${userData?.id}`);
     const data = await res.json();
     const allSession = data.allSession as Session[];
     console.log('ALL SESSIONS LIST', allSession);

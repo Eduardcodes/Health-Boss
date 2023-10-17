@@ -14,12 +14,14 @@ function LoginPage() {
   const [modalOpen, setModalOpen] = useState(false);
   const [inputs, setInputs] = useState<User>({} as User);
   const setUser = useUserStore((state) => state.setUser);
-
+  const user = useUserStore((state) => state.data);
   const handleSubmit = async (event: React.SyntheticEvent) => {
     try {
       event.preventDefault();
       // console.log("INPUTS::", inputs)
       const response = await axios.post('/api/users/login', inputs);
+      setUser(response.data.user);
+      console.log(user);
       setJWT(response.data.token);
       setInputs({} as User);
       setUser(response.data.user);

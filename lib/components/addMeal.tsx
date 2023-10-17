@@ -2,6 +2,7 @@
 import { FormEvent, useState } from 'react';
 import { FoodData, Ingredient } from '../types';
 import AddMealEntry from './addMealEntry';
+import { useUserStore } from '../store/store';
 
 export default function AddMeal({
   selectedFoods,
@@ -16,6 +17,8 @@ export default function AddMeal({
   setDisplayedMeals: Function;
   setSelectedFoods: React.Dispatch<React.SetStateAction<FoodData[]>>;
 }) {
+
+  const userData = useUserStore(state => state.data)
   const [type, setType] = useState('Breakfast');
 
   async function submitHandler(e: FormEvent) {
@@ -62,7 +65,7 @@ export default function AddMeal({
       },
       body: JSON.stringify({
         ingredients: ingredientsList,
-        userId: '652560db8f962632ac04d15f', //TODO REDUX FOR USER ID
+        userId: userData?.id, //TODO REDUX FOR USER ID
         type: type,
         totalCals: totalCalsThisMeal,
       }),
@@ -81,7 +84,7 @@ export default function AddMeal({
           className="inputLogin text-center"
           onClick={() => setModalOpen(true)}
         >
-          Add new meal 🍌
+          Add food item 🍌
         </div>
 
         <div className="flex justify-around mt-5 gap-2">

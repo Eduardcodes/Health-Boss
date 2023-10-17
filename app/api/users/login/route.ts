@@ -1,8 +1,6 @@
 //url: http://localhost:3000/api/users/login
-
 import { hashPassword } from '../../../../lib/components/auth';
 import { NextRequest, NextResponse } from 'next/server';
-
 import { z } from 'zod';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
@@ -24,8 +22,8 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
     const user = await prisma.user.findUnique({
       where: { email },
       include: {
-        mealHistory: true,
         exerciseHistory: true,
+        mealHistory: true,
       },
     });
 

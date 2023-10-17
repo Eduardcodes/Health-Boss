@@ -10,13 +10,15 @@ export default function AverageBurnedCalories() {
   const [average, setAverage] = useState(0);
 
   useEffect(() => {
-    if (userData) {
+    console.log(userData)
+    if (userData?.exerciseHistory) {
       const exerciseHistory = userData.exerciseHistory;
       const { calorieCount } = averageCaloriesBurnedPrevSessions(
         exerciseHistory,
         period
       );
       setAverage(calorieCount);
+      console.log('BURNED CALORIES', calorieCount)
     }
   }, [userData, period]);
 
@@ -27,7 +29,7 @@ export default function AverageBurnedCalories() {
   return (
     <div className="flex flex-col gap-2">
       <h6 className="mx-6 text-lg ">
-        Your average calories burned over the last
+        Your average calories burned over the last (choose) exercise sessions
       </h6>
       <select onChange={(e) => handleChange(e)}>
         <option>5</option>
@@ -39,9 +41,8 @@ export default function AverageBurnedCalories() {
         <option>35</option>
         <option>40</option>
       </select>{' '}
-      exercise sessions
       <div className={`cardBackground my-0`}>
-        <p className="font-semibold">{average} Kcal</p>
+        <p className="font-semibold">{average.toFixed(2)} Kcal</p>
       </div>
     </div>
   );
