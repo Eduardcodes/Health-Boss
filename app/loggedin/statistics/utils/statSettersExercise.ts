@@ -1,5 +1,6 @@
 import { useUserStore } from "@/lib/store/store";
 import {  Session } from "@/lib/types";
+import moment from "moment";
 
 export const averageCaloriesBurnedPrevSessions = (userSessions: Session[], noOfSessions: number) => {
   const reversed = userSessions.slice().reverse()
@@ -40,9 +41,34 @@ export const mostPerformedActivities = (sessions: Session[], count:number) => {
     return sortedIngredients.slice(0,count)
 }
 
-
-const activitiesThisMonth = (userSessions: Session[]) => {
-
+export const getChartData = (method: string, sessionHistory: Session[]) => {
+  
+  let xAxis: string[] = []
+  let yProgenitor: {[key: string]: number} = {}
+  if(method === 'Total') {
+    sessionHistory.forEach(session => {
+      const date = moment(session.createdAt).format('DD/MM')
+      if(!xAxis.includes(date)) {
+        xAxis.push(date)
+        yProgenitor[date] = session.caloriesBurned
+      } else {
+        yProgenitor[date] += session.caloriesBurned
+      }
+    })
+  } else {
+    sessionHistory.forEach(session => {
+      if(session.time === method) {
+        const date = moment(session.createdAt).format('DD/MM')
+        if(!xAxis.includes(date)) {
+          xAxis.push(date)
+          yProgenitor[date] = session.caloriesBurned
+        } else {
+          yProgenitor[date] += session.caloriesBurned
+        }
+      }
+    })
+  }
+  return {xAxis, yAxis: Object.values(yProgenitor)}
 }
 
 

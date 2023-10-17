@@ -15,6 +15,7 @@ import AverageCaloriesConsumed from './averageCaloriesConsumed';
 import FavouriteFoods from './favouriteFoods';
 import MealsChart from './mealsChart';
 
+
 const share = (
   <FontAwesomeIcon icon={faShare} size="2xl" style={{ color: '#2de86b' }} />
 );
@@ -80,6 +81,7 @@ export default function StatisticsPage() {
       <FavouriteActivitiesList></FavouriteActivitiesList>
       <FavouriteFoods></FavouriteFoods>
       <MealsChart></MealsChart>
+      
     </div>
   );
 }

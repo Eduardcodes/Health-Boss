@@ -84,7 +84,7 @@ export default function AddMeal({
           className="inputLogin text-center"
           onClick={() => setModalOpen(true)}
         >
-          Add new meal 🍌
+          Add food item 🍌
         </div>
 
         <div className="flex justify-around mt-5 gap-2">

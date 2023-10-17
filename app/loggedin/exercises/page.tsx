@@ -61,7 +61,7 @@ export default function ExercisesPage() {
           className="buttonAddActivityOrFood"
           onClick={() => setAddSessionBox(true)}
         >
-          Add New Exercise
+          Add New Exercise Session
         </button>
       )}
 

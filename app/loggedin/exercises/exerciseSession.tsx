@@ -82,7 +82,7 @@ export default function ExerciseSession({
           type="button"
           onClick={() => setModalOpen(true)}
         >
-          Add New Exercise 💪
+          Add Activity 💪
         </button>
 
         <div className="flex justify-around mt-5 gap-4">

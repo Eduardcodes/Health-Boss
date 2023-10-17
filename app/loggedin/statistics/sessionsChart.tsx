@@ -3,7 +3,7 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend, registerables } from "ch
 import { Chart } from "react-chartjs-2";
 import { useEffect, useState } from 'react';
 import moment from 'moment';
-import { getChartData } from './utils/statSettersMeals';
+import { getChartData } from './utils/statSettersExercise';
 import { ChartData } from '@/lib/types';
 
 ChartJS.register(ArcElement, Tooltip, Legend, ...registerables);
@@ -16,18 +16,18 @@ export default function MealsChart() {
 
   
   useEffect(()=>{
-    if(userData) setChartData(getChartData(option, userData.mealHistory ))
+    if(userData) setChartData(getChartData(option, userData.exerciseHistory ))
   },[option])
 
   return (
     chartData && <div>
-      Food Chart
+      Exercise Chart
       Display <select defaultValue='Total' onChange={(e)=>setOption(e.currentTarget.value)}>
         <option>Total</option>
-        <option>Breakfasts</option>
-        <option>Lunches</option>
-        <option>Dinners</option>
-        <option>Snacks</option>
+        <option>Early Morning</option>
+        <option>Late Morning</option>
+        <option>Afternoon</option>
+        <option>Evening</option>
       </select>
       <Chart 
       type='bar' 
