@@ -27,9 +27,7 @@ const back = (
 export default function ExercisesPage() {
   const [modalOpen, setModalOpen] = useState(false);
   const [addSessionBox, setAddSessionBox] = useState(false);
-  const [selectedActivities, setSelectedActivities] = useState<
-    CleanActivityData[]
-  >([]);
+  const [selectedActivities, setSelectedActivities] = useState<CleanActivityData[]>([]);
   const [displayedSessions, setDisplayedSessions] = useState<Session[]>([]);
 
   async function handleCancel() {

@@ -19,6 +19,7 @@ const back = (
 );
 
 export default function MealsPage() {
+  
   const [modalOpen, setModalOpen] = useState(false);
   const [addMealBox, setAddMealBox] = useState(false);
   const [selectedFoods, setSelectedFoods] = useState<FoodData[]>([]);

@@ -3,16 +3,18 @@ import { useState, useEffect } from 'react';
 import { useUserStore } from '@/lib/store/store';
 import { mostPerformedActivities } from './utils/statSettersExercise';
 
-export default function AverageBurnedCalories() {
+export default function FavouriteActivitiesList() {
+  
   const userData = useUserStore.getState().data;
   const [activities, setActivities] = useState<string[]>([]);
   // const [displayCount, setDisplayCount] = useState(5)
 
   useEffect(() => {
-    if (userData) {
+    if (userData?.exerciseHistory) {
       const exerciseHistory = userData.exerciseHistory;
       const list = mostPerformedActivities(exerciseHistory, 5);
       setActivities(list);
+      console.log('FACE ACTIVITES', list)
     }
   }, [userData]);
 

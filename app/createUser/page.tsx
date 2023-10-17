@@ -1,11 +1,11 @@
-'use client';
-import Image from 'next/image';
-import axios from 'axios';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
-import React from 'react';
-import { User } from '@/lib/types';
-import { signIn } from 'next-auth/react';
+"use client";
+import Image from "next/image";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import React from "react";
+import { User } from "@/lib/types";
+import { signIn } from "next-auth/react";
 
 function CreateAccount() {
   const router = useRouter();
@@ -15,12 +15,11 @@ function CreateAccount() {
   const handleSubmit = async (event: React.SyntheticEvent) => {
     try {
       event.preventDefault();
-      console.log('INPUTS::', inputs);
-      await axios.post('/api/users/signUp', inputs);
-      await signIn("credentials", {redirect: false, ...inputs}) 
-      router.push('/loggedin');
+      await axios.post("/api/users/signUp", inputs);
+      await signIn("credentials", { redirect: false, ...inputs });
+      router.push("/loggedin");
     } catch (err) {
-      console.error('Failed to submit form:: ', err);
+      console.error("Failed to submit form:: ", err);
     }
   };
 
@@ -33,8 +32,7 @@ function CreateAccount() {
 
   return (
     <div
-      className={`sectionMainPages  bg-gradient-to-b from-mainGreen to-mainBlack `}
-    >
+      className={`sectionMainPages  bg-gradient-to-b from-mainGreen to-mainBlack `}>
       <section className="mt-5 flex flex-col justify-center items-center ">
         <Image
           src="/logo.png"
@@ -49,8 +47,7 @@ function CreateAccount() {
       <section className="mx-5">
         <form
           className="flex flex-col items-center w-full"
-          onSubmit={handleSubmit}
-        >
+          onSubmit={handleSubmit}>
           <div className="w-full">
             <label className="font-semibold text-base" htmlFor="userName">
               User Name
@@ -61,7 +58,7 @@ function CreateAccount() {
               id="userName"
               name="userName"
               placeholder="Your user name here"
-              value={inputs.userName || ''}
+              value={inputs.userName || ""}
               onChange={handleChange}
             />
           </div>
@@ -75,7 +72,7 @@ function CreateAccount() {
               id="firstName"
               name="firstName"
               placeholder="Your first name here"
-              value={inputs.firstName || ''}
+              value={inputs.firstName || ""}
               onChange={handleChange}
             />
           </div>
@@ -89,7 +86,7 @@ function CreateAccount() {
               id="lastName"
               name="lastName"
               placeholder="Your last name here"
-              value={inputs.lastName || ''}
+              value={inputs.lastName || ""}
               onChange={handleChange}
             />
           </div>
@@ -103,7 +100,7 @@ function CreateAccount() {
               id="email"
               name="email"
               placeholder="email@email.com"
-              value={inputs.email || ''}
+              value={inputs.email || ""}
               onChange={handleChange}
             />
           </div>
@@ -117,7 +114,7 @@ function CreateAccount() {
               id="password"
               name="password"
               placeholder="New password"
-              value={inputs.password || ''}
+              value={inputs.password || ""}
               onChange={handleChange}
             />
           </div>
@@ -125,8 +122,7 @@ function CreateAccount() {
           <button
             className={`buttonLogin bg-lightGreen text-mainBlack hover:scale-110`}
             type="submit"
-            value="Submit"
-          >
+            value="Submit">
             Create account
           </button>
         </form>
