@@ -1,12 +1,15 @@
+'use client';
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
 import Button from '@/lib/components/Button';
+import moment from 'moment';
 
 // TODO: need to change this for real data from DB!!
 import { users } from '@/utils/mockData';
+import { signOut, useSession } from 'next-auth/react';
 
 const plus = (
   <FontAwesomeIcon icon={faCirclePlus} size="lg" style={{ color: '#2de86b' }} />
@@ -15,6 +18,9 @@ const plus = (
 type Exercise = {};
 
 export default function ProfilePage() {
+  const session = useSession();
+  const userBirthday = moment(session.data?.user.birthday).format('l');
+
   const getExerciseUnit = (exerciseType: string) => {
     switch (exerciseType) {
       case 'walk':
@@ -52,8 +58,8 @@ export default function ProfilePage() {
 
       <section className="flex mt-14 gap-2 justify-center font-bold">
         {/* TODO: This should note be 0 when we have user by id */}
-        <h1 className="">{users[0].fistName}</h1>
-        <h1> {users[0].lastName}</h1>
+        <h1 className="">{session.data?.user.firstName}</h1>
+        <h1> {session.data?.user.lastName}</h1>
       </section>
 
       <div className="flex flex-col justify-around">
@@ -66,19 +72,16 @@ export default function ProfilePage() {
             {users.map((user) => (
               <div className="mt-4 text-lg" key={user.id}>
                 <p>
-                  Name: <span>{user.fistName}</span>
+                  Name: <span>{session.data?.user.firstName}</span>
                 </p>
                 <p>
-                  Surname: <span>{user.lastName}</span>
+                  Surname: <span>{session.data?.user.lastName}</span>
                 </p>
                 <p>
-                  Birthday: <span>{user.birthday}</span>
+                  Birthday: <span>{userBirthday}</span>
                 </p>
                 <p>
-                  Email: <span>{user.email}</span>
-                </p>
-                <p typeof="password">
-                  Password: <span>{user.password}</span>
+                  Email: <span>{session.data?.user.email}</span>
                 </p>
               </div>
             ))}
@@ -114,6 +117,14 @@ export default function ProfilePage() {
               Check history
             </p>
           </Link>
+          <p
+            onClick={() => {
+              signOut({ callbackUrl: 'http://localhost:3000/' });
+            }}
+            className="text-mainGreen font-semibold cursor-pointer hover:border-2 rounded-lg p-2"
+          >
+            Sign Out
+          </p>
         </div>
       </div>
     </div>

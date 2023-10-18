@@ -12,7 +12,7 @@ const secretKey = process.env.JWT_SECRET_KEY;
 export const POST = async (request: NextRequest, res: NextResponse) => {
   try {
     const body = await request.json();
-    const {password, userName, email} = SignupSchema.parse(body);
+    const {password, userName, email, firstName, lastName} = SignupSchema.parse(body);
    // Check if email or username already exists
    const existingEmail = await prisma.user.findUnique({
     where: { email },
@@ -37,6 +37,8 @@ export const POST = async (request: NextRequest, res: NextResponse) => {
         userName,
         email,
         password: hashedPassword,
+        firstName, 
+        lastName
       },
     });
 

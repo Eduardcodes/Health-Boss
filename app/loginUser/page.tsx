@@ -6,27 +6,24 @@ import { useState } from 'react';
 import React from 'react';
 import { User } from '@/lib/types';
 import Link from 'next/link';
-import { setJWT } from '@/lib/jwt';
+import { signIn } from 'next-auth/react';
 import { useUserStore } from '@/lib/store/store';
+import { signOut, useSession } from 'next-auth/react';
 
 function LoginPage() {
   const router = useRouter();
   const [modalOpen, setModalOpen] = useState(false);
   const [inputs, setInputs] = useState<User>({} as User);
+
   const setUser = useUserStore((state) => state.setUser);
-  const user = useUserStore((state) => state.data);
+  const session = useSession();
+
   const handleSubmit = async (event: React.SyntheticEvent) => {
     try {
       event.preventDefault();
-      // console.log("INPUTS::", inputs)
-      const response = await axios.post('/api/users/login', inputs);
-      setUser(response.data.user);
-      console.log(user);
-      setJWT(response.data.token);
-      setInputs({} as User);
-      setUser(response.data.user);
-      //TODO give token to user and encrypt the password, set status to global store
-      router.push('/loggedin/');
+      await signIn('credentials', { redirect: false, ...inputs });
+      router.push('/loggedin');
+      setUser(session.data?.user);
     } catch (err) {
       console.error('Failed to submit form:: ', err);
     }
