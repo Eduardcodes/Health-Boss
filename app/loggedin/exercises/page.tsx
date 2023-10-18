@@ -42,7 +42,7 @@ export default function ExercisesPage() {
   }
 
   const userData = useUserStore((state) => state.data);
-  const user = ['cintisiq', 'Eduard', 'edward'];
+  const user = ['cintisiq', 'apple', 'edward'];
 
   return (
     <div className="sectionMainPages">

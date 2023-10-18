@@ -18,6 +18,7 @@ export const getActivitiesList = async () => {
 
 export const getActivityDetails = async (activity: string, weight?: number) => {
   let arrayOfActivities = [];
+
   console.log('ACTIVITY', `${activity}`);
   if (weight) {
     const res: Response = await fetch(

@@ -50,10 +50,11 @@ export default function SearchExercise({
     console.log('SELECT', activityData);
     setSearchDisplay(activityData);
   }
-  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: any) {
     e.preventDefault();
     setOptions([]);
-    const activityData = await getActivityDetails(e.currentTarget.value, 160); //TODO REDUX FOR USER WEIGHT
+    console.log(e.target[0].value);
+    const activityData = await getActivityDetails(e.target[0].value, 160); //TODO REDUX FOR USER WEIGHT
     setSearchDisplay(activityData);
   }
   function handleAdd(food: CleanActivityData) {
@@ -66,7 +67,7 @@ export default function SearchExercise({
       <div>
         <form
           className="flex flex-col justify-center items-center"
-          onSubmit={(e) => handleSubmit(e)}
+          onSubmit={handleSubmit}
         >
           <input
             type="text"

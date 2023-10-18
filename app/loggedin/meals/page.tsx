@@ -27,7 +27,7 @@ export default function MealsPage() {
   const [displayedMeals, setDisplayedMeals] = useState<Meal[]>([]);
 
   const userData = useUserStore((state) => state.data);
-  const user = ['cintisiq', 'Eduard', 'edward'];
+  const user = ['cintisiq', 'apple', 'edward'];
 
   return (
     <div className="sectionMainPages ">
