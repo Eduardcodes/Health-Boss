@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDoubleLeft } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
+import { useUserStore } from '@/lib/store/store';
 
 const back = (
   <FontAwesomeIcon
@@ -17,6 +18,8 @@ function HeaderPage({ title }: { title: React.ReactNode }) {
   const handleBackClick = () => {
     window.history.back();
   };
+  const userData = useUserStore((state) => state.data);
+  const user = ['cintisiq', 'Eduard', 'edward'];
 
   return (
     <>
@@ -24,14 +27,25 @@ function HeaderPage({ title }: { title: React.ReactNode }) {
         <button onClick={handleBackClick}>{back}</button>
         <h4 className="font-bold">{title}</h4>
         <Link href="/loggedin/profile">
-          <Image
-            src="/profile.jpg"
-            alt="exercise icon"
-            width={50}
-            height={50}
-            className="item-center text-mainWhite rounded-full border-2 border-mainGreen"
-            priority={true}
-          />
+          {user.includes(userData?.userName || '') ? (
+            <Image
+              src={`/${userData?.userName}.jpg`}
+              alt="user photo profile"
+              width={50}
+              height={50}
+              className="item-center text-mainWhite rounded-full border-2 border-mainGreen"
+              priority={true}
+            />
+          ) : (
+            <Image
+              src={`/profile.jpg`}
+              alt="user photo profile"
+              width={50}
+              height={50}
+              className="item-center text-mainWhite rounded-full border-2 border-mainGreen"
+              priority={true}
+            />
+          )}
         </Link>
       </section>
     </>

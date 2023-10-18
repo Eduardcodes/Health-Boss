@@ -35,6 +35,8 @@ export default function ProfilePage() {
     }
   };
 
+  const user = ['cintisiq', 'Eduard', 'edward'];
+
   return (
     <div className={`sectionMainPages `}>
       <section className="relative flex flex-col items-center ">
@@ -45,14 +47,26 @@ export default function ProfilePage() {
         </div>
 
         <div className="flex absolute justify-end top-20 ">
-          <Image
-            src="/profile.jpg"
-            alt="exercise icon"
-            width={170}
-            height={170}
-            className="item-center rounded-full border-4 border-mainGreen shadow-md relative"
-            priority={true}
-          />
+          {user.includes(userData?.userName || '') ? (
+            <Image
+              src={`/${userData?.userName}.jpg`}
+              alt="user photo profile"
+              width={170}
+              height={170}
+              className="item-center rounded-full border-4 border-mainGreen shadow-md relative"
+              priority={true}
+            />
+          ) : (
+            <Image
+              src={`/profile.jpg`}
+              alt="user photo profile"
+              width={170}
+              height={170}
+              className="item-center rounded-full border-4 border-mainGreen shadow-md relative"
+              priority={true}
+            />
+          )}
+
           <span className="ml-[8.5rem] mt-32 absolute shadow-lg">{plus}</span>
         </div>
       </section>

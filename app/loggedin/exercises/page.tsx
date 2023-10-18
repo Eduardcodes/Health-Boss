@@ -41,6 +41,9 @@ export default function ExercisesPage() {
     setAddSessionBox(false);
   }
 
+  const userData = useUserStore((state) => state.data);
+  const user = ['cintisiq', 'Eduard', 'edward'];
+
   return (
     <div className="sectionMainPages">
       <section className="h-20 flex justify-between items-center  mx-5 mt-10">
@@ -48,14 +51,25 @@ export default function ExercisesPage() {
 
         <h4 className="font-bold">My Exercises</h4>
         <Link href="/loggedin/profile">
-          <Image
-            src="/profile.jpg"
-            alt="exercise icon"
-            width={50}
-            height={50}
-            className="item-center text-mainWhite rounded-full border-2 border-mainGreen"
-            priority={true}
-          />
+          {user.includes(userData?.userName || '') ? (
+            <Image
+              src={`/${userData?.userName}.jpg`}
+              alt="user photo profile"
+              width={50}
+              height={50}
+              className="item-center text-mainWhite rounded-full border-2 border-mainGreen"
+              priority={true}
+            />
+          ) : (
+            <Image
+              src={`/profile.jpg`}
+              alt="user photo profile"
+              width={50}
+              height={50}
+              className="item-center text-mainWhite rounded-full border-2 border-mainGreen"
+              priority={true}
+            />
+          )}
         </Link>
       </section>
 
