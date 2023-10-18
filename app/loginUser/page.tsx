@@ -81,7 +81,7 @@ function LoginPage() {
               type="password"
               id="password"
               name="password"
-              placeholder="New password"
+              placeholder="Password"
               value={inputs.password || ''}
               onChange={handleChange}
             />
