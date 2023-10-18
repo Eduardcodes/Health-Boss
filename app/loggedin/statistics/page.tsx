@@ -4,47 +4,33 @@ import Image from 'next/image';
 import HeaderPage from '@/lib/components/HeaderPage';
 import Button from '@/lib/components/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faFacebook,
-  faWhatsapp,
-  faXTwitter,
-} from '@fortawesome/free-brands-svg-icons';
 import { faShare } from '@fortawesome/free-solid-svg-icons';
-import { users } from '@/utils/mockData';
 import { useUserStore } from '@/lib/store/store';
-import prisma from '@/lib/components/prismadb';
-import ModalShare from '@/app/modal/modalShare';
-import {
-  FacebookShareButton,
-  TwitterShareButton,
-  WhatsappShareButton,
-} from 'react-share';
-import Link from 'next/link';
-import { useEffect } from 'react';
 import FavouriteActivitiesList from './favouriteActivities';
 import AverageBurnedCalories from './averageBurnedCalories';
 import AverageCaloriesConsumed from './averageCaloriesConsumed';
 import FavouriteFoods from './favouriteFoods';
 import MealsChart from './mealsChart';
 import SessionsChart from './sessionsChart';
+import ModalShare from '@/app/modal/modalShare';
 
 const share = (
   <FontAwesomeIcon icon={faShare} size="2xl" style={{ color: '#2de86b' }} />
 );
-const twitter = (
-  <FontAwesomeIcon icon={faXTwitter} size="xl" style={{ color: '#2de86b' }} />
-);
-const facebook = (
-  <FontAwesomeIcon icon={faFacebook} size="xl" style={{ color: '#2de86b' }} />
-);
-const whatsapp = (
-  <FontAwesomeIcon icon={faWhatsapp} size="xl" style={{ color: '#2de86b' }} />
-);
 
 export default function StatisticsPage() {
   const [open, setOpen] = useState(false);
+  const [shareableLink, setShareableLink] = useState('');
 
-  const handleToggle = () => setOpen((prev) => !prev);
+  // const handleToggle = () => setOpen((prev) => !prev);
+  const userData = useUserStore.getState().data;
+
+  const handleToggle = () => {
+    const userShareLink = `https://health-boss.vercel.app/share/${userData?.id}`;
+    // const userShareLink = `http://localhost:3001/share/${userData?.id}`;
+    setShareableLink(userShareLink);
+    setOpen((prev) => !prev);
+  };
 
   // useEffect(()=>{
   //   getUser()
@@ -54,12 +40,14 @@ export default function StatisticsPage() {
   //   const data = await res.json()
   //   console.log('USER DATA ', data)
   // }
-  // const userData = useUserStore.getState().data
 
   return (
     <div className={'sectionMainPages'}>
       <HeaderPage title={'Statistic '} />
-      <h3 className="text-lg mx-6 my-3 ">Hi panda, check and share it!</h3>
+      <h3 className="text-lg mx-6 my-3 ">
+        Hi <span className="text-mainGreen">{userData?.firstName}</span>, check
+        your activities!
+      </h3>
 
       <section
         className={`cardBgPhoto flex flex-col items-center bg-cover relative`}
@@ -74,12 +62,12 @@ export default function StatisticsPage() {
             priority={true}
           />
         </div>
-        <div className="z-20 flex flex-col items-center  ">
-          <div className="bg-mainWhite border-2 border-mainGreen w-20 h-20 rounded-full flex justify-center items-center ">
-            {/* TODO: change this for real number from user data */}
+        <div className="z-20 flex flex-col items-center  my-6 ">
+          {/* TODO: change this for real number from user data */}
+          {/* <div className="bg-mainWhite border-2 border-mainGreen w-20 h-20 rounded-full flex justify-center items-center ">
             <p className=" text-mainBlack text-center font-bold">25%</p>
-          </div>
-          <p className="">2 of 5 complete</p>
+          </div> */}
+          <p className="font-bold">My Summary</p>
         </div>
       </section>
 
@@ -89,32 +77,8 @@ export default function StatisticsPage() {
         {/* <Link href="/share">Share</Link> */}
 
         <button onClick={handleToggle}>{share}</button>
-        <ModalShare open={open}>
-          <h3 className="font-bold text-lg text-mainWhite">Share it one:</h3>
 
-          <div className="flex m-2 gap-7 ">
-            <TwitterShareButton
-              title="Checkout this awesome exercise I did!"
-              url="https://health-boss.vercel.app/share"
-            >
-              {twitter}
-            </TwitterShareButton>
-
-            <FacebookShareButton
-              quote="Checkout this awesome exercise I did!"
-              url="https://health-boss.vercel.app/share"
-            >
-              {facebook}
-            </FacebookShareButton>
-
-            <WhatsappShareButton
-              title="Checkout this awesome exercise I did!"
-              url="https://health-boss.vercel.app/share"
-            >
-              {whatsapp}
-            </WhatsappShareButton>
-          </div>
-
+        <ModalShare open={open} shareableLink={shareableLink}>
           <div className="modal-action  text-mainWhite">
             <button className="buttonConfirm" onClick={handleToggle}>
               Close

@@ -3,9 +3,13 @@ import { useUserStore } from '@/lib/store/store';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
+import { useRouter } from 'next/router';
 
 function Share() {
   const userData = useUserStore((state) => state.data);
+
+  const router = useRouter();
+  const { id } = router.query;
 
   return (
     <>
@@ -21,6 +25,7 @@ function Share() {
           <div className="max-w-md ">
             <h1 className="mb-5 text-4xl font-bold">
               Check out what <span>{userData?.firstName}</span> did!
+              <h1>Share Page for ID: {id}</h1>
             </h1>
             <p className="mb-5 text-3xl ">Exercise here!</p>
 

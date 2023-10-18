@@ -10,21 +10,23 @@ export default function FavouriteFoods() {
 
   useEffect(() => {
     if (userData?.mealHistory) {
-      const mealHistory = userData.mealHistory
+      const mealHistory = userData.mealHistory;
       const list = mostEatenFoods(mealHistory, 5);
       setActivities(list);
-      console.log('FAVE FOODS',list)
+      console.log('FAVE FOODS', list);
     }
   }, [userData]);
 
   return (
-    <div className="flex flex-col gap-2">
-      <h2 className="mx-6 text-lg ">Your favourite foods!</h2>
+    <div className="cardBackground flexflex-col gap-2">
+      <h2 className="text-lg font-bold "> 💖 Your favourite foods!</h2>
       {favouriteFoods &&
         favouriteFoods.map((food, index) => {
           return (
-            <div key={index} className={`cardBackground my-0`}>
-              <p className="font-semibold">{food}</p>
+            <div key={index}>
+              <p className="font-semibold text-base text-mainGreen my-2">
+                {food}
+              </p>
             </div>
           );
         })}
