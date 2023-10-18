@@ -1,40 +1,39 @@
 'use client';
-import { Session } from '@/lib/types';
-import { useEffect, useState } from 'react';
+import { ExcersizeSession } from '@/lib/types';
+import { useEffect } from 'react';
 import SessionCard from './sessionCard';
-import { useUserStore } from '@/lib/store/store';
+import { useSession } from 'next-auth/react';
 
 export default function SessionList({
-  displayedSessions,
-  setDisplayedSessions,
+  displayedExcersizes,
+  setDisplayedExcersizes,
 }: {
-  displayedSessions: Session[];
-  setDisplayedSessions: React.Dispatch<React.SetStateAction<Session[]>>;
+  displayedExcersizes: ExcersizeSession[];
+  setDisplayedExcersizes: React.Dispatch<React.SetStateAction<ExcersizeSession[]>>;
 }) {
-
-  const userData = useUserStore(state => state.data)
+  const session = useSession();
   useEffect(() => {
-    getAllSessions();
-  }, []);
+    if(session?.data?.user.id !== undefined) getAllExcersizeSessions();
+  }, [session?.data?.user.id]);
 
-  async function getAllSessions() {
-    const res: Response = await fetch(`/api/exercises/${userData?.id}`);
+  async function getAllExcersizeSessions() {
+    const res: Response = await fetch(`/api/exercises/${session?.data?.user.id}`);
     const data = await res.json();
-    const allSession = data.allSession as Session[];
-    console.log('ALL SESSIONS LIST', allSession);
-    if (Array.isArray(allSession)) {
-      setDisplayedSessions(allSession);
+    const allExcersizeSession = data.allSession as ExcersizeSession[];
+    console.log('ALL SESSIONS LIST', allExcersizeSession);
+    if (Array.isArray(allExcersizeSession)) {
+      setDisplayedExcersizes(allExcersizeSession);
     } else return null;
   }
   return (
     <div>
-      {displayedSessions &&
-        displayedSessions.map((session: Session) => {
+      {displayedExcersizes &&
+        displayedExcersizes.map((session: ExcersizeSession) => {
           return (
             <SessionCard
               key={session.id}
-              session={session}
-              setDisplayedSessions={setDisplayedSessions}
+              excersizeSession={session}
+              setDisplayedExcersizes={setDisplayedExcersizes}
             />
           );
         })}

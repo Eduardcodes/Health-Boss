@@ -50,7 +50,7 @@ export type AverageCalories = {
 
 //Exercise related types
 
-export type Session = {
+export type ExcersizeSession = {
   id: string 
   activities: NewSessionList[]
   caloriesBurned: number

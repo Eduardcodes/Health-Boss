@@ -2,7 +2,7 @@
 import MealCard from './mealCard';
 import { Meal } from '../types';
 import { useEffect } from 'react';
-import { useUserStore } from '../store/store';
+import { useSession } from 'next-auth/react';
 
 export default function MealList({
   displayedMeals,
@@ -11,23 +11,22 @@ export default function MealList({
   displayedMeals: Meal[];
   setDisplayedMeals: Function;
 }) {
-
-  const userData = useUserStore(state => state.data)
+  const session = useSession();
 
   useEffect(() => {
+    if(session?.data?.user.id !== undefined)
     getMeals().then((res) => setDisplayedMeals(res));
-  }, []);
-  console.log(userData)
+  }, [session?.data?.user.id]);
 
   async function getMeals() {
-    const res: Response = await fetch(`/api/meals/${userData?.id}`);
+    const res: Response = await fetch(`/api/meals/${session?.data?.user.id}`);
     const data = await res.json();
     const allMeals = data.allMeals;
 
     if (Array.isArray(allMeals)) return allMeals;
     else return null;
   }
-  console.log(displayedMeals)
+
   return (
     <div>
       {displayedMeals &&

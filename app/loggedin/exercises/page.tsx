@@ -5,7 +5,7 @@ import ExerciseSession from './exerciseSession';
 import SearchExercise from './searchExercise';
 import ModalExercise from '@/app/modal/ModalExercise';
 import { useState } from 'react';
-import { CleanActivityData, Session } from '@/lib/types';
+import { CleanActivityData, ExcersizeSession } from '@/lib/types';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -26,13 +26,13 @@ const back = (
 
 export default function ExercisesPage() {
   const [modalOpen, setModalOpen] = useState(false);
-  const [addSessionBox, setAddSessionBox] = useState(false);
+  const [addExcersizeBox, setAddExcersizeBox] = useState(false);
   const [selectedActivities, setSelectedActivities] = useState<CleanActivityData[]>([]);
-  const [displayedSessions, setDisplayedSessions] = useState<Session[]>([]);
+  const [displayedExersizes, setDisplayedExcersizes] = useState<ExcersizeSession[]>([]);
 
   async function handleCancel() {
     setSelectedActivities([]);
-    setAddSessionBox(false);
+    setAddExcersizeBox(false);
   }
 
   return (
@@ -53,25 +53,25 @@ export default function ExercisesPage() {
         </Link>
       </section>
 
-      {addSessionBox ? (
+      {addExcersizeBox ? (
         // <button onClick={() => handleCancel()}>Cancel</button>
         <button className="hidden"></button>
       ) : (
         <button
           className="buttonAddActivityOrFood"
-          onClick={() => setAddSessionBox(true)}
+          onClick={() => setAddExcersizeBox(true)}
         >
           Add New Exercise
         </button>
       )}
 
-      {addSessionBox && (
+      {addExcersizeBox && (
         <ExerciseSession
-          setDisplayedSessions={setDisplayedSessions}
+          setDisplayedExcersizes={setDisplayedExcersizes}
           setModalOpen={setModalOpen}
           selectedActivities={selectedActivities}
           setSelectedActivities={setSelectedActivities}
-          setAddSessionBox={setAddSessionBox}
+          setAddExcersizeBox={setAddExcersizeBox}
         />
       )}
       <ModalExercise modalOpen={modalOpen} setModalOpen={setModalOpen}>
@@ -81,18 +81,18 @@ export default function ExercisesPage() {
         />
       </ModalExercise>
 
-      <div className={!addSessionBox ? `block` : 'hidden'}>
-        {displayedSessions && (
+      <div className={!addExcersizeBox ? `block` : 'hidden'}>
+        {displayedExersizes && (
           <SessionList
-            displayedSessions={displayedSessions}
-            setDisplayedSessions={setDisplayedSessions}
+            displayedExcersizes={displayedExersizes}
+            setDisplayedExcersizes={setDisplayedExcersizes}
           />
         )}
       </div>
 
       <section
         className={
-          !addSessionBox
+          !addExcersizeBox
             ? `cardBgPhoto flex flex-col h-28 bg-cover relative mt-3 cursor-pointer`
             : 'hidden'
         }

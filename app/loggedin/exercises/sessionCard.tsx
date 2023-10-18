@@ -1,20 +1,20 @@
 'use client';
-import { Session } from '@/lib/types';
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClose } from '@fortawesome/free-solid-svg-icons';
 import moment from 'moment';
+import { ExcersizeSession } from '@/lib/types';
 
 const close = (
   <FontAwesomeIcon icon={faClose} size="2xl" style={{ color: '#2de86b' }} />
 );
 
 export default function SessionCard({
-  session,
-  setDisplayedSessions,
+  excersizeSession,
+  setDisplayedExcersizes,
 }: {
-  session: Session;
-  setDisplayedSessions: React.Dispatch<React.SetStateAction<Session[]>>;
+  excersizeSession: ExcersizeSession;
+  setDisplayedExcersizes: React.Dispatch<React.SetStateAction<ExcersizeSession[]>>;
 }) {
   const [details, setDetails] = useState(false);
 
@@ -30,7 +30,7 @@ export default function SessionCard({
     const { deletedItem } = data;
     console.log('DELETED ITEM', deletedItem);
     if (deletedItem.id) {
-      setDisplayedSessions((prev: Session[]) => {
+      setDisplayedExcersizes((prev: ExcersizeSession[]) => {
         for (let i = 0; i < prev.length; i++) {
           if (prev[i].id === deletedItem.id) {
             prev.splice(i, 1);
@@ -44,19 +44,19 @@ export default function SessionCard({
     //TODO: for above, create real alert
   }
 
-  const data = moment(session.createdAt).format('l');
+  const data = moment(excersizeSession.createdAt).format('l');
 
   return (
     <div className="cardBackground">
       <div>
         <div className="flex justify-between items-center text-base font-semibold ">
           <h3 className="font-semibold rounded-lg p-2 px-5 border-2 border-mainGreen shadow-lg">
-            {session.time}
+            {excersizeSession.time}
           </h3>
           <h3 className="font-semibold">{data}</h3>
           <button
             className="p-3 rounded-lg mt-2 text-base font-bold"
-            onClick={() => handleDelete(session.id)}
+            onClick={() => handleDelete(excersizeSession.id)}
           >
             {close}
           </button>
@@ -65,12 +65,12 @@ export default function SessionCard({
         <div className="text-lg flex justify-between mt-5 font-bold items-center">
           <p>Total Calories Burned: </p>
           <p>
-            {session.caloriesBurned}{' '}
-            <span>{session.caloriesBurned > 1 ? 'cals' : 'cal'}</span>
+            {excersizeSession.caloriesBurned}{' '}
+            <span>{excersizeSession.caloriesBurned > 1 ? 'cals' : 'cal'}</span>
           </p>
         </div>
 
-        {session.activities.map((ex) => (
+        {excersizeSession.activities.map((ex) => (
           <p className="text-base mb-3" key={ex.activity}>
             {ex.activity}
           </p>
@@ -78,7 +78,7 @@ export default function SessionCard({
       </div>
       {details && (
         <ul className="text-base flex flex-col">
-          {session.activities.map((activity) => {
+          {excersizeSession.activities.map((activity) => {
             return (
               <>
                 <div className="font-semibold  text-mainGreen flex justify-between">

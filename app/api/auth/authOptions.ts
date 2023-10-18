@@ -34,9 +34,9 @@ const authOption = {
        },
         // @ts-ignore
         async session({ session, token, user }) {
-          const {firstName, lastName, email, birthday} = token
+          const {firstName, lastName, email, birthday, mealHistory, exerciseHistory, id} = token
           return {...session, user: {
-            firstName, lastName, email, birthday
+            firstName, lastName, email, birthday, mealHistory, exerciseHistory, id
           }};
         },
       },

@@ -1,12 +1,13 @@
-'use client';
-import { Meal } from '../types';
-import { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faClose } from '@fortawesome/free-solid-svg-icons';
-import { useUserStore } from '../store/store';
+"use client";
+import { Meal } from "../types";
+import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faClose } from "@fortawesome/free-solid-svg-icons";
+import { useUserStore } from "../store/store";
+import { useSession } from "next-auth/react";
 
 const close = (
-  <FontAwesomeIcon icon={faClose} size="2xl" style={{ color: '#2de86b' }} />
+  <FontAwesomeIcon icon={faClose} size="2xl" style={{ color: "#2de86b" }} />
 );
 
 export default function MealCard({
@@ -16,20 +17,19 @@ export default function MealCard({
   mealData: Meal;
   setDisplayedMeals: Function;
 }) {
-
   const [details, setDetails] = useState(false);
 
   async function handleDelete(id: string) {
-    const res: Response = await fetch('/api/meals', {
-      method: 'DELETE',
+    const res: Response = await fetch("/api/meals", {
+      method: "DELETE",
       headers: {
-        'Contet-Type': 'application/json',
+        "Contet-Type": "application/json",
       },
-      body: JSON.stringify({ id: id}),
+      body: JSON.stringify({ id: id }),
     });
     const data = await res.json();
     const { deletedItem } = data;
-    console.log('DELETED ITEM', deletedItem);
+    console.log("DELETED ITEM", deletedItem);
     if (deletedItem.id) {
       setDisplayedMeals((prev: Meal[]) => {
         for (let i = 0; i < prev.length; i++) {
@@ -40,7 +40,7 @@ export default function MealCard({
         return [...prev];
       });
     } else {
-      console.log('ITEM FAILED TO DELETE');
+      console.log("ITEM FAILED TO DELETE");
     }
     //TODO: for above, create real alert
   }
@@ -59,13 +59,12 @@ export default function MealCard({
         <div className="text-lg flex justify-between mt-5 font-bold items-center">
           <p>Total Calories: </p>
           <p>
-            {mealData.totalCals}{' '}
-            <span>{mealData.totalCals > 1 ? 'cals' : 'cal'}</span>
+            {mealData.totalCals}{" "}
+            <span>{mealData.totalCals > 1 ? "cals" : "cal"}</span>
           </p>
           <button
             className="p-3  rounded-lg mt-2 text-base   font-bold"
-            onClick={() => handleDelete(mealData.id)}
-          >
+            onClick={() => handleDelete(mealData.id)}>
             {close}
           </button>
         </div>
@@ -84,13 +83,13 @@ export default function MealCard({
               <>
                 <div className="font-semibold  text-mainGreen flex justify-between">
                   <p className=""> {ingredient.name}</p>
-                  <p> {ingredient.amount + ' grams'} </p>
+                  <p> {ingredient.amount + " grams"} </p>
                 </div>
 
                 <div className="font-semibold flex justify-between">
                   <p> Calories:</p>
                   <p>
-                    {' '}
+                    {" "}
                     {(
                       ingredient.nutrients.calories *
                       (ingredient.amount / 100)
@@ -101,7 +100,7 @@ export default function MealCard({
                 <div className="font-semibold flex justify-between">
                   <p> Protein:</p>
                   <p>
-                    {' '}
+                    {" "}
                     {(
                       ingredient.nutrients.protein *
                       (ingredient.amount / 100)
@@ -112,7 +111,7 @@ export default function MealCard({
                 <div className="font-semibold flex justify-between">
                   <p> Carbohydrates:</p>
                   <p>
-                    {' '}
+                    {" "}
                     {(
                       ingredient.nutrients.carbs *
                       (ingredient.amount / 100)
@@ -123,7 +122,7 @@ export default function MealCard({
                 <div className="font-semibold flex justify-between">
                   <p> Fibre:</p>
                   <p>
-                    {' '}
+                    {" "}
                     {(
                       ingredient.nutrients.fibre *
                       (ingredient.amount / 100)
@@ -134,7 +133,7 @@ export default function MealCard({
                 <div className="font-semibold flex justify-between">
                   <p> Fat:</p>
                   <p>
-                    {' '}
+                    {" "}
                     {(
                       ingredient.nutrients.fat *
                       (ingredient.amount / 100)
@@ -149,15 +148,13 @@ export default function MealCard({
       {!details ? (
         <button
           className="font-semibold text-lg text-mainGreen"
-          onClick={() => setDetails(!details)}
-        >
+          onClick={() => setDetails(!details)}>
           Show More
         </button>
       ) : (
         <button
           className="mt-2 font-semibold text-lg text-mainGreen"
-          onClick={() => setDetails(!details)}
-        >
+          onClick={() => setDetails(!details)}>
           Show Less
         </button>
       )}

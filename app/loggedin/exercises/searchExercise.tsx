@@ -1,7 +1,7 @@
 'use client';
-import { CleanActivityData, Session } from '@/lib/types';
+import { CleanActivityData } from '@/lib/types';
 import { useState, useEffect } from 'react';
-import { FormEvent, FormEventHandler } from 'react';
+import { FormEvent } from 'react';
 import {
   getAutoFillSuggestions,
   getActivityDetails,

@@ -3,6 +3,7 @@ import { FormEvent, useState } from 'react';
 import { FoodData, Ingredient } from '../types';
 import AddMealEntry from './addMealEntry';
 import { useUserStore } from '../store/store';
+import { useSession } from 'next-auth/react';
 
 export default function AddMeal({
   selectedFoods,
@@ -17,7 +18,7 @@ export default function AddMeal({
   setDisplayedMeals: Function;
   setSelectedFoods: React.Dispatch<React.SetStateAction<FoodData[]>>;
 }) {
-
+  const session = useSession();
   const userData = useUserStore(state => state.data)
   const [type, setType] = useState('Breakfast');
 
@@ -65,7 +66,7 @@ export default function AddMeal({
       },
       body: JSON.stringify({
         ingredients: ingredientsList,
-        userId: userData?.id, //TODO REDUX FOR USER ID
+        userId: session?.data?.user.id, //TODO REDUX FOR USER ID
         type: type,
         totalCals: totalCalsThisMeal,
       }),

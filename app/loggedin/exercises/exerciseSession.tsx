@@ -1,25 +1,26 @@
 'use client';
 import { useState, FormEvent } from 'react';
-import { CleanActivityData, NewSessionList, Session } from '@/lib/types';
+import { CleanActivityData, NewSessionList, ExcersizeSession } from '@/lib/types';
 import SessionEntry from './sessionEntry';
 import { useUserStore } from '@/lib/store/store';
+import { useSession } from 'next-auth/react';
 
 export default function ExerciseSession({
   setModalOpen,
-  setAddSessionBox,
-  setDisplayedSessions,
+  setAddExcersizeBox,
+  setDisplayedExcersizes,
   selectedActivities,
   setSelectedActivities,
 }: {
   setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  setAddSessionBox: React.Dispatch<React.SetStateAction<boolean>>;
-  setDisplayedSessions: React.Dispatch<React.SetStateAction<Session[]>>;
+  setAddExcersizeBox: React.Dispatch<React.SetStateAction<boolean>>;
+  setDisplayedExcersizes: React.Dispatch<React.SetStateAction<ExcersizeSession[]>>;
   selectedActivities: CleanActivityData[];
   setSelectedActivities: React.Dispatch<
     React.SetStateAction<CleanActivityData[]>
   >;
 }) {
-  const userData = useUserStore(state => state.data)
+  const session = useSession();
   const [time, setTime] = useState('Morning');
 
   async function submitHandler(e: FormEvent) {
@@ -58,13 +59,13 @@ export default function ExerciseSession({
         activities: activityList,
         caloriesBurned: calsBurnedThisSesssion,
         time: time,
-        userId: userData?.id, //TODO REDUX FOR USER ID
+        userId: session?.data?.user.id, //TODO REDUX FOR USER ID
       }),
     });
-    const { newSession } = await response.json();
+    const { newExcersize } = await response.json();
 
-    setDisplayedSessions((prev) => [...prev, newSession]);
-    setAddSessionBox(false);
+    setDisplayedExcersizes((prev) => [...prev, newExcersize]);
+    setAddExcersizeBox(false);
   }
   return (
     <div className="mx-4">
