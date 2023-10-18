@@ -11,6 +11,8 @@ import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDoubleLeft } from '@fortawesome/free-solid-svg-icons';
 import { faClose } from '@fortawesome/free-solid-svg-icons';
+import { useSession } from 'next-auth/react';
+import { useUserStore } from '@/lib/store/store';
 
 const close = (
   <FontAwesomeIcon icon={faClose} size="2xl" style={{ color: '#292828' }} />
@@ -27,8 +29,12 @@ const back = (
 export default function ExercisesPage() {
   const [modalOpen, setModalOpen] = useState(false);
   const [addSessionBox, setAddSessionBox] = useState(false);
-  const [selectedActivities, setSelectedActivities] = useState<CleanActivityData[]>([]);
-  const [displayedSessions, setDisplayedSessions] = useState<ExerciseSession[]>([]);
+  const [selectedActivities, setSelectedActivities] = useState<
+    CleanActivityData[]
+  >([]);
+  const [displayedSessions, setDisplayedSessions] = useState<ExerciseSession[]>(
+    []
+  );
 
   async function handleCancel() {
     setSelectedActivities([]);

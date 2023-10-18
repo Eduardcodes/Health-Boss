@@ -13,6 +13,7 @@ import FavouriteFoods from './favouriteFoods';
 import MealsChart from './mealsChart';
 import SessionsChart from './sessionsChart';
 import ModalShare from '@/app/modal/modalShare';
+import { useSession } from 'next-auth/react';
 
 const share = (
   <FontAwesomeIcon icon={faShare} size="2xl" style={{ color: '#2de86b' }} />
@@ -23,7 +24,7 @@ export default function StatisticsPage() {
   const [shareableLink, setShareableLink] = useState('');
 
   // const handleToggle = () => setOpen((prev) => !prev);
-  const userData = useUserStore.getState().data;
+  const userData = useUserStore((state) => state.data);
 
   const handleToggle = () => {
     const userShareLink = `https://health-boss.vercel.app/share/${userData?.id}`;

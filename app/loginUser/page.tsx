@@ -23,11 +23,6 @@ function LoginPage() {
       event.preventDefault();
       await signIn('credentials', { redirect: false, ...inputs });
       router.push('/loggedin');
-
-      if (session.data) {
-        setUser(session.data.user);
-      }
-      // setUser(session.data?.user);
     } catch (err) {
       console.error('Failed to submit form:: ', err);
     }

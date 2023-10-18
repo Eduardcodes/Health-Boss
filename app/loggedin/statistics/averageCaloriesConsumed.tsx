@@ -5,7 +5,8 @@ import { averageCaloriesPreviousMeals } from './utils/statSettersMeals';
 import { ChangeEvent } from 'react';
 
 export default function AverageCaloriesConsumed() {
-  const userData = useUserStore.getState().data;
+  const userData = useUserStore((state) => state.data);
+  console.log('USER DATA CALORIES CONSUMED', userData);
   const [period, setPeriod] = useState(7);
   const [average, setAverage] = useState(0);
 
@@ -17,7 +18,6 @@ export default function AverageCaloriesConsumed() {
         period
       );
       setAverage(calorieCount);
-      console.log('CONSUMENT', calorieCount);
     }
   }, [userData, period]);
 

@@ -7,6 +7,8 @@ import {
 } from '@/lib/types';
 import SessionEntry from './sessionEntry';
 import { useUserStore } from '@/lib/store/store';
+import { useSession } from 'next-auth/react';
+import { User } from '@/lib/types';
 
 export default function ExerciseSessionCard({
   setModalOpen,
@@ -24,7 +26,7 @@ export default function ExerciseSessionCard({
   >;
 }) {
   const userData = useUserStore((state) => state.data);
-  console.log('USER DATA IN SESSION LIST', userData);
+  const setUser = useUserStore((state) => state.setUser);
   const [time, setTime] = useState('Morning');
 
   async function submitHandler(e: FormEvent) {
@@ -71,6 +73,13 @@ export default function ExerciseSessionCard({
 
     setDisplayedSessions((prev) => [...prev, newSession]);
     setAddSessionBox(false);
+    if (userData) {
+      const newUser: User = {
+        ...userData,
+        exerciseHistory: [...userData?.exerciseHistory, newSession],
+      };
+      setUser(newUser);
+    }
   }
   return (
     <div className="mx-4">

@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClose } from '@fortawesome/free-solid-svg-icons';
 import moment from 'moment';
+import { useUserStore } from '@/lib/store/store';
+import { User } from '@/lib/types';
 
 const close = (
   <FontAwesomeIcon icon={faClose} size="2xl" style={{ color: '#2de86b' }} />
@@ -16,6 +18,7 @@ export default function SessionCard({
   session: ExerciseSession;
   setDisplayedSessions: React.Dispatch<React.SetStateAction<ExerciseSession[]>>;
 }) {
+  const state = useUserStore((state) => state);
   const [details, setDetails] = useState(false);
   console.log('SESSION', session);
 
@@ -30,12 +33,21 @@ export default function SessionCard({
     const data = await res.json();
     const { deletedItem } = data;
     console.log('DELETED ITEM', deletedItem);
+    // let newUserExerciseHistory: ExerciseSession[] = [];
     if (deletedItem.id) {
       setDisplayedSessions((prev: ExerciseSession[]) => {
         for (let i = 0; i < prev.length; i++) {
           if (prev[i].id === deletedItem.id) {
             prev.splice(i, 1);
           }
+        }
+        // newUserExerciseHistory = [...prev];
+        if (state.data) {
+          const newUser: User = {
+            ...state.data,
+            exerciseHistory: [...prev],
+          };
+          state.setUser(newUser);
         }
         return [...prev];
       });

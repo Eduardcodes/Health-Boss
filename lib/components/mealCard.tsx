@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClose } from '@fortawesome/free-solid-svg-icons';
 import { useUserStore } from '../store/store';
 import moment from 'moment';
+import { User } from '../types';
 
 const close = (
   <FontAwesomeIcon icon={faClose} size="2xl" style={{ color: '#2de86b' }} />
@@ -17,7 +18,7 @@ export default function MealCard({
   mealData: Meal;
   setDisplayedMeals: React.Dispatch<React.SetStateAction<Meal[]>>;
 }) {
-
+  const state = useUserStore((state) => state);
   const [details, setDetails] = useState(false);
 
   async function handleDelete(id: string) {
@@ -26,7 +27,7 @@ export default function MealCard({
       headers: {
         'Contet-Type': 'application/json',
       },
-      body: JSON.stringify({ id: id}),
+      body: JSON.stringify({ id: id }),
     });
     const data = await res.json();
     const { deletedItem } = data;
@@ -38,6 +39,14 @@ export default function MealCard({
             prev.splice(i, 1);
           }
         }
+        if (state.data) {
+          const newUser: User = {
+            ...state.data,
+            mealHistory: [...prev],
+          };
+          state.setUser(newUser);
+        }
+
         return [...prev];
       });
     } else {

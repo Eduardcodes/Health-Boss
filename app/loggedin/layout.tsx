@@ -1,6 +1,9 @@
 import type { Metadata } from 'next';
 import Navbar from '../../lib/components/navbar';
 import Head from 'next/head';
+import { useUserStore } from '@/lib/store/store';
+import { useSession } from 'next-auth/react';
+import GETUSERFUCKFFUCKK from './componentForGetUser';
 
 export const metadata: Metadata = {
   title: 'Health Boss 😎',
@@ -16,6 +19,7 @@ export default function HomePageLayout({
 
   return (
     <div>
+      <GETUSERFUCKFFUCKK />
       {children}
       <header className="z-10 sticky bottom-0  h-16 bg-mainBlack rounded-t-lg  border-t-2 border-mainGreen ">
         <Navbar />

@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
 import Button from '@/lib/components/Button';
 import moment from 'moment';
+import { useUserStore } from '@/lib/store/store';
 
 // TODO: need to change this for real data from DB!!
 import { users } from '@/utils/mockData';
@@ -18,8 +19,8 @@ const plus = (
 type Exercise = {};
 
 export default function ProfilePage() {
-  const session = useSession();
-  const userBirthday = moment(session.data?.user.birthday).format('l');
+  const userData = useUserStore((state) => state.data);
+  const userBirthday = moment(userData?.birthday).format('l');
 
   const getExerciseUnit = (exerciseType: string) => {
     switch (exerciseType) {
@@ -58,8 +59,8 @@ export default function ProfilePage() {
 
       <section className="flex mt-14 gap-2 justify-center font-bold">
         {/* TODO: This should note be 0 when we have user by id */}
-        <h1 className="">{session.data?.user.firstName}</h1>
-        <h1> {session.data?.user.lastName}</h1>
+        <h1 className="">{userData?.firstName}</h1>
+        <h1> {userData?.lastName}</h1>
       </section>
 
       <div className="flex flex-col justify-around">
@@ -72,16 +73,16 @@ export default function ProfilePage() {
             {users.map((user) => (
               <div className="mt-4 text-lg" key={user.id}>
                 <p>
-                  Name: <span>{session.data?.user.firstName}</span>
+                  Name: <span>{userData?.firstName}</span>
                 </p>
                 <p>
-                  Surname: <span>{session.data?.user.lastName}</span>
+                  Surname: <span>{userData?.lastName}</span>
                 </p>
                 <p>
                   Birthday: <span>{userBirthday}</span>
                 </p>
                 <p>
-                  Email: <span>{session.data?.user.email}</span>
+                  Email: <span>{userData?.email}</span>
                 </p>
               </div>
             ))}

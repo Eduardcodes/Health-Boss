@@ -9,6 +9,8 @@ import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDoubleLeft } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
+import { useSession } from 'next-auth/react';
+import { useUserStore } from '@/lib/store/store';
 
 const back = (
   <FontAwesomeIcon
@@ -19,7 +21,6 @@ const back = (
 );
 
 export default function MealsPage() {
-  
   const [modalOpen, setModalOpen] = useState(false);
   const [addMealBox, setAddMealBox] = useState(false);
   const [selectedFoods, setSelectedFoods] = useState<FoodData[]>([]);

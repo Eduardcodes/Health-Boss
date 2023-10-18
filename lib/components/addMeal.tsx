@@ -3,6 +3,7 @@ import { FormEvent, useState } from 'react';
 import { FoodData, Ingredient, Meal } from '../types';
 import AddMealEntry from './addMealEntry';
 import { useUserStore } from '../store/store';
+import { User } from '../types';
 
 export default function AddMeal({
   selectedFoods,
@@ -13,12 +14,12 @@ export default function AddMeal({
 }: {
   selectedFoods: FoodData[];
   setAddMealBox: React.Dispatch<React.SetStateAction<boolean>>;
-  setModalOpen: React.Dispatch<React.SetStateAction<boolean>>
-  setDisplayedMeals: React.Dispatch<React.SetStateAction<Meal[]>>
+  setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setDisplayedMeals: React.Dispatch<React.SetStateAction<Meal[]>>;
   setSelectedFoods: React.Dispatch<React.SetStateAction<FoodData[]>>;
 }) {
-
-  const userData = useUserStore(state => state.data)
+  const userData = useUserStore((state) => state.data);
+  const setUser = useUserStore((state) => state.setUser);
   const [type, setType] = useState('Breakfast');
 
   async function submitHandler(e: FormEvent) {
@@ -73,6 +74,13 @@ export default function AddMeal({
     const newMeal = await response.json();
     setDisplayedMeals((prev: Meal[]) => [...prev, newMeal]);
     setAddMealBox(false);
+    if (userData) {
+      const newUser: User = {
+        ...userData,
+        mealHistory: [...userData.mealHistory, newMeal],
+      };
+      setUser(newUser);
+    }
   }
   return (
     <div className="mx-4">
