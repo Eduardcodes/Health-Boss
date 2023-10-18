@@ -34,10 +34,10 @@ export default function MealsChart() {
             onChange={(e) => setOption(e.currentTarget.value)}
           >
             <option>Total</option>
-            <option>Breakfasts</option>
-            <option>Lunches</option>
-            <option>Dinners</option>
-            <option>Snacks</option>
+            <option>Breakfast</option>
+            <option>Lunch</option>
+            <option>Dinner</option>
+            <option>Snack</option>
           </select>
         </div>
 
