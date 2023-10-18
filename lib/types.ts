@@ -64,6 +64,7 @@ export type ExerciseSession = {
   createdAt?: Date
   userId: string 
   user?: User
+  key? : string
 }
 
 export type NewSessionList = {

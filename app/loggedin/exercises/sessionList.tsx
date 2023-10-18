@@ -29,10 +29,10 @@ export default function SessionList({
   return (
     <div>
       {displayedSessions &&
-        displayedSessions.map((session: ExerciseSession) => {
+        displayedSessions.map((session: ExerciseSession, index) => {
           return (
             <SessionCard
-              key={session.id}
+              key={index}
               session={session}
               setDisplayedSessions={setDisplayedSessions}
             />
