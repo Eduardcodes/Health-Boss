@@ -9,7 +9,7 @@ export default function MealList({
   setDisplayedMeals,
 }: {
   displayedMeals: Meal[];
-  setDisplayedMeals: Function;
+  setDisplayedMeals: React.Dispatch<React.SetStateAction<Meal[]>>
 }) {
 
   const userData = useUserStore(state => state.data)
@@ -19,13 +19,12 @@ export default function MealList({
   }, []);
   console.log(userData)
 
-  async function getMeals() {
+  async function getMeals(): Promise<Meal[]> {
     const res: Response = await fetch(`/api/meals/${userData?.id}`);
     const data = await res.json();
     const allMeals = data.allMeals;
 
-    if (Array.isArray(allMeals)) return allMeals;
-    else return null;
+    return allMeals;
   }
   console.log(displayedMeals)
   return (

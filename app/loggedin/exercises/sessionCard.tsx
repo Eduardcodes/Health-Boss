@@ -1,5 +1,5 @@
 'use client';
-import { Session } from '@/lib/types';
+import { ExerciseSession } from '@/lib/types';
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClose } from '@fortawesome/free-solid-svg-icons';
@@ -13,8 +13,8 @@ export default function SessionCard({
   session,
   setDisplayedSessions,
 }: {
-  session: Session;
-  setDisplayedSessions: React.Dispatch<React.SetStateAction<Session[]>>;
+  session: ExerciseSession;
+  setDisplayedSessions: React.Dispatch<React.SetStateAction<ExerciseSession[]>>;
 }) {
   const [details, setDetails] = useState(false);
 
@@ -30,7 +30,7 @@ export default function SessionCard({
     const { deletedItem } = data;
     console.log('DELETED ITEM', deletedItem);
     if (deletedItem.id) {
-      setDisplayedSessions((prev: Session[]) => {
+      setDisplayedSessions((prev: ExerciseSession[]) => {
         for (let i = 0; i < prev.length; i++) {
           if (prev[i].id === deletedItem.id) {
             prev.splice(i, 1);

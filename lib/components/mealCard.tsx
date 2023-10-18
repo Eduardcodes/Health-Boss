@@ -15,7 +15,7 @@ export default function MealCard({
   setDisplayedMeals,
 }: {
   mealData: Meal;
-  setDisplayedMeals: Function;
+  setDisplayedMeals: React.Dispatch<React.SetStateAction<Meal[]>>;
 }) {
 
   const [details, setDetails] = useState(false);

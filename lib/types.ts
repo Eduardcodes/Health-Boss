@@ -6,7 +6,7 @@ export type User = {
   firstName: string;
   lastName: string;
   birthday: Date;
-  exerciseHistory: Session[];
+  exerciseHistory: ExerciseSession[];
   mealHistory: Meal[];
   createdAt: Date;
   updatedAt: Date;
@@ -56,7 +56,7 @@ export type ChartData = {
 
 //Exercise related types
 
-export type Session = {
+export type ExerciseSession = {
   id: string 
   activities: NewSessionList[]
   caloriesBurned: number

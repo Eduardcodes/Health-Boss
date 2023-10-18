@@ -1,6 +1,6 @@
 'use client';
 import { FormEvent, useState } from 'react';
-import { FoodData, Ingredient } from '../types';
+import { FoodData, Ingredient, Meal } from '../types';
 import AddMealEntry from './addMealEntry';
 import { useUserStore } from '../store/store';
 
@@ -12,9 +12,9 @@ export default function AddMeal({
   setDisplayedMeals,
 }: {
   selectedFoods: FoodData[];
-  setAddMealBox: Function;
-  setModalOpen: Function;
-  setDisplayedMeals: Function;
+  setAddMealBox: React.Dispatch<React.SetStateAction<boolean>>;
+  setModalOpen: React.Dispatch<React.SetStateAction<boolean>>
+  setDisplayedMeals: React.Dispatch<React.SetStateAction<Meal[]>>
   setSelectedFoods: React.Dispatch<React.SetStateAction<FoodData[]>>;
 }) {
 
@@ -71,7 +71,7 @@ export default function AddMeal({
       }),
     });
     const newMeal = await response.json();
-    setDisplayedMeals((prev: FoodData[]) => [...prev, newMeal]);
+    setDisplayedMeals((prev: Meal[]) => [...prev, newMeal]);
     setAddMealBox(false);
   }
   return (

@@ -1,8 +1,8 @@
 import { useUserStore } from "@/lib/store/store";
-import {  Session } from "@/lib/types";
+import {  ExerciseSession } from "@/lib/types";
 import moment from "moment";
 
-export const averageCaloriesBurnedPrevSessions = (userSessions: Session[], noOfSessions: number) => {
+export const averageCaloriesBurnedPrevSessions = (userSessions: ExerciseSession[], noOfSessions: number) => {
   const reversed = userSessions.slice().reverse()
   if(reversed.length > noOfSessions) {
     let calorieCount = 0
@@ -22,7 +22,7 @@ export const averageCaloriesBurnedPrevSessions = (userSessions: Session[], noOfS
   return {calorieCount, overHowManySessions}
 }
 
-export const mostPerformedActivities = (sessions: Session[], count:number) => {
+export const mostPerformedActivities = (sessions: ExerciseSession[], count:number) => {
   const activityCounts: { [ingredientName: string]: number } = {};
 
   for (const session of sessions) {
@@ -41,7 +41,7 @@ export const mostPerformedActivities = (sessions: Session[], count:number) => {
     return sortedIngredients.slice(0,count)
 }
 
-export const getChartData = (method: string, sessionHistory: Session[]) => {
+export const getChartData = (method: string, sessionHistory: ExerciseSession[]) => {
   
   let xAxis: string[] = []
   let yProgenitor: {[key: string]: number} = {}

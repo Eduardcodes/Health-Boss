@@ -1,11 +1,11 @@
 'use client';
 import React from 'react';
 import SessionList from './sessionList';
-import ExerciseSession from './exerciseSession';
+import ExerciseSessionCard from './exerciseSession';
 import SearchExercise from './searchExercise';
 import ModalExercise from '@/app/modal/ModalExercise';
 import { useState } from 'react';
-import { CleanActivityData, Session } from '@/lib/types';
+import { CleanActivityData, ExerciseSession } from '@/lib/types';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -28,7 +28,7 @@ export default function ExercisesPage() {
   const [modalOpen, setModalOpen] = useState(false);
   const [addSessionBox, setAddSessionBox] = useState(false);
   const [selectedActivities, setSelectedActivities] = useState<CleanActivityData[]>([]);
-  const [displayedSessions, setDisplayedSessions] = useState<Session[]>([]);
+  const [displayedSessions, setDisplayedSessions] = useState<ExerciseSession[]>([]);
 
   async function handleCancel() {
     setSelectedActivities([]);
@@ -66,7 +66,7 @@ export default function ExercisesPage() {
       )}
 
       {addSessionBox && (
-        <ExerciseSession
+        <ExerciseSessionCard
           setDisplayedSessions={setDisplayedSessions}
           setModalOpen={setModalOpen}
           selectedActivities={selectedActivities}

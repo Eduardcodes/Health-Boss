@@ -1,5 +1,5 @@
 'use client';
-import { Session } from '@/lib/types';
+import { ExerciseSession } from '@/lib/types';
 import { useEffect, useState } from 'react';
 import SessionCard from './sessionCard';
 import { useUserStore } from '@/lib/store/store';
@@ -8,8 +8,8 @@ export default function SessionList({
   displayedSessions,
   setDisplayedSessions,
 }: {
-  displayedSessions: Session[];
-  setDisplayedSessions: React.Dispatch<React.SetStateAction<Session[]>>;
+  displayedSessions: ExerciseSession[];
+  setDisplayedSessions: React.Dispatch<React.SetStateAction<ExerciseSession[]>>;
 }) {
 
   const userData = useUserStore(state => state.data)
@@ -20,7 +20,7 @@ export default function SessionList({
   async function getAllSessions() {
     const res: Response = await fetch(`/api/exercises/${userData?.id}`);
     const data = await res.json();
-    const allSession = data.allSession as Session[];
+    const allSession = data.allSession as ExerciseSession[];
     console.log('ALL SESSIONS LIST', allSession);
     if (Array.isArray(allSession)) {
       setDisplayedSessions(allSession);
@@ -29,7 +29,7 @@ export default function SessionList({
   return (
     <div>
       {displayedSessions &&
-        displayedSessions.map((session: Session) => {
+        displayedSessions.map((session: ExerciseSession) => {
           return (
             <SessionCard
               key={session.id}

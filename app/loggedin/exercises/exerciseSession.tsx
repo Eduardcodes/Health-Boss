@@ -1,10 +1,10 @@
 'use client';
 import { useState, FormEvent } from 'react';
-import { CleanActivityData, NewSessionList, Session } from '@/lib/types';
+import { CleanActivityData, NewSessionList, ExerciseSession } from '@/lib/types';
 import SessionEntry from './sessionEntry';
 import { useUserStore } from '@/lib/store/store';
 
-export default function ExerciseSession({
+export default function ExerciseSessionCard({
   setModalOpen,
   setAddSessionBox,
   setDisplayedSessions,
@@ -13,7 +13,7 @@ export default function ExerciseSession({
 }: {
   setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setAddSessionBox: React.Dispatch<React.SetStateAction<boolean>>;
-  setDisplayedSessions: React.Dispatch<React.SetStateAction<Session[]>>;
+  setDisplayedSessions: React.Dispatch<React.SetStateAction<ExerciseSession[]>>;
   selectedActivities: CleanActivityData[];
   setSelectedActivities: React.Dispatch<
     React.SetStateAction<CleanActivityData[]>
