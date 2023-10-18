@@ -20,7 +20,8 @@ model User {
   firstName       String     @default("Panda")
   lastName        String     @default("Paints")
   birthday        DateTime   @default(now())
-  exerciseHistory Session[]
+  exerciseHistory ExerciseSession[]
+  auth            Session[]
   mealHistory     Meal[]
   createdAt       DateTime   @default(now())
   updatedAt       DateTime   @updatedAt
@@ -32,6 +33,16 @@ model Session {
   userId       String
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model ExerciseSession {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  activities Json
+  time String
+  caloriesBurned Int
+  createdAt DateTime @default(now())
+  userId String
+  user User  @relation(fields: [userId], references: [id])
 }
 
 

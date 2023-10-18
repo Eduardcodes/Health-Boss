@@ -12,13 +12,12 @@ const close = (
 export default function SessionCard({
   session,
   setDisplayedSessions,
-  key
 }: {
   session: ExerciseSession;
   setDisplayedSessions: React.Dispatch<React.SetStateAction<ExerciseSession[]>>;
-  key: number
 }) {
   const [details, setDetails] = useState(false);
+  console.log('SESSION', session);
 
   async function handleDelete(id: string) {
     const res: Response = await fetch('/api/exercises', {

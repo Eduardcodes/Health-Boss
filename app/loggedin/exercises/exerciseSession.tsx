@@ -1,6 +1,10 @@
 'use client';
 import { useState, FormEvent } from 'react';
-import { CleanActivityData, NewSessionList, ExerciseSession } from '@/lib/types';
+import {
+  CleanActivityData,
+  NewSessionList,
+  ExerciseSession,
+} from '@/lib/types';
 import SessionEntry from './sessionEntry';
 import { useUserStore } from '@/lib/store/store';
 
@@ -19,7 +23,8 @@ export default function ExerciseSessionCard({
     React.SetStateAction<CleanActivityData[]>
   >;
 }) {
-  const userData = useUserStore(state => state.data)
+  const userData = useUserStore((state) => state.data);
+  console.log('USER DATA IN SESSION LIST', userData);
   const [time, setTime] = useState('Morning');
 
   async function submitHandler(e: FormEvent) {
@@ -62,6 +67,7 @@ export default function ExerciseSessionCard({
       }),
     });
     const { newSession } = await response.json();
+    console.log('NEW SESSION CREATED', newSession);
 
     setDisplayedSessions((prev) => [...prev, newSession]);
     setAddSessionBox(false);

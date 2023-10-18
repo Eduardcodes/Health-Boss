@@ -1,13 +1,14 @@
 import prisma from '@/lib/components/prismadb';
 import { NextRequest, NextResponse } from 'next/server';
-import { Session } from '@/lib/types';
+import { ExerciseSession } from '@/lib/types';
 
 export const POST = async (request: Request) => {
   try {
     const body = await request.json();
-    console.log(body);
+
+    console.log('POST BODY', body);
     const { activities, userId, caloriesBurned, time } = body;
-    const newSession = await prisma.session.create({
+    const newSession = await prisma.exerciseSession.create({
       data: {
         activities,
         caloriesBurned,
@@ -15,6 +16,7 @@ export const POST = async (request: Request) => {
         userId,
       },
     });
+    console.log('NEW SESSION IN ROUTE', newSession);
     return NextResponse.json({ newSession, status: 200 });
   } catch (error) {
     console.log(error);
@@ -26,7 +28,7 @@ export const DELETE = async (request: Request) => {
   try {
     const body = await request.json();
     const { id } = body;
-    const deletedItem = await prisma.session.delete({
+    const deletedItem = await prisma.exerciseSession.delete({
       where: {
         id: id,
       },

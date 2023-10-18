@@ -11,8 +11,7 @@ export default function SessionList({
   displayedSessions: ExerciseSession[];
   setDisplayedSessions: React.Dispatch<React.SetStateAction<ExerciseSession[]>>;
 }) {
-
-  const userData = useUserStore(state => state.data)
+  const userData = useUserStore((state) => state.data);
   useEffect(() => {
     getAllSessions();
   }, []);
@@ -29,10 +28,10 @@ export default function SessionList({
   return (
     <div>
       {displayedSessions &&
-        displayedSessions.map((session: ExerciseSession, index) => {
+        displayedSessions.map((session: ExerciseSession) => {
           return (
             <SessionCard
-              key={index}
+              key={session.id}
               session={session}
               setDisplayedSessions={setDisplayedSessions}
             />
